@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="NimatorCouchBase.Entities.Statistics.AddNode">
+    <Position X="1" Y="15" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\AddNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.AutoCompactionSettings">
+    <Position X="7.25" Y="6.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAQAAAAAAAAAABAAAAAIAAEAAAAAAg=</HashCode>
+      <FileName>Entities\Statistics\AutoCompactionSettings.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DatabaseFragmentationThreshold" />
+      <Property Name="IndexCircularCompaction" />
+      <Property Name="IndexFragmentationThreshold" />
+      <Property Name="ViewFragmentationThreshold" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Buckets">
+    <Position X="12.25" Y="6.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAgAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\Buckets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.ClusterLogsCollection">
+    <Position X="0.75" Y="12.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\ClusterLogsCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Controllers">
+    <Position X="4.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACQAAAAIAAABAAAAIAAAAAgBAAIAAAIEAI=</HashCode>
+      <FileName>Entities\Statistics\Controllers.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ClusterLogsCollection" />
+      <Property Name="SetAutoCompaction" />
+      <Property Name="SetRecoveryType" />
+      <Property Name="StartGracefulFailover" />
+      <Property Name="Replication" />
+      <Property Name="ReFailOver" />
+      <Property Name="AddNode" />
+      <Property Name="EjectNode" />
+      <Property Name="FailOver" />
+      <Property Name="ReAddNode" />
+      <Property Name="Rebalance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.CouchBaseDefaultStats">
+    <Position X="7.5" Y="9.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAggACAAAIEAAAQBAIAAQEQCAAAACBBAAAIoADEAAQI=</HashCode>
+      <FileName>Entities\Statistics\CouchBaseDefaultStats.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Buckets" />
+      <Property Name="Controllers" />
+      <Property Name="Counters" />
+      <Property Name="RemoteClusters" />
+      <Property Name="StorageTotals" />
+      <Property Name="AutoCompactionSettings" />
+      <Property Name="Tasks" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Nodes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Counters">
+    <Position X="4.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\Counters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.DatabaseFragmentationThreshold">
+    <Position X="3.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\DatabaseFragmentationThreshold.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.EjectNode">
+    <Position X="7" Y="17" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\EjectNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.FailOver">
+    <Position X="1" Y="17" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\FailOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Hdd">
+    <Position X="0.75" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAEI=</HashCode>
+      <FileName>Entities\Statistics\Hdd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.IndexCircularCompaction">
+    <Position X="11.75" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\IndexCircularCompaction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Interval" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.IndexFragmentationThreshold">
+    <Position X="4.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\IndexFragmentationThreshold.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.InterestingStats">
+    <Position X="16.5" Y="5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAAAAAAAAAAAAAABEABgAAAABAAEAAgRQAACAw=</HashCode>
+      <FileName>Entities\Statistics\InterestingStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Interval">
+    <Position X="11.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAwA=</HashCode>
+      <FileName>Entities\Statistics\Interval.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Node">
+    <Position X="11.25" Y="9.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>oAAAAEAGAEAAAEACBAAAABAQIAAQAYAAAAAEAICAACg=</HashCode>
+      <FileName>Entities\Statistics\Node.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="InterestingStats" />
+      <Property Name="SystemStats" />
+      <Property Name="Ports" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Ports">
+    <Position X="15.75" Y="10" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAg=</HashCode>
+      <FileName>Entities\Statistics\Ports.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Ram">
+    <Position X="0.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BAAgAAAAABAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAEA=</HashCode>
+      <FileName>Entities\Statistics\Ram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.ReAddNode">
+    <Position X="4" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\ReAddNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Rebalance">
+    <Position X="4" Y="15" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\Rebalance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.ReFailOver">
+    <Position X="1" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\ReFailOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.RemoteClusters">
+    <Position X="9.75" Y="14.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAE=</HashCode>
+      <FileName>Entities\Statistics\RemoteClusters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Replication">
+    <Position X="6.75" Y="14.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Entities\Statistics\Replication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.SetAutoCompaction">
+    <Position X="3.75" Y="20.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAE=</HashCode>
+      <FileName>Entities\Statistics\SetAutoCompaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.SetRecoveryType">
+    <Position X="4" Y="13" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\SetRecoveryType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.StartGracefulFailover">
+    <Position X="7" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\StartGracefulFailover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.StorageTotals">
+    <Position X="4.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\StorageTotals.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Ram" />
+      <Property Name="Hdd" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.SystemStats">
+    <Position X="15.5" Y="13" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAgQAQAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\SystemStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.Tasks">
+    <Position X="4" Y="11" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\Tasks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NimatorCouchBase.Entities.Statistics.ViewFragmentationThreshold">
+    <Position X="7.75" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Statistics\ViewFragmentationThreshold.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
