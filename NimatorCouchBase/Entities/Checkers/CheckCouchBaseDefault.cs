@@ -7,9 +7,10 @@
 
 #region Imports
 
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Nimator;
-using NimatorCouchBase.Utils;
+using NimatorCouchBase.Entities.Statistics;
 
 #endregion
 
@@ -17,9 +18,12 @@ namespace NimatorCouchBase.Entities.Checkers
 {
     public class CheckCouchBaseDefault : ICheck
     {
-        public CheckCouchBaseDefault(string pShortName)
+        private readonly CheckHttpCaller<CouchBaseDefaultStats> CouchBaseDefaultStatisticsCaller;
+
+        public CheckCouchBaseDefault(string pShortName, CheckHttpCaller<CouchBaseDefaultStats> pCouchBaseDefaultStatisticsCaller)
         {
             ShortName = pShortName;
+            CouchBaseDefaultStatisticsCaller = pCouchBaseDefaultStatisticsCaller;
         }
 
         /// <summary>
@@ -39,8 +43,9 @@ namespace NimatorCouchBase.Entities.Checkers
         /// </remarks>
         public Task<ICheckResult> RunAsync()
         {
-            WebRequests.DoHttpGetCall("");
-            CheckCouchBaseResult checkCouchBaseResult = new CheckCouchBaseResult(NotificationLevel.Okay, "Yeah");
+            var defaultStatus = CouchBaseDefaultStatisticsCaller.Call();
+
+            CheckCouchBaseResult checkCouchBaseResult = new CheckCouchBaseResult(NotificationLevel.Okay, defaultStatus.ToString());
             return Task.FromResult<ICheckResult>(checkCouchBaseResult);
         }
 

@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="Entities\Checkers\CheckCouchBaseDefault.cs" />
     <Compile Include="Entities\Checkers\CheckCouchBaseResult.cs" />
+    <Compile Include="Entities\Checkers\CheckHttpCaller.cs" />
+    <Compile Include="Entities\Checkers\CheckHttpCallerParameters.cs" />
     <Compile Include="Utils\ErrorHttpResponse.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Utils\WebRequests.cs" />

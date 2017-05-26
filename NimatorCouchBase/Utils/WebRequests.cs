@@ -1,20 +1,25 @@
 using System;
+using NimatorCouchBase.Entities.Checkers;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace NimatorCouchBase.Utils
 {
     public static class WebRequests
     {
-        public static IRestResponse DoHttpGetCall(string pUrl)
+        public static IRestResponse DoHttpGetCall(CheckHttpCallerParameters pCallerParameters)
         {
-            return DoHttpCall(pUrl, Method.GET);
+            return DoHttpCall(pCallerParameters.HttpUrl, Method.GET, pCallerParameters.Authenticator);
         }
-
-        private static IRestResponse DoHttpCall(string pUrl, Method pRestMethod)
+        
+        private static IRestResponse DoHttpCall(string pUrl, Method pRestMethod, IAuthenticator pHttpBasicAuthenticator)
         {
             try
             {
-                var restClient = new RestClient(pUrl);
+                var restClient = new RestClient(pUrl)
+                {
+                    Authenticator = pHttpBasicAuthenticator
+                };
 
                 var request = new RestRequest(pRestMethod)
                 {

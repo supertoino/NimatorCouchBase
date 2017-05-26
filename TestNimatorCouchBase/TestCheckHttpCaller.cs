@@ -1,0 +1,23 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NimatorCouchBase.Entities.Checkers;
+using NimatorCouchBase.Entities.Statistics;
+using RestSharp.Authenticators;
+
+namespace TestNimatorCouchBase
+{
+    [TestClass]
+    public class TestCheckHttpCaller
+    {
+        [TestMethod]
+        public void TestCheckHttpCallerGetOk()
+        {
+            var httpCallerParameters = new CheckHttpCallerParameters("http://localhost:8091/pools/default", new HttpBasicAuthenticator("supertoino","OcohoW*99"));
+
+            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(httpCallerParameters);
+            var stats = checkHttpCaller.Call();
+            Assert.AreNotEqual(stats, null);          
+            Assert.AreEqual("supertoino", stats.ClusterName);                 
+        }
+    }
+}

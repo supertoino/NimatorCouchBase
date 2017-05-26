@@ -1,0 +1,625 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nimator</name>
+    </assembly>
+    <members>
+        <member name="T:Nimator.AmbientTimeProvider">
+            <summary>
+            Utility class to provide time-related functionality.
+            </summary>
+        </member>
+        <member name="P:Nimator.AmbientTimeProvider.GetNow">
+            <summary>
+            Returns a DateTime instance representing the current moment. Default statically initialized to always
+            return <see cref="P:System.DateTime.Now"/>, but can be overridden.
+            </summary>
+        </member>
+        <member name="M:Nimator.AmbientTimeProvider.SetNewTimeProvider(System.Func{System.DateTime})">
+            <summary>
+            Overrides the default implementation behind <see cref="P:Nimator.AmbientTimeProvider.GetNow"/>. This can be useful for example when
+            you want to run monitoring cycles as if they were at some other moment than the local machine's date
+            and time, or when you want to set a mock implementation for automated tests.
+            </summary>
+            <param name="getDateTimeFunc">A new function to get <see cref="T:System.DateTime"/>s representing "right now".</param>
+            <remarks>
+            Note that if you set a new <see cref="P:Nimator.AmbientTimeProvider.GetNow"/> implementation, the old one is lost. If you only want
+            to temporarily replace it you have to save the original implementation and call this function again to
+            set it back. 
+            </remarks>
+        </member>
+        <member name="T:Nimator.CheckResult">
+            <summary>
+            Basic implementation of <see cref="T:Nimator.ICheckResult"/>, not much more than a DTO for the constructor arguments.
+            </summary>
+        </member>
+        <member name="M:Nimator.CheckResult.#ctor(System.String,Nimator.NotificationLevel,System.String)">
+            <summary>
+            Constructs new <see cref="T:Nimator.CheckResult"/> for specific values.
+            </summary>
+        </member>
+        <member name="P:Nimator.CheckResult.Level">
+            <inheritdoc/>
+        </member>
+        <member name="P:Nimator.CheckResult.CheckName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nimator.CheckResult.RenderPlainText">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nimator.ICheckSettings">
+            <summary>
+            Represents the configuration of an <see cref="T:Nimator.ICheck"/>. There are no required properties
+            for this interface, as each implementation is meant for exactly that: to represent the 
+            configuration needed for an <see cref="T:Nimator.ICheck"/>.
+            </summary>
+        </member>
+        <member name="M:Nimator.ICheckSettings.ToCheck">
+            <summary>
+            When called, the settings converts itself to an <see cref="T:Nimator.ICheck"/> instance. This
+            effectively means each <see cref="T:Nimator.ICheckSettings"/> is a mini-composition-root that
+            can construct concrete dependencies for an <see cref="T:Nimator.ICheck"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nimator.ICheck">
+            <summary>
+            Represents a check that will be called upon each time Nimator "Ticks" to check the system state.
+            </summary>
+            <remarks>
+            The lifetime of an ICheck is linked to the <see cref="T:Nimator.NimatorEngine"/>. Everytime the engine is 
+            started, instances of all (per configuration) requested ICheck classesare constructed. This means
+            an ICheck might live for quite some time, but nonetheless it might be recreated (e.g. if the 
+            settings changed and the engine was restarted.
+            
+            <see cref="T:Nimator.ICheck"/> instances are typically created from <see cref="M:Nimator.ICheckSettings.ToCheck"/>.
+            </remarks>
+        </member>
+        <member name="P:Nimator.ICheck.ShortName">
+            <summary>
+            A simple human-readable way to identify the Check.
+            </summary>
+        </member>
+        <member name="M:Nimator.ICheck.RunAsync">
+            <summary>
+            Every time the <see cref="T:Nimator.NimatorEngine"/> "Ticks" the check will be run.
+            </summary>
+            <returns>A task representing the check calculating the current result.</returns>
+            <remarks>
+            You can safely assume this method will not be called concurrently on one and the same instance 
+            of your implementation (though it can be called concurrently on seperate different instances).
+            
+            Implementations are allowed to throw exceptions, although it is encouraged to deal with the
+            exception types that are specific to the check (e.g. a WebException for clients that go over
+            a WebClient to check stuff), crafting an informative <see cref="T:Nimator.ICheckResult"/> for those
+            situations. If an exception flows from this method, the engine will keep running but consider
+            the result to be a <see cref="F:Nimator.NotificationLevel.Critical"/> failure.
+            </remarks>
+        </member>
+        <member name="T:Nimator.ILayer">
+            <summary>
+            Represents a logical group of <see cref="T:Nimator.ICheck"/> instances.
+            </summary>
+        </member>
+        <member name="P:Nimator.ILayer.Name">
+            <summary>
+            The human-readable identifier for a layer, e.g. "Hardware" or "API's".
+            </summary>
+        </member>
+        <member name="M:Nimator.ILayer.Run">
+            <summary>
+            Runs all components to get to an aggregated result.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nimator.ICheckResult">
+            <summary>
+            Represents the result of running an <see cref="T:Nimator.ICheck"/>.
+            </summary>
+        </member>
+        <member name="P:Nimator.ICheckResult.CheckName">
+            <summary>
+            Repeats the name of the <see cref="T:Nimator.ICheck"/>, possibly in a format altered to
+            work best for display purposes.
+            </summary>
+        </member>
+        <member name="P:Nimator.ICheckResult.Level">
+            <summary>
+            The <see cref="T:Nimator.NotificationLevel"/> for this result (e.g. "Okay", or "Error").
+            </summary>
+        </member>
+        <member name="M:Nimator.ICheckResult.RenderPlainText">
+            <summary>
+            Joins <see cref="P:Nimator.ICheckResult.Level"/>, <see cref="P:Nimator.ICheckResult.CheckName"/>, and any other details, in 
+            a readable fashion.
+            </summary>
+        </member>
+        <member name="T:Nimator.ILayerResult">
+            <summary>
+            Represents a combination of <see cref="T:Nimator.ICheckResult"/> items from running <see cref="T:Nimator.ICheck"/>s 
+            in a <see cref="T:Nimator.ILayer"/>. 
+            </summary>
+        </member>
+        <member name="P:Nimator.ILayerResult.Level">
+            <summary>
+            The aggregated <see cref="T:Nimator.NotificationLevel"/> of the composed <see cref="T:Nimator.ICheckResult"/> subresults. This 
+            will typically be the worst result of the batch. To get the individual levels, see the <see cref="P:Nimator.ILayerResult.CheckResults"/>.
+            </summary>
+        </member>
+        <member name="P:Nimator.ILayerResult.LayerName">
+            <summary>
+            Name of the layer that generated this <see cref="T:Nimator.ILayerResult"/>.
+            </summary>
+        </member>
+        <member name="P:Nimator.ILayerResult.CheckResults">
+            <summary>
+            Individual <see cref="T:Nimator.ICheckResult"/> sub results making up this <see cref="T:Nimator.ILayerResult"/>.
+            </summary>
+        </member>
+        <member name="M:Nimator.ILayerResult.RenderPlainText(Nimator.NotificationLevel)">
+            <summary>
+            Creates human-readable representation of this result, with details for a given <see cref="T:Nimator.NotificationLevel"/>.
+            </summary>
+        </member>
+        <member name="T:Nimator.INimator">
+            <summary>
+            Represents something that can "Tick" and get monitoring results to the appropriate receivers. Implementations will
+            typically use an <see cref="T:Nimator.INimatorEngine"/> to do the actual work.
+            </summary>
+        </member>
+        <member name="M:Nimator.INimator.TickSafe(log4net.ILog)">
+            <summary>
+            Promises to run a monitoring cycle, probably delegating the work to the inner <see cref="T:Nimator.INimatorEngine"/>, and
+            reports to any <see cref="T:Nimator.INotifier"/>s if any. Implementations should be "Safe" in a sense that they trap all
+            exceptions, only letting the most gruesome failures escape (e.g. <see cref="T:System.Threading.ThreadAbortException"/>).
+            </summary>
+            <param name="logger">The <see cref="T:log4net.ILog"/> instance to log application exceptiosn to.</param>
+        </member>
+        <member name="T:Nimator.INimatorEngine">
+            <summary>
+            Represents the engine running actual checks through its <see cref="T:Nimator.ILayer"/>s.
+            </summary>
+        </member>
+        <member name="M:Nimator.INimatorEngine.RunSafe">
+            <summary>
+            Runs checks in all internal <see cref="T:Nimator.ILayer"/>s, promising not to throw any exceptions.
+            </summary>
+            <remarks>
+            Implementations should catch all exceptions and return an appropriate <see cref="T:Nimator.INimatorResult"/>
+            (e.g. with a <see cref="F:Nimator.NotificationLevel.Critical"/> level).
+            </remarks>
+        </member>
+        <member name="M:Nimator.INimatorEngine.AddLayer(Nimator.ILayer)">
+            <summary>
+            Add a <see cref="T:Nimator.ILayer"/> to the engine.
+            </summary>
+            <param name="layer"></param>
+        </member>
+        <member name="M:Nimator.INimatorEngine.AddLayer(System.String,System.Collections.Generic.IEnumerable{Nimator.ICheck})">
+            <summary>
+            Add a new layer with specific name and checks to the engine.
+            </summary>
+        </member>
+        <member name="T:Nimator.INimatorResult">
+            <summary>
+            Represents a "Grand Result", i.e. the result of a complete monitoring cycle.
+            </summary>
+        </member>
+        <member name="P:Nimator.INimatorResult.Finished">
+            <summary>
+            The moment the cycle for this result was completed.
+            </summary>
+        </member>
+        <member name="P:Nimator.INimatorResult.Started">
+            <summary>
+            The moment the cycle for this result was started.
+            </summary>
+        </member>
+        <member name="P:Nimator.INimatorResult.Level">
+            <summary>
+            Aggregated <see cref="T:Nimator.NotificationLevel"/> of the individual parts, typically the "worst" result.
+            </summary>
+        </member>
+        <member name="P:Nimator.INimatorResult.LayerResults">
+            <summary>
+            Individual <see cref="T:Nimator.ILayerResult"/>s making up this aggregated, final <see cref="T:Nimator.INimatorResult"/>.
+            </summary>
+        </member>
+        <member name="P:Nimator.INimatorResult.Message">
+            <summary>
+            Human readable explanation of this <see cref="T:Nimator.INimatorResult"/>.
+            </summary>
+        </member>
+        <member name="M:Nimator.INimatorResult.GetFirstFailedLayerName">
+            <summary>
+            Get the Name of the first <see cref="T:Nimator.ILayer"/> that was considered beyond the <see cref="T:Nimator.NotificationLevel"/> threshold.
+            </summary>
+        </member>
+        <member name="M:Nimator.INimatorResult.GetFailingLayerNames">
+            <summary>
+            Get the Names of all <see cref="T:Nimator.ILayer"/>s that were considered beyond the <see cref="T:Nimator.NotificationLevel"/> threshold.
+            </summary>
+        </member>
+        <member name="M:Nimator.INimatorResult.GetFailingCheckNames">
+            <summary>
+            Get the Names of all failing <see cref="T:Nimator.ICheck"/>s inside the individual <see cref="T:Nimator.ILayer"/>s that were checked.
+            </summary>
+        </member>
+        <member name="M:Nimator.INimatorResult.RenderPlainText(Nimator.NotificationLevel)">
+            <summary>
+            Render this result in (possibly mutli-line) plain text, with details for a chosen <see cref="T:Nimator.NotificationLevel"/> threshold.
+            </summary>
+        </member>
+        <member name="T:Nimator.LayerResult">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nimator.LayerResult.#ctor(System.String,System.Collections.Generic.IEnumerable{Nimator.ICheckResult})">
+            <summary>
+            Initializes a new instance of <see cref="T:Nimator.LayerResult"/>.
+            </summary>
+            <param name="layerName">Human readable identifier for the layer that generated this <see cref="T:Nimator.LayerResult"/></param>
+            <param name="checkResults">The individual results that make up this <see cref="T:Nimator.LayerResult"/></param>
+        </member>
+        <member name="P:Nimator.LayerResult.Level">
+            <inheritdoc/>
+        </member>
+        <member name="P:Nimator.LayerResult.LayerName">
+            <inheritdoc/>
+        </member>
+        <member name="P:Nimator.LayerResult.CheckResults">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nimator.LayerResult.RenderPlainText(Nimator.NotificationLevel)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nimator.Nimator">
+            <summary>
+            Core class to bootstrap monitoring. This class will require or create its own <see cref="T:Nimator.INimatorEngine"/>
+            to run monitoring cycles on each <see cref="M:Nimator.Nimator.Tick"/>, and distribute the result to <see cref="T:Nimator.INotifier"/>s
+            that were created based on the settings provided.
+            </summary>
+        </member>
+        <member name="M:Nimator.Nimator.TickSafe(log4net.ILog)">
+            <summary>
+            Run all checks and distribute results, as safely as possible (meaning 
+            that we try to trap as many types of exceptions as reasonably possible
+            without crashing).
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Nimator.Nimator.FromSettings(log4net.ILog,System.String)">
+            <summary>
+            Constructs a new <see cref="T:Nimator.INimator"/> based on a json string that will be 
+            converted to <see cref="T:Nimator.Settings.NimatorSettings"/>.
+            </summary>
+            <param name="logger">
+            Instance that allows Nimator to log errors, warnings, and whatnot.
+            </param>
+            <param name="json">
+            Any valid json that can be deserialized into <see cref="T:Nimator.Settings.NimatorSettings"/>. Note that <see cref="N:Newtonsoft"/> is
+            used to deserialize the settings, utilizing TypeNameHandling to determine the specific assemblies and types to pick.
+            </param>
+            <returns>A bootstrapped <see cref="T:Nimator.INimator"/> ready to run cycles.</returns>
+        </member>
+        <member name="T:Nimator.NoopCheck">
+            <summary>
+            Example <see cref="T:Nimator.ICheck"/> that does no actual check but always returns a
+            certain result.
+            </summary>
+        </member>
+        <member name="M:Nimator.NoopCheck.#ctor(Nimator.NoopCheckSettings)">
+            <summary>
+            Constructs a check based on certain <see cref="T:Nimator.NoopCheckSettings"/>.
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="P:Nimator.NoopCheck.ShortName">
+            <inheritDoc/>
+        </member>
+        <member name="M:Nimator.NoopCheck.RunAsync">
+            <summary>
+            Will return a task that promises a <see cref="T:Nimator.ICheckResult"/>, after a possible Delay.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Nimator.NoopCheckSettings">
+            <summary>
+            Settings for checks that don't do anything besides returning a specific result after an (optional) delay.
+            </summary>
+        </member>
+        <member name="M:Nimator.NoopCheckSettings.#ctor">
+            <summary>
+            Constructs default settings.
+            </summary>
+        </member>
+        <member name="P:Nimator.NoopCheckSettings.DelayResultInMs">
+            <summary>
+            How long the <see cref="T:Nimator.NoopCheck"/> should simulate being busy.
+            </summary>
+        </member>
+        <member name="P:Nimator.NoopCheckSettings.LevelToSimulate">
+            <summary>
+            The <see cref="T:Nimator.NotificationLevel"/> to return when run.
+            </summary>
+        </member>
+        <member name="M:Nimator.NoopCheckSettings.ToCheck">
+            <inheritDoc/>
+        </member>
+        <member name="T:Nimator.NotificationLevel">
+            <summary>
+            Predefined "levels", or "severities", for the results of running <see cref="T:Nimator.ICheck"/>s.
+            </summary>
+        </member>
+        <member name="F:Nimator.NotificationLevel.Okay">
+            <summary>
+            For mere status reports of regular situations, e.g. "Couchbase returned 'STORE: OKAY'." and similar.
+            </summary>
+        </member>
+        <member name="F:Nimator.NotificationLevel.Warning">
+            <summary>
+            For when there's something worth checking, though not necessarily right now, e.g. "Diskspace running low" or "Many Workers queued".
+            </summary>
+        </member>
+        <member name="F:Nimator.NotificationLevel.Error">
+            <summary>
+            For things requiring immediate attention, e.g. services being entirely unreachable.
+            </summary>
+        </member>
+        <member name="F:Nimator.NotificationLevel.Critical">
+            <summary>
+            For unrecoverable monitoring problems, e.g. the fact that monitoring itself cannot run.
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieCreateAlertRequest.Message">
+            <summary>
+            [MANDATORY] Alert text limited to 130 characters
+            
+            LIMIT: 130 chars
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieCreateAlertRequest.Alias">
+            <summary>
+            Used for alert deduplication. A user defined identifier for the alert and there can 
+            be only one alert with open status with the same alias. Provides ability to assign 
+            a known id and later use this id to perform additional actions such as log, close, 
+            attach for the same alert. 
+            
+            LIMIT: 512 chars
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieCreateAlertRequest.Description">
+            <summary>
+            This field can be used to provide a detailed description of the alert, anything that
+            may not have fit in the Message field.
+            
+            LIMIT: 15000 chars
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieCreateAlertRequest.Teams">
+            <summary>
+            List of team names which will be responsible for the alert. Team escalation policies
+            are run to calculate which users will receive notifications. Teams which are exceeding
+            the limit are ignored.
+            
+            LIMIT: 50 teams
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieCreateAlertRequest.Tags">
+            <summary>
+            A comma separated list of labels attached to the alert. You can overwrite Quiet Hours 
+            setting for urgent alerts by adding OverwritesQuietHours tag. Tags which are exceeding 
+            the number limit are ignored. Tag names which are longer than length limit are shortened.
+            
+            LIMIT: 20 tags, 50 chars each
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieHeartbeatRequest.Name">
+            <summary>
+            Name of the heartbeat.
+            </summary>
+        </member>
+        <member name="P:Nimator.Notifiers.OpsGenieRequest.ApiKey">
+            <summary>
+            [MANDATORY] API key is used for authenticating API requests
+            </summary>
+        </member>
+        <member name="T:Nimator.Settings.ConsoleSettings">
+            <summary>
+            Settings for a <see cref="T:Nimator.Notifiers.ConsoleNotifier"/>.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.ConsoleSettings.#ctor">
+            <summary>
+            Constructs default settings
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.ConsoleSettings.ToNotifier">
+            <inheritDoc/>
+        </member>
+        <member name="M:Nimator.Settings.ConsoleSettings.GetExample">
+            <summary>
+            Creates example instance with dummy data.
+            </summary>
+        </member>
+        <member name="T:Nimator.Settings.LayerSettings">
+            <summary>
+            Settings for a <see cref="T:Nimator.Layer"/>.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.LayerSettings.#ctor">
+            <summary>
+            Constructs default, empty <see cref="T:Nimator.Settings.LayerSettings"/>.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.LayerSettings.Name">
+            <summary>
+            Human readable name for the <see cref="T:Nimator.Layer"/> to be generated based on these settings.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.LayerSettings.Checks">
+            <summary>
+            List of <see cref="T:Nimator.ICheckSettings"/> instances to be generated.
+            </summary>
+        </member>
+        <member name="T:Nimator.Settings.NimatorSettings">
+            <summary>
+            Top level object for settings to bootstrap <see cref="T:Nimator.INimator"/> instances.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.NimatorSettings.Notifiers">
+            <summary>
+            List of <see cref="T:Nimator.Settings.NotifierSettings"/> instances to determine how recepients get notified.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.NimatorSettings.Layers">
+            <summary>
+            List of <see cref="T:Nimator.Settings.LayerSettings"/> to determine the actual (layered) checks that will be run.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.NimatorSettings.ToJson">
+            <summary>
+            Convert this <see cref="T:Nimator.Settings.NimatorSettings"/> instance to a json string so it can be persisted.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nimator.Settings.NimatorSettings.FromJson(System.String)">
+            <summary>
+            Create <see cref="T:Nimator.Settings.NimatorSettings"/> instance from json string.
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Nimator.Settings.NimatorSettings.GetExample">
+            <summary>
+            Get typical example <see cref="T:Nimator.Settings.NimatorSettings"/> instance with dummy data.
+            </summary>
+        </member>
+        <member name="T:Nimator.Settings.NotifierSettings">
+            <summary>
+            Abstract structure for settings to bootstrap <see cref="T:Nimator.INotifier"/> instances.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.NotifierSettings.#ctor">
+            <summary>
+            Constructs default instance.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.NotifierSettings.Threshold">
+            <summary>
+            Threshold at which notifications should start to be sent out by this notifier.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.NotifierSettings.ToNotifier">
+            <summary>
+            Converts these settings into an <see cref="T:Nimator.INotifier"/>, effectively making this method
+            a mini-composition-root.
+            </summary>
+        </member>
+        <member name="T:Nimator.Settings.OpsGenieSettings">
+            <summary>
+            Settings for a <see cref="T:Nimator.INotifier"/> that calls out to OpsGenie: <see href="https://www.opsgenie.com/">www.opsgenie.com</see>
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.OpsGenieSettings.ApiKey">
+            <summary>
+            Your API key for posting.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.OpsGenieSettings.TeamName">
+            <summary>
+            The name of the team to receive new Alerts.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.OpsGenieSettings.HeartbeatName">
+            <summary>
+            The name of the Heartbeat to keep alive on each cycle.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.OpsGenieSettings.ToNotifier">
+            <inheritDoc/>
+        </member>
+        <member name="M:Nimator.Settings.OpsGenieSettings.GetExample">
+            <summary>
+            Creates <see cref="T:Nimator.Settings.OpsGenieSettings"/> instance with example dummy data.
+            </summary>
+        </member>
+        <member name="T:Nimator.Settings.SlackSettings">
+            <summary>
+            Settings for creating a <see cref="T:Nimator.INotifier"/> that will publish to Slack: <see href="https://slack.com/">slack.com</see>
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.SlackSettings.Url">
+            <summary>
+            The webhook integration url to post to.
+            </summary>
+        </member>
+        <member name="P:Nimator.Settings.SlackSettings.DebounceTimeInSecs">
+            <summary>
+            A number of seconds to wait for any subsequent post.
+            </summary>
+        </member>
+        <member name="M:Nimator.Settings.SlackSettings.ToNotifier">
+            <inheritDoc/>
+        </member>
+        <member name="M:Nimator.Settings.SlackSettings.GetExample">
+            <summary>
+            Creates a <see cref="T:Nimator.Settings.SlackSettings"/> example with dummy data.
+            </summary>
+        </member>
+        <member name="T:Nimator.INotifier">
+            <summary>
+            Represents something that can distribute a <see cref="T:Nimator.INimatorResult"/> to receivers.
+            </summary>
+        </member>
+        <member name="M:Nimator.INotifier.Notify(Nimator.INimatorResult)">
+            <summary>
+            Notifies receivers via a channel about a <see cref="T:Nimator.INimatorResult"/>.
+            </summary>
+            <remarks>
+            Implementations are allowed to throw any type of exception that is warranted. The 
+            <see cref="T:Nimator.INimator"/> distributing a <see cref="T:Nimator.INimatorResult"/> to various
+            notifiers should decide how to handle exceptions thrown by Notify.
+            </remarks>
+        </member>
+        <member name="T:Nimator.NimatorEngine">
+            <summary>
+            Core <see cref="T:Nimator.INimatorEngine"/> that will run layers sequentially.
+            </summary>
+        </member>
+        <member name="M:Nimator.NimatorEngine.#ctor">
+            <summary>
+            Constructs default engine without any <see cref="T:Nimator.ILayer"/>s.
+            </summary>
+        </member>
+        <member name="M:Nimator.NimatorEngine.#ctor(System.Collections.Generic.IEnumerable{Nimator.ILayer})">
+            <summary>
+            Constructs engine with specifica <see cref="T:Nimator.ILayer"/>s.
+            </summary>
+            <param name="layers"></param>
+        </member>
+        <member name="M:Nimator.NimatorEngine.RunSafe">
+            <inheritDoc/>
+        </member>
+        <member name="M:Nimator.NimatorEngine.AddLayer(System.String,System.Collections.Generic.IEnumerable{Nimator.ICheck})">
+            <inheritDoc/>
+        </member>
+        <member name="M:Nimator.NimatorEngine.AddLayer(Nimator.ILayer)">
+            <inheritDoc/>
+        </member>
+        <member name="T:Nimator.Util.ExtendedWebClient">
+            <summary>
+            Represents a custom <see cref="T:System.Net.WebClient"/> extension with some extra modification.
+            </summary>
+        </member>
+        <member name="M:Nimator.Util.ExtendedWebClient.#ctor(System.TimeSpan)">
+            <summary>
+            Creates a new instance of the <see cref="T:Nimator.Util.ExtendedWebClient"/> class.
+            </summary>
+            <param name="timeout">Maximal duration of request(s).</param>
+        </member>
+        <member name="M:Nimator.Util.ExtendedWebClient.GetWebRequest(System.Uri)">
+            <summary>
+            Overrides the <see cref="M:Nimator.Util.ExtendedWebClient.GetWebRequest(System.Uri)"/> method.
+            </summary>
+        </member>
+    </members>
+</doc>

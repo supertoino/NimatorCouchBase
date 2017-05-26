@@ -1,0 +1,17 @@
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\TestNimatorCouchBase.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\TestNimatorCouchBase.pdb
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\NimatorCouchBase.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\RestSharp.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\Newtonsoft.Json.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\Nimator.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\log4net.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\NimatorCouchBase.pdb
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\RestSharp.xml
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\Newtonsoft.Json.xml
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\Nimator.xml
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\bin\Debug\log4net.xml
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\obj\Debug\TestNimatorCouchBase.csprojResolveAssemblyReference.cache
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\obj\Debug\TestNimatorCouchBase.dll
+C:\Users\antonio.silva\Documents\NimatorCouchBase\TestNimatorCouchBase\obj\Debug\TestNimatorCouchBase.pdb
