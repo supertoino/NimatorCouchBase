@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using RestSharp;
 
-namespace NimatorCouchBase
+namespace NimatorCouchBase.Utils
 {
     public class ErrorHttpResponse : IRestResponse
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NimatorCouchBase
+namespace NimatorCouchBase.Utils
 {
     public static class Utils
     {

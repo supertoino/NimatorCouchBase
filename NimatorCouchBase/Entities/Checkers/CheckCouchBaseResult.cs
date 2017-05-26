@@ -1,6 +1,6 @@
 using Nimator;
 
-namespace NimatorCouchBase
+namespace NimatorCouchBase.Entities.Checkers
 {
     public class CheckCouchBaseResult : ICheckResult
     {

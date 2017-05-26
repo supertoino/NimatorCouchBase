@@ -56,9 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckCouchBaseDefault.cs" />
-    <Compile Include="CheckCouchBaseResult.cs" />
-    <Compile Include="CheckWebRequest.cs" />
+    <Compile Include="Entities\Checkers\CheckCouchBaseDefault.cs" />
+    <Compile Include="Entities\Checkers\CheckCouchBaseResult.cs" />
+    <Compile Include="Utils\ErrorHttpResponse.cs" />
+    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Utils\WebRequests.cs" />
     <Compile Include="Entities\Statistics\AddNode.cs" />
     <Compile Include="Entities\Statistics\AutoCompactionSettings.cs" />
     <Compile Include="Entities\Statistics\Buckets.cs" />
@@ -89,10 +91,7 @@
     <Compile Include="Entities\Statistics\SystemStats.cs" />
     <Compile Include="Entities\Statistics\Tasks.cs" />
     <Compile Include="Entities\Statistics\ViewFragmentationThreshold.cs" />
-    <Compile Include="ErrorHttpResponse.cs" />
-    <Compile Include="ErrorWebRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

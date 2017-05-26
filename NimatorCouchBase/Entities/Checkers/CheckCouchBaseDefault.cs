@@ -9,10 +9,11 @@
 
 using System.Threading.Tasks;
 using Nimator;
+using NimatorCouchBase.Utils;
 
 #endregion
 
-namespace NimatorCouchBase
+namespace NimatorCouchBase.Entities.Checkers
 {
     public class CheckCouchBaseDefault : ICheck
     {
@@ -38,7 +39,7 @@ namespace NimatorCouchBase
         /// </remarks>
         public Task<ICheckResult> RunAsync()
         {
-            CheckWebRequest.DoHttpGetCall("");
+            WebRequests.DoHttpGetCall("");
             CheckCouchBaseResult checkCouchBaseResult = new CheckCouchBaseResult(NotificationLevel.Okay, "Yeah");
             return Task.FromResult<ICheckResult>(checkCouchBaseResult);
         }

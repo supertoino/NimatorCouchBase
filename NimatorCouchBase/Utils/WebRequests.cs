@@ -1,9 +1,9 @@
 using System;
 using RestSharp;
 
-namespace NimatorCouchBase
+namespace NimatorCouchBase.Utils
 {
-    public static class CheckWebRequest
+    public static class WebRequests
     {
         public static IRestResponse DoHttpGetCall(string pUrl)
         {
