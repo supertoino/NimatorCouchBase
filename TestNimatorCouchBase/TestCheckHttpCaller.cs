@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NimatorCouchBase.Entities.Checkers;
-using NimatorCouchBase.Entities.Statistics;
+using NimatorCouchBase.Entities.Statistics.Default;
 using RestSharp.Authenticators;
 
 namespace TestNimatorCouchBase

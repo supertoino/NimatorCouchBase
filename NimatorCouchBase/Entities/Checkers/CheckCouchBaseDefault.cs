@@ -10,7 +10,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Nimator;
-using NimatorCouchBase.Entities.Statistics;
+using NimatorCouchBase.Entities.Statistics.Default;
 
 #endregion
 
