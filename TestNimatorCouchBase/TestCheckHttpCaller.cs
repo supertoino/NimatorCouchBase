@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NimatorCouchBase.Entities.Checkers;
+using NimatorCouchBase.Entities.Statistics.Bucker;
 using NimatorCouchBase.Entities.Statistics.Default;
 using RestSharp.Authenticators;
 
@@ -9,24 +10,26 @@ namespace TestNimatorCouchBase
     [TestClass]
     public class TestCheckHttpCaller
     {
-        private CheckHttpCallerParameters DefaultHttpCallerParameters;
+        private CheckHttpCallerParameters DefaultStatsHttpCallerParameters;
+        private CheckHttpCallerParameters BucketStatsHttpCallerParameters;
 
         [TestInitialize]
-        public void Init()
+        public void TestInit()
         {
-            DefaultHttpCallerParameters = new CheckHttpCallerParameters("http://localhost:8091/pools/default", new HttpBasicAuthenticator("supertoino", "OcohoW*99"));
+            DefaultStatsHttpCallerParameters = new CheckHttpCallerParameters("http://localhost:8091/pools/default", new HttpBasicAuthenticator("supertoino", "OcohoW*99"));
+            BucketStatsHttpCallerParameters = new CheckHttpCallerParameters("http://localhost:8091/pools/default/buckets/supertoinoBucket/stats", new HttpBasicAuthenticator("supertoino", "OcohoW*99"));
         }
 
         [TestMethod]
-        public void TestCheckHttpCallerGetOk()
+        public void TestCheckHttpCallerGetDefaultStatsOk()
         {            
-            var httpCallerParameters = DefaultHttpCallerParameters;
+            var httpCallerParameters = DefaultStatsHttpCallerParameters;
 
             CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(httpCallerParameters);
 
             var stats = checkHttpCaller.Call();
-
-            Assert.AreNotEqual(stats, null);          
+            
+            Assert.AreNotEqual(stats, null); 
             Assert.AreEqual("supertoino", stats.ClusterName);                 
         }
 
@@ -55,5 +58,19 @@ namespace TestNimatorCouchBase
             Assert.AreNotEqual(stats, null);
             Assert.AreEqual(null, stats.ClusterName);
         }
+
+        [TestMethod]
+        public void TestCheckHttpCallerGetBucketStatsOk()
+        {
+            var httpCallerParameters = BucketStatsHttpCallerParameters;
+
+            CheckHttpCaller<CoachBaseBucketStats> checkHttpCaller = new CheckHttpCaller<CoachBaseBucketStats>(httpCallerParameters);
+
+            var stats = checkHttpCaller.Call();
+
+            Assert.AreNotEqual(stats, null);
+            Assert.AreEqual(60, stats.Op.SamplesCount);
+        }
+        
     }
 }

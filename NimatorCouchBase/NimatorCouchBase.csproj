@@ -60,6 +60,14 @@
     <Compile Include="Entities\Checkers\CheckCouchBaseResult.cs" />
     <Compile Include="Entities\Checkers\CheckHttpCaller.cs" />
     <Compile Include="Entities\Checkers\CheckHttpCallerParameters.cs" />
+    <Compile Include="Entities\L\IExpression.cs" />
+    <Compile Include="Entities\L\Lexer.cs" />
+    <Compile Include="Entities\L\OperatorExpression.cs" />
+    <Compile Include="Entities\L\Parser.cs" />
+    <Compile Include="Entities\L\Token.cs" />
+    <Compile Include="Entities\L\TokenType.cs" />
+    <Compile Include="Entities\L\UtilsTokenType.cs" />
+    <Compile Include="Entities\L\VariableExpression.cs" />
     <Compile Include="Entities\Statistics\Bucker\CoachBaseBucketStats.cs" />
     <Compile Include="Entities\Statistics\Bucker\Op.cs" />
     <Compile Include="Entities\Statistics\Bucker\Samples.cs" />
