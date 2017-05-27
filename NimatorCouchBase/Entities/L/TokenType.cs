@@ -15,9 +15,9 @@ namespace NimatorCouchBase.Entities.L
         Minus,
         Asterisk,
         Bigger,
-        Smaller,
-        Dot,
+        Smaller,        
         Variable,
-        Eof
+        Eof,
+        Scalar
     }
 }

@@ -25,9 +25,7 @@ namespace NimatorCouchBase.Entities.L
                 case TokenType.Comma:
                     break;
                 case TokenType.Not:
-                    break;
-                case TokenType.Dot:
-                    break;                                
+                    break;                              
                 default:
                     return ' ';
             }

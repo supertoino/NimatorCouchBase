@@ -1,28 +1,89 @@
+// 
+// NimatorCouchBase - NimatorCouchBase - Lexer.cs 
+// CREATOR: antonio.silva - António Silva
+// AT: 2017/05/27/10:15
+// LAST HEADER UPDATE: 2017 /05/27/22:19
+// 
+
+#region Imports
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#endregion
 
 namespace NimatorCouchBase.Entities.L
 {
     public class Lexer : IEnumerator<Token>
     {
-        private int CurrentIndex;
-        private readonly string TextToLex;
-        private Token CurrrentToken;
         private readonly Dictionary<char, TokenType> Puctuators;
+        private readonly string TextToLex;
+        private int CurrentIndex;
+        private Token CurrrentToken;
 
         public Lexer(string pText)
         {
-            CurrentIndex = 0;
+            Reset();
             TextToLex = pText;
 
             Puctuators = new Dictionary<char, TokenType>();
             RegisterTokenTypesPunctuators();
         }
 
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+        }
+
+        /// <summary>
+        ///     Advances the enumerator to the next element of the collection.
+        /// </summary>
+        /// <returns>
+        ///     true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of
+        ///     the collection.
+        /// </returns>
+        /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+        public bool MoveNext()
+        {
+            if (++CurrentIndex > (TextToLex.Length - 1))
+            {
+                return false;
+            }
+            SetNextToken();
+            return true;
+        }
+
+        /// <summary>
+        ///     Sets the enumerator to its initial position, which is before the first element in the collection.
+        /// </summary>
+        /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+        public void Reset()
+        {
+            CurrentIndex = -1;
+        }
+
+        /// <summary>
+        ///     Gets the element in the collection at the current position of the enumerator.
+        /// </summary>
+        /// <returns>
+        ///     The element in the collection at the current position of the enumerator.
+        /// </returns>
+        public Token Current => CurrrentToken;
+
+        /// <summary>
+        ///     Gets the current element in the collection.
+        /// </summary>
+        /// <returns>
+        ///     The current element in the collection.
+        /// </returns>
+        object IEnumerator.Current => Current;
+
         private void RegisterTokenTypesPunctuators()
         {
-            foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
+            foreach (TokenType type in Enum.GetValues(typeof (TokenType)))
             {
                 var value = type.GetPunctuator();
                 if (value != ' ')
@@ -32,38 +93,13 @@ namespace NimatorCouchBase.Entities.L
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            return;
-        }
-
-        /// <summary>
-        /// Advances the enumerator to the next element of the collection.
-        /// </summary>
-        /// <returns>
-        /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
-        /// </returns>
-        /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
-        public bool MoveNext()
-        {
-            if (++CurrentIndex < TextToLex.Length)
-            {
-                return false;
-            }
-            SetNextToken();
-            return true;
-        }
-
         private void SetNextToken()
         {
             char currentChar = TextToLex[CurrentIndex];
 
             if (CharIsPunctuator(currentChar))
             {
-                CurrrentToken = new Token(TokenType.Asterisk, Convert.ToString(TextToLex[CurrentIndex]));
+                CurrrentToken = new Token(Puctuators[currentChar], Convert.ToString(TextToLex[CurrentIndex]));
                 return;
             }
             if (CharIsLetter(currentChar))
@@ -72,25 +108,75 @@ namespace NimatorCouchBase.Entities.L
                 CurrrentToken = new Token(TokenType.Variable, variableName);
                 return;
             }
-            else
+            if (CharIsNumber(currentChar))
             {
-                //Ignore (Whitespaces)
+                var scalarValue = GetScalarValue();
+                CurrrentToken = new Token(TokenType.Scalar, scalarValue);
+                return;
+            }
+            if (CharIsWhitespace(currentChar))
+            {
+                //Ignore
             }
             CurrrentToken = new Token(TokenType.Eof, string.Empty);
         }
 
-        private string GetVariableName()
+        private static bool CharIsNumber(char pCurrentChar)
         {
-            int nameStartIndex = CurrentIndex;
-            while (CurrentIndex < TextToLex.Length)
+            return char.IsDigit(pCurrentChar);
+        }
+
+        private static bool CharIsWhitespace(char pCurrentChar)
+        {
+            return char.IsWhiteSpace(pCurrentChar);
+        }
+
+        private string GetScalarValue()
+        {
+            int valueStartIndex = CurrentIndex;
+            int searchIndex = valueStartIndex;
+            var charsToTake = 1;
+            while (searchIndex < TextToLex.Length - 1)
             {
-                if (!char.IsLetter(TextToLex[CurrentIndex]))
+                var currentChar = TextToLex[searchIndex];
+                if (!CharIsNumber(currentChar) && currentChar != '.')
                 {
+                    charsToTake--;
+                    searchIndex--;
                     break;
                 }
-                CurrentIndex++;
+                charsToTake++;
+                searchIndex++;
+            }            
+            string scalarValue = GetSubstring(valueStartIndex, charsToTake, TextToLex);
+            CurrentIndex = searchIndex;
+            return scalarValue;
+        }
+
+        private static string GetSubstring(int pInitialIndex, int pCharsToTake, string pTextToSubstring)
+        {                        
+            return pTextToSubstring.Substring(pInitialIndex, pCharsToTake);
+        }
+
+        private string GetVariableName()
+        {
+            int valueStartIndex = CurrentIndex;
+            int searchIndex = valueStartIndex;
+            var charsToTake = 1;
+            while (searchIndex < TextToLex.Length - 1)
+            {
+                var currentChar = TextToLex[searchIndex];
+                if (!CharIsLetter(currentChar) && currentChar != '.')
+                {
+                    charsToTake--;
+                    searchIndex--;
+                    break;
+                }
+                charsToTake++;
+                searchIndex++;
             }
-            string name = TextToLex.Substring(nameStartIndex, CurrentIndex);
+            string name = GetSubstring(valueStartIndex, charsToTake, TextToLex);
+            CurrentIndex = searchIndex;
             return name;
         }
 
@@ -103,30 +189,5 @@ namespace NimatorCouchBase.Entities.L
         {
             return Puctuators.ContainsKey(pCurrentChar);
         }
-
-        /// <summary>
-        /// Sets the enumerator to its initial position, which is before the first element in the collection.
-        /// </summary>
-        /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
-        public void Reset()
-        {
-            CurrentIndex = -1;
-        }
-
-        /// <summary>
-        /// Gets the element in the collection at the current position of the enumerator.
-        /// </summary>
-        /// <returns>
-        /// The element in the collection at the current position of the enumerator.
-        /// </returns>
-        public Token Current => CurrrentToken;
-
-        /// <summary>
-        /// Gets the current element in the collection.
-        /// </summary>
-        /// <returns>
-        /// The current element in the collection.
-        /// </returns>
-        object IEnumerator.Current => Current;
     }
 }
