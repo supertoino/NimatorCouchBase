@@ -17,19 +17,10 @@ namespace NimatorCouchBase.Entities.L
                 case TokenType.Smaller:
                     return '<';
                 case TokenType.Equal:
-                    return '=';
-                case TokenType.LeftParam:
-                    break;
-                case TokenType.RigthParam:
-                    break;
-                case TokenType.Comma:
-                    break;
-                case TokenType.Not:
-                    break;                              
+                    return '=';                            
                 default:
                     return ' ';
             }
-            return ' ';
         }
     }
 }

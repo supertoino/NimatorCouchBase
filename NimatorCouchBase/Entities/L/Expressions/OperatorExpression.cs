@@ -17,11 +17,9 @@ namespace NimatorCouchBase.Entities.L.Expressions
 
         public void Print(StringBuilder pBuilder)
         {
-            pBuilder.Append("(");
             LeftExpression.Print(pBuilder);
             pBuilder.Append(" ").Append(Operator.GetPunctuator()).Append(" ");
             RigthExpression.Print(pBuilder);
-            pBuilder.Append(")");
         }
     }
 }

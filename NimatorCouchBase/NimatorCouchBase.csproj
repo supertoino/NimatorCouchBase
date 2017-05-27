@@ -62,6 +62,7 @@
     <Compile Include="Entities\Checkers\CheckHttpCallerParameters.cs" />
     <Compile Include="Entities\L\Expressions\IExpression.cs" />
     <Compile Include="Entities\L\Expressions\OperatorExpression.cs" />
+    <Compile Include="Entities\L\Expressions\ScalarExpression.cs" />
     <Compile Include="Entities\L\Expressions\VariableExpression.cs" />
     <Compile Include="Entities\L\Lexer.cs" />
     <Compile Include="Entities\L\Memory\Interfaces\IMemory.cs" />
