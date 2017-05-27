@@ -31,6 +31,7 @@ namespace NimatorCouchBase.Entities.L
                 default:
                     return ' ';
             }
+            return ' ';
         }
     }
 }

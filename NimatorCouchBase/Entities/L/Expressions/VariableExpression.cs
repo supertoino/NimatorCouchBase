@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace NimatorCouchBase.Entities.L
+namespace NimatorCouchBase.Entities.L.Expressions
 {
     public class VariableExpression : IExpression
     {
