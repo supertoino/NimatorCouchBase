@@ -1,6 +1,8 @@
+using System;
 using System.Text;
+using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Expressions
+namespace NimatorCouchBase.Entities.L.Parser.Expressions
 {
     public class OperatorExpression : IExpression
     {
@@ -13,6 +15,21 @@ namespace NimatorCouchBase.Entities.L.Expressions
             Operator = pOperator;
             RigthExpression = pRigthExpression;
             LeftExpression = pLeftExpression;
+        }
+
+        public object Value
+        {
+            get
+            {
+                if (Operator == TokenType.Equal)
+                {
+                    return Convert.ToInt64(LeftExpression.Value) == Convert.ToInt64(RigthExpression.Value);
+                }
+                else
+                {
+                    return Convert.ToInt64(LeftExpression.Value) > Convert.ToInt64(RigthExpression.Value);
+                }                
+            }
         }
 
         public void Print(StringBuilder pBuilder)

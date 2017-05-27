@@ -1,8 +1,4 @@
-﻿using System.Data;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-
-namespace NimatorCouchBase.Entities.L
+﻿namespace NimatorCouchBase.Entities.L.Tokens
 {
     public enum TokenType
     {

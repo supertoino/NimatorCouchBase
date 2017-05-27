@@ -1,4 +1,4 @@
-namespace NimatorCouchBase.Entities.L
+namespace NimatorCouchBase.Entities.L.Tokens
 {
     public static class UtilsTokenType
     {

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NimatorCouchBase.Entities.L.Expressions
+namespace NimatorCouchBase.Entities.L.Parser.Expressions
 {
     public class ScalarExpression : IExpression
     {

@@ -10,10 +10,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NimatorCouchBase.Entities.L.Tokens;
 
 #endregion
 
-namespace NimatorCouchBase.Entities.L
+namespace NimatorCouchBase.Entities.L.Lexer
 {
     public class Lexer : IEnumerator<Token>
     {

@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace NimatorCouchBase.Entities.L.Expressions
+namespace NimatorCouchBase.Entities.L.Parser.Expressions
 {
     public class VariableExpression : IExpression
     {
@@ -10,6 +10,8 @@ namespace NimatorCouchBase.Entities.L.Expressions
         {
             VariableName = pVariableName;
         }
+
+        public object Value { get; }
 
         public void Print(StringBuilder pBuilder)
         {

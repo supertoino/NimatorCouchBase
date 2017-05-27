@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NimatorCouchBase.Entities.L;
+using NimatorCouchBase.Entities.L.Lexer;
+using NimatorCouchBase.Entities.L.Tokens;
 
 namespace TestNimatorCouchBase
 {
