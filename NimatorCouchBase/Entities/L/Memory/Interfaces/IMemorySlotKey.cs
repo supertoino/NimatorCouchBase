@@ -1,4 +1,4 @@
-namespace NimatorCouchBase.Entities.L.Memory
+namespace NimatorCouchBase.Entities.L.Memory.Interfaces
 {
     public interface IMemorySlotKey
     {

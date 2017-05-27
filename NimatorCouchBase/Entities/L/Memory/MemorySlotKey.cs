@@ -1,3 +1,5 @@
+using NimatorCouchBase.Entities.L.Memory.Interfaces;
+
 namespace NimatorCouchBase.Entities.L.Memory
 {
     public class MemorySlotKey : IMemorySlotKey

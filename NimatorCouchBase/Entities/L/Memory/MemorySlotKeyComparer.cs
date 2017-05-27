@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NimatorCouchBase.Entities.L.Memory.Interfaces;
 
 namespace NimatorCouchBase.Entities.L.Memory
 {

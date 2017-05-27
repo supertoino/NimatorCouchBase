@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NimatorCouchBase.Entities.L.Memory
+﻿namespace NimatorCouchBase.Entities.L.Memory.Interfaces
 {
     public interface IMemory
     {

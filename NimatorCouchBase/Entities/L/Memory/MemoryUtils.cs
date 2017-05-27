@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using NimatorCouchBase.Entities.L.Memory.Interfaces;
 
 namespace NimatorCouchBase.Entities.L.Memory
 {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NimatorCouchBase.Entities.L.Memory;
+using NimatorCouchBase.Entities.L.Memory.Interfaces;
 
 namespace TestNimatorCouchBase
 {
