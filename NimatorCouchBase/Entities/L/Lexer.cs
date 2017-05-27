@@ -2,7 +2,7 @@
 // NimatorCouchBase - NimatorCouchBase - Lexer.cs 
 // CREATOR: antonio.silva - António Silva
 // AT: 2017/05/27/10:15
-// LAST HEADER UPDATE: 2017 /05/27/22:19
+// LAST HEADER UPDATE: 2017 /05/27/23:16
 // 
 
 #region Imports
@@ -126,12 +126,22 @@ namespace NimatorCouchBase.Entities.L
             return char.IsDigit(pCurrentChar);
         }
 
+        private static bool CharIsNotNumber(char pCurrentChar)
+        {
+            return !char.IsDigit(pCurrentChar) && pCurrentChar != '.';
+        }
+
+        private static bool CharIsNotLetter(char pCurrentChar)
+        {
+            return !char.IsLetter(pCurrentChar) && pCurrentChar != '.';
+        }
+
         private static bool CharIsWhitespace(char pCurrentChar)
         {
             return char.IsWhiteSpace(pCurrentChar);
         }
 
-        private string GetScalarValue()
+        private string GetCharactersUntil(Func<char, bool> pStopFunction)
         {
             int valueStartIndex = CurrentIndex;
             int searchIndex = valueStartIndex;
@@ -139,34 +149,7 @@ namespace NimatorCouchBase.Entities.L
             while (searchIndex < TextToLex.Length - 1)
             {
                 var currentChar = TextToLex[searchIndex];
-                if (!CharIsNumber(currentChar) && currentChar != '.')
-                {
-                    charsToTake--;
-                    searchIndex--;
-                    break;
-                }
-                charsToTake++;
-                searchIndex++;
-            }            
-            string scalarValue = GetSubstring(valueStartIndex, charsToTake, TextToLex);
-            CurrentIndex = searchIndex;
-            return scalarValue;
-        }
-
-        private static string GetSubstring(int pInitialIndex, int pCharsToTake, string pTextToSubstring)
-        {                        
-            return pTextToSubstring.Substring(pInitialIndex, pCharsToTake);
-        }
-
-        private string GetVariableName()
-        {
-            int valueStartIndex = CurrentIndex;
-            int searchIndex = valueStartIndex;
-            var charsToTake = 1;
-            while (searchIndex < TextToLex.Length - 1)
-            {
-                var currentChar = TextToLex[searchIndex];
-                if (!CharIsLetter(currentChar) && currentChar != '.')
+                if (pStopFunction(currentChar))
                 {
                     charsToTake--;
                     searchIndex--;
@@ -175,9 +158,24 @@ namespace NimatorCouchBase.Entities.L
                 charsToTake++;
                 searchIndex++;
             }
-            string name = GetSubstring(valueStartIndex, charsToTake, TextToLex);
+            string scalarValue = GetSubstring(valueStartIndex, charsToTake, TextToLex);
             CurrentIndex = searchIndex;
-            return name;
+            return scalarValue;
+        }
+
+        private static string GetSubstring(int pInitialIndex, int pCharsToTake, string pTextToSubstring)
+        {
+            return pTextToSubstring.Substring(pInitialIndex, pCharsToTake);
+        }
+
+        private string GetScalarValue()
+        {
+            return GetCharactersUntil(CharIsNotNumber);
+        }
+
+        private string GetVariableName()
+        {
+            return GetCharactersUntil(CharIsNotLetter);
         }
 
         private static bool CharIsLetter(char pCurrentChar)
