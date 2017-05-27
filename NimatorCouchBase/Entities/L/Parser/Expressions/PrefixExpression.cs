@@ -1,8 +1,7 @@
 using System.Text;
-using NimatorCouchBase.Entities.L.Parser.Expressions;
 using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Parser
+namespace NimatorCouchBase.Entities.L.Parser.Expressions
 {
     public class PrefixExpression : IExpression
     {

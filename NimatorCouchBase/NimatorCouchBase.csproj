@@ -80,7 +80,7 @@
     <Compile Include="Entities\L\Memory\MemorySlotKeyComparer.cs" />
     <Compile Include="Entities\L\Memory\MemoryUtils.cs" />
     <Compile Include="Entities\L\Parser\Parser.cs" />
-    <Compile Include="Entities\L\Parser\PrefixExpression.cs" />
+    <Compile Include="Entities\L\Parser\Expressions\PrefixExpression.cs" />
     <Compile Include="Entities\L\Parser\PrefixOperatorParselet.cs" />
     <Compile Include="Entities\L\Parser\ScalarParselt.cs" />
     <Compile Include="Entities\L\Tokens\Token.cs" />
