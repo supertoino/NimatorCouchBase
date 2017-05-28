@@ -1,13 +1,10 @@
 using System;
 using System.Text;
 using NimatorCouchBase.Entities.L.Memory;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Expressions;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 using NimatorCouchBase.Utils;
 
-namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
+namespace NimatorCouchBase.Entities.L.Parser
 {
     public abstract class ArithmeticOperatorExpression : IExpression
     {
@@ -21,24 +18,7 @@ namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
             RigthExpression = pRigthExpression;
             LeftExpression = pLeftExpression;
         }
-       
-        protected object GetOperationResult(dynamic pLeftValue, dynamic pRightValue, TokenType pTokenType)
-        {
-            switch (pTokenType)
-            {
-                case TokenType.Asterisk:
-                    return pLeftValue * pRightValue;
-                case TokenType.Plus:
-                    return pLeftValue + pRightValue;
-                case TokenType.Minus:
-                    return pLeftValue - pRightValue;
-                case TokenType.Divide:
-                    return pLeftValue / pRightValue;                
-                default:
-                    return pLeftValue + pRightValue;
-            }
-        }
-
+             
         protected dynamic GetValueFromExpression(IExpression pExpression)
         {
             dynamic expressionValue = pExpression.Value;
@@ -82,7 +62,5 @@ namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
             pBuilder.Append(" ").Append(Operator.GetFunctionSyntax()).Append(" ");
             RigthExpression.Print(pBuilder);
         }
-
-        public string OperatorValue { get; set; }
     }
 }

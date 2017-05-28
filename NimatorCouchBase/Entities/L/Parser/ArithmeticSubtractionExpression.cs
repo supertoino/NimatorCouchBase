@@ -1,7 +1,6 @@
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
+namespace NimatorCouchBase.Entities.L.Parser
 {
     public class ArithmeticSubtractionExpression : ArithmeticOperatorExpression
     {
@@ -15,7 +14,7 @@ namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
             {
                 dynamic leftValue = GetValueFromExpression(LeftExpression);
                 dynamic rightValue = GetValueFromExpression(RigthExpression);
-                return leftValue * rightValue;
+                return leftValue - rightValue;
             }
         }
     }

@@ -6,7 +6,6 @@ using NimatorCouchBase.Entities.L.Lexer;
 using NimatorCouchBase.Entities.L.Memory;
 using NimatorCouchBase.Entities.L.Memory.Interfaces;
 using NimatorCouchBase.Entities.L.Parser;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 
 namespace TestNimatorCouchBase
 {

@@ -6,7 +6,6 @@ using NimatorCouchBase.Entities.L.Lexer;
 using NimatorCouchBase.Entities.L.Memory;
 using NimatorCouchBase.Entities.L.Memory.Interfaces;
 using NimatorCouchBase.Entities.L.Parser;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 
 namespace TestNimatorCouchBase
 {
@@ -39,7 +38,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestOk()
+        public void TestTotalGoalsTimes10BiggerThanTotalPenaltiesShouldReturnTrue()
         {
             var total = new TestLParserVariables.Totals
             {
@@ -58,7 +57,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestOk2()
+        public void TestTotalGoalsTimes10SmallerThanTotalPenaltiesShouldReturnFalse()
         {
             var total = new TestLParserVariables.Totals
             {
@@ -77,7 +76,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestOk3()
+        public void TestTotalGoalsTimes0_5Plus1_2SmallerThanTotalPenaltiesShouldReturnTrue()
         {
             var total = new TestLParserVariables.Totals
             {
@@ -96,7 +95,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestOk4()
+        public void TestTotalGoalsTime0_5Plus1_2EqualsTotalPenaltiesTimes0_5Plus1_2ShouldReturnTrue()
         {
             var total = new TestLParserVariables.Totals
             {
@@ -115,7 +114,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestOk5()
+        public void TestTotalGoalsTime0_5Plus1_2DifferentThenTotalPenaltiesTimes0_5Plus1_21ShouldReturnTrue()
         {
             var total = new TestLParserVariables.Totals
             {

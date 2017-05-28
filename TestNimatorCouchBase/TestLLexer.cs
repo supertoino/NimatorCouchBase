@@ -310,7 +310,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestLexerWithSum()
+        public void TestLexerWithSums()
         {
             string phrase = "1+2>2";
             Lexer lexer = new Lexer(phrase);
@@ -337,7 +337,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestLexerWithMul()
+        public void TestLexerWithMultiplication()
         {
             string phrase = "1*2>2";
             Lexer lexer = new Lexer(phrase);

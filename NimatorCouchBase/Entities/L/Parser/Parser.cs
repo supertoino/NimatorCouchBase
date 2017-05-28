@@ -10,10 +10,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NimatorCouchBase.Entities.L.Memory.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Infix.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
 #endregion
@@ -114,7 +110,7 @@ namespace NimatorCouchBase.Entities.L.Parser
             var parser = InfixParsers[lookAhead.Type];
             if (parser != null)
             {
-                return parser.GetPrecedence();
+                return parser.Precedence;
             }
             return 0;
         }

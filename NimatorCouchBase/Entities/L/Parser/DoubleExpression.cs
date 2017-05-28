@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Text;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 
-namespace NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Expressions
+namespace NimatorCouchBase.Entities.L.Parser
 {
-    public class LongExpression : IExpression
+    public class DoubleExpression : IExpression
     {
-        public LongExpression(object pValue)
+        public DoubleExpression(object pValue)
         {
             Value = pValue;
         }

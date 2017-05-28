@@ -9,8 +9,6 @@
 
 using System.Collections.Generic;
 using NimatorCouchBase.Entities.L.Memory.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Infix;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix;
 using NimatorCouchBase.Entities.L.Tokens;
 
 #endregion

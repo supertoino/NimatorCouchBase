@@ -1,13 +1,10 @@
 using System;
 using System.Text;
 using NimatorCouchBase.Entities.L.Memory;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Expressions;
-using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 using NimatorCouchBase.Utils;
 
-namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
+namespace NimatorCouchBase.Entities.L.Parser
 {
     public class LogicalOperatorExpression : IExpression
     {

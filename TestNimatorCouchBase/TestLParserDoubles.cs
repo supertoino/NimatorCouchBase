@@ -3,7 +3,6 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NimatorCouchBase.Entities.L.Lexer;
 using NimatorCouchBase.Entities.L.Parser;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 
 namespace TestNimatorCouchBase
 {

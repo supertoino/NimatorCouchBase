@@ -1,11 +1,10 @@
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
+namespace NimatorCouchBase.Entities.L.Parser
 {
-    public class ArithmeticDivisionExpression : ArithmeticOperatorExpression
+    public class ArithmeticMultiplicationExpression : ArithmeticOperatorExpression
     {
-        public ArithmeticDivisionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, TokenType.Divide, pRigthExpression)
+        public ArithmeticMultiplicationExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, TokenType.Asterisk, pRigthExpression)
         {
         }
 

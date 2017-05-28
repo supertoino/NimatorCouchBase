@@ -1,9 +1,6 @@
-using NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions;
-using NimatorCouchBase.Entities.L.Parser.Entities.Infix.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix
+namespace NimatorCouchBase.Entities.L.Parser
 {
     public class ArithmenticDivisionOperatorParser : IInfixParser
     {
