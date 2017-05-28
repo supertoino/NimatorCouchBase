@@ -15,14 +15,14 @@ This plugin is composed by:
 #### L
 ##### BNF for Language L
 ```
-**<L>** ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
-**<ArithmeticFunction>** ::= <PrefixOperators> | <PrefixOperators> <InfixOperations> <ArithmeticFunction>
-**<PrefixOperators>** ::= <Var> | <Long> | <Double>						
-**<Var>** ::= 1*<letter>
-**<Long>** ::= 1*<digit>
-**<Double>** ::= <digit> (".") <digit>
-**<LogicalFunction>** ::= = | != | < | > | <= | >=
-**<InfixOperations>** ::= + | - | * | \
+<L> ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
+<ArithmeticFunction> ::= <PrefixOperators> | <PrefixOperators> <InfixOperations> <ArithmeticFunction>
+<PrefixOperators> ::= <Var> | <Long> | <Double>						
+<Var> ::= 1*<letter>
+<Long> ::= 1*<digit>
+<Double> ::= <digit> (".") <digit>
+<LogicalFunction> ::= = | != | < | > | <= | >=
+<InfixOperations> ::= + | - | * | \
 ```
 ### Usage
 Just fork the repo and run _ConsoleNimatorCouchBase_. Configure you Coachbase authentication settings. They are default settings for notifications using L. Feel free to trysome for you.
