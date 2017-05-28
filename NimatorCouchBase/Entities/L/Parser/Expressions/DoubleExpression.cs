@@ -1,22 +1,21 @@
+﻿using System;
 using System.Text;
 using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 
 namespace NimatorCouchBase.Entities.L.Parser.Expressions
 {
-    public class VariableExpression : IExpression
+    public class DoubleExpression : IExpression
     {
-        private readonly string VariableName;
-
-        public VariableExpression(string pVariableName)
+        public DoubleExpression(object pValue)
         {
-            VariableName = pVariableName;
+            Value = pValue;
         }
 
         public object Value { get; }
 
         public void Print(StringBuilder pBuilder)
         {
-            pBuilder.Append(VariableName);
+            pBuilder.Append(Convert.ToString(Value));
         }
     }
 }

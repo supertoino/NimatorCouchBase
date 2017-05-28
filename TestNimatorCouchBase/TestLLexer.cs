@@ -251,5 +251,44 @@ namespace TestNimatorCouchBase
             Assert.AreEqual(TokenType.Long, tokens[2].Type);
             Assert.AreEqual("2", tokens[2].Value);
         }
+
+        [TestMethod]
+        public void TestLexerEmpty()
+        {
+            string phrase = "";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(0, tokens.Count);
+        }
+
+        [TestMethod]
+        public void TestLexerAllWhiteSpaces()
+        {
+            string phrase = "    ";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(0, tokens.Count);
+        }
+
+        [TestMethod]
+        public void TestLexerUnknowCaracthersSpaces()
+        {
+            string phrase = "#@€&%{";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(1, tokens.Count);
+        }
     }
 }

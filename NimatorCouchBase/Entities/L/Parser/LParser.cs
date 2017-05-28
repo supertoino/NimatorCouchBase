@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NimatorCouchBase.Entities.L.Parser.Specific;
 using NimatorCouchBase.Entities.L.Tokens;
 
 namespace NimatorCouchBase.Entities.L.Parser
@@ -7,11 +8,16 @@ namespace NimatorCouchBase.Entities.L.Parser
     {
         public LParser(IEnumerator<Token> pTokens) : base(pTokens)
         {
-            Register(TokenType.Long, new ScalarParselt() );
+            Register(TokenType.Long, new LongParser());
+            Register(TokenType.Double, new DoubleParser());
+            Register(TokenType.Variable, new VariableParser());
 
-            Register(TokenType.Bigger, new BinaryOperatorParselet());    
-            Register(TokenType.Equal, new BinaryOperatorParselet());    
-            Register(TokenType.Smaller, new BinaryOperatorParselet());    
+            Register(TokenType.Bigger, new BinaryOperatorParser());    
+            Register(TokenType.Equal, new BinaryOperatorParser());    
+            Register(TokenType.Smaller, new BinaryOperatorParser());
+            Register(TokenType.Different, new BinaryOperatorParser());
+            Register(TokenType.BiggerEqual, new BinaryOperatorParser());
+            Register(TokenType.SmallerEqual, new BinaryOperatorParser());
         }
     }
 }

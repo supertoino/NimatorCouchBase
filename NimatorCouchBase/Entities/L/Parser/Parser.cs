@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using NimatorCouchBase.Entities.L.Parser.Expressions;
+using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
 namespace NimatorCouchBase.Entities.L.Parser
@@ -39,7 +41,7 @@ namespace NimatorCouchBase.Entities.L.Parser
         public IExpression ParseExpression()
         {
            Token token = Consume();
-            IPrefixParselet prefix = MiPrefixParselet[token.Type];
+            IPrefixParser prefix = MiPrefixParselet[token.Type];
 
             //if (prefix == null) throw new ParseException("Could not parse \"" + token.getText() + "\".");
 
@@ -47,7 +49,7 @@ namespace NimatorCouchBase.Entities.L.Parser
 
             token = LookAhead(0);
             if (token == null) return left;
-            IInfixParselet infix = MInfixParselets[token.Type];
+            IInfixParser infix = MInfixParselets[token.Type];
 
             // No infix expression at this point, so we're done.
             if (infix == null) return left;
@@ -57,18 +59,18 @@ namespace NimatorCouchBase.Entities.L.Parser
         }
 
 
-        public void Register(TokenType pToken, IPrefixParselet pArselet)
+        public void Register(TokenType pToken, IPrefixParser pArselet)
         {
             MiPrefixParselet.Add(pToken, pArselet);
         }
 
-        public void Register(TokenType pToken, IInfixParselet pArselet)
+        public void Register(TokenType pToken, IInfixParser pArselet)
         {
             MInfixParselets.Add(pToken, pArselet);
         }
 
-        private readonly Dictionary<TokenType, IInfixParselet> MInfixParselets = new Dictionary<TokenType, IInfixParselet>();
-        private readonly Dictionary<TokenType, IPrefixParselet> MiPrefixParselet = new Dictionary<TokenType, IPrefixParselet>();
+        private readonly Dictionary<TokenType, IInfixParser> MInfixParselets = new Dictionary<TokenType, IInfixParser>();
+        private readonly Dictionary<TokenType, IPrefixParser> MiPrefixParselet = new Dictionary<TokenType, IPrefixParser>();
 
     }
 }

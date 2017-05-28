@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Text;
+using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 
 namespace NimatorCouchBase.Entities.L.Parser.Expressions
 {
-    public class ScalarExpression : IExpression
+    public class LongExpression : IExpression
     {
-        public ScalarExpression(object pValue)
+        public LongExpression(object pValue)
         {
             Value = pValue;
         }

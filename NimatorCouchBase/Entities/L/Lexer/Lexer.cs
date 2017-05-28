@@ -49,12 +49,18 @@ namespace NimatorCouchBase.Entities.L.Lexer
         /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
         public bool MoveNext()
         {
-            if (++CurrentIndex > (TextToTokenize.Length - 1))
+            CurrentIndex++;
+            if (!IndexIsWithinCodeBounds(CurrentIndex))
             {
                 return false;
             }
             SetNextToken();
             return true;
+        }
+
+        private bool IndexIsWithinCodeBounds(int pCurrentIndex)
+        {
+            return pCurrentIndex < (TextToTokenize.Length);
         }
 
         /// <summary>
@@ -83,14 +89,14 @@ namespace NimatorCouchBase.Entities.L.Lexer
         object IEnumerator.Current => Current;
 
         private static string CleanTextToTokenize(string pCode)
-        {            
-            var cleanCode = pCode.Replace(" ",string.Empty);
+        {
+            var cleanCode = pCode.Replace(" ", string.Empty);
             return cleanCode;
         }
 
         private void RegisterTokenTypesPunctuators()
         {
-            foreach (TokenType type in Enum.GetValues(typeof (TokenType)))
+            foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
             {
                 var value = type.GetPunctuator();
                 if (value != " ")
@@ -102,32 +108,16 @@ namespace NimatorCouchBase.Entities.L.Lexer
 
         private void SetNextToken()
         {
-            char currentChar = TextToTokenize[CurrentIndex];            
-            if (CharIsPunctuator(currentChar))
+            char currentChar = TextToTokenize[CurrentIndex];
+            if (CharIsFunction(currentChar))
             {
-                if (CurrentIndex + 1 < TextToTokenize.Length)
-                {
-                    if (CharIsPunctuator("" + currentChar + TextToTokenize[CurrentIndex + 1]))
-                    {
-                        var functionId = currentChar.ToString() + TextToTokenize[CurrentIndex + 1].ToString();
-                        CurrrentToken = new Token(Functions[functionId], functionId);
-                        CurrentIndex++;
-                        return;
-                    }
-                }
+                if (NextPositionIsFunction(currentChar)) return;
                 CurrrentToken = new Token(Functions[Convert.ToString(currentChar)], Convert.ToString(currentChar));
                 return;
             }
-            if (CurrentIndex + 1 < TextToTokenize.Length)
-            {
-                if (CharIsPunctuator("" + currentChar + TextToTokenize[CurrentIndex + 1]))
-                {
-                    var functionId = currentChar.ToString() + TextToTokenize[CurrentIndex + 1].ToString();
-                    CurrrentToken = new Token(Functions[functionId], functionId);
-                    CurrentIndex++;
-                    return;
-                }
-            }
+
+            if (NextPositionIsFunction(currentChar)) return;
+
             if (CharIsLetter(currentChar))
             {
                 var variableName = GetVariableName();
@@ -137,18 +127,29 @@ namespace NimatorCouchBase.Entities.L.Lexer
             if (CharIsNumber(currentChar))
             {
                 var factorValue = GetScalarValue();
-                if (NumberFactorIsDecimal(factorValue))
-                {
-                    CurrrentToken = new Token(TokenType.Double, factorValue);
-                }
-                else
-                {
-                    CurrrentToken = new Token(TokenType.Long, factorValue);
-                }
-                
+                CurrrentToken = NumberFactorIsDecimal(factorValue) ? new Token(TokenType.Double, factorValue) : new Token(TokenType.Long, factorValue);
                 return;
-            }            
+            }
+            SetNextTokenAsEofAndEndIteration();
+        }
+
+        private bool NextPositionIsFunction(char pCurrentChar)
+        {
+            var nextIndex = CurrentIndex + 1;
+            if (IndexIsWithinCodeBounds(nextIndex) && CharIsFunction("" + pCurrentChar + TextToTokenize[nextIndex]))
+            {
+                var function = pCurrentChar + TextToTokenize[nextIndex].ToString();
+                CurrrentToken = new Token(Functions[function], function);
+                CurrentIndex++;
+                return true;
+            }
+            return false;
+        }
+
+        private void SetNextTokenAsEofAndEndIteration()
+        {
             CurrrentToken = new Token(TokenType.Eof, string.Empty);
+            CurrentIndex = TextToTokenize.Length;
         }
 
         private static bool NumberFactorIsDecimal(string pFactorValue)
@@ -214,12 +215,12 @@ namespace NimatorCouchBase.Entities.L.Lexer
             return char.IsLetter(pCurrentChar);
         }
 
-        private bool CharIsPunctuator(char pCurrentChar)
+        private bool CharIsFunction(char pCurrentChar)
         {
             return Functions.ContainsKey(Convert.ToString(pCurrentChar));
         }
 
-        private bool CharIsPunctuator(string pCurrentChar)
+        private bool CharIsFunction(string pCurrentChar)
         {
             return Functions.ContainsKey(pCurrentChar);
         }

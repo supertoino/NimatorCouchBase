@@ -1,11 +1,10 @@
-using System;
 using System.Text;
 
-namespace NimatorCouchBase.Entities.L.Parser.Expressions
+namespace NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces
 {
     public interface IExpression
     {
-        Object Value { get; }
+        object Value { get; }
         void Print(StringBuilder pBuilder);
     }
 }

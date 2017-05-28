@@ -1,4 +1,5 @@
 using System.Text;
+using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
 namespace NimatorCouchBase.Entities.L.Parser.Expressions

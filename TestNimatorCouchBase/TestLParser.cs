@@ -7,6 +7,7 @@ using NimatorCouchBase.Entities.L;
 using NimatorCouchBase.Entities.L.Lexer;
 using NimatorCouchBase.Entities.L.Parser;
 using NimatorCouchBase.Entities.L.Parser.Expressions;
+using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 
 namespace TestNimatorCouchBase
 {
@@ -38,6 +39,18 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
+        public void TestParserOneSmallerTwoShouldReturnTrue()
+        {
+            Lexer lexer = new Lexer("1<2");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsTrue((bool)result.Value);
+        }
+
+        [TestMethod]
         public void TestParserTwoEqualsTwoShouldReturnTrue()
         {
             Lexer lexer = new Lexer("2=2");
@@ -47,6 +60,78 @@ namespace TestNimatorCouchBase
             result.Print(stringBuilder);
             Console.WriteLine(stringBuilder);
             Assert.IsTrue((bool)result.Value);
+        }
+
+        [TestMethod]
+        public void TestParserOneDiferentThanTwoShouldReturnTrue()
+        {
+            Lexer lexer = new Lexer("1!=2");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsTrue((bool)result.Value);
+        }
+
+        [TestMethod]
+        public void TestParserOneDiferentThanOneShouldReturnFalse()
+        {
+            Lexer lexer = new Lexer("1!=1");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsFalse((bool)result.Value);
+        }
+
+        [TestMethod]
+        public void TestParser10BiggerEqualThanOneShouldReturnTrue()
+        {
+            Lexer lexer = new Lexer("10>=1");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsTrue((bool)result.Value);
+        }
+
+        [TestMethod]
+        public void TestParser10SmallerEqualThanOneShouldReturnFalse()
+        {
+            Lexer lexer = new Lexer("10<=1");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsFalse((bool)result.Value);
+        }
+
+        [TestMethod]
+        public void TestParser10Dot10SmallerEqualThanOneShouldReturnFalse()
+        {
+            Lexer lexer = new Lexer("10.10<=1");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsFalse((bool)result.Value);
+        }
+
+        [TestMethod]
+        public void TestParser10Dot10SmallerEqualThanOneDotFiveShouldReturnFalse()
+        {
+            Lexer lexer = new Lexer("10.10<=1.5");
+            Parser parser = new LParser(lexer);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsFalse((bool)result.Value);
         }
     }
 }
