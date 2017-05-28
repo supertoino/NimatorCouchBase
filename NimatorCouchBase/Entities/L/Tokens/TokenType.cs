@@ -3,11 +3,14 @@
     public enum TokenType
     {
         Equal,
+        Different,
         Bigger,
         Smaller,        
         Variable,        
         Long,
         Double,
-        Eof
+        Eof,
+        SmallerEqual,
+        BiggerEqual
     }
 }

@@ -194,5 +194,62 @@ namespace TestNimatorCouchBase
             Assert.AreEqual(TokenType.Variable, tokens[2].Type);
             Assert.AreEqual("SuperRam", tokens[2].Value);
         }
+
+        [TestMethod]
+        public void TestLexer1NotEqual2Ok()
+        {
+            string phrase = "1!=2";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(3, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("1", tokens[0].Value);
+            Assert.AreEqual(TokenType.Different, tokens[1].Type);
+            Assert.AreEqual("!=", tokens[1].Value);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
+            Assert.AreEqual("2", tokens[2].Value);
+        }
+
+        [TestMethod]
+        public void TestLexer1BiggerEqualThen2Ok()
+        {
+            string phrase = "1>=2";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(3, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("1", tokens[0].Value);
+            Assert.AreEqual(TokenType.BiggerEqual, tokens[1].Type);
+            Assert.AreEqual(">=", tokens[1].Value);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
+            Assert.AreEqual("2", tokens[2].Value);
+        }
+
+        [TestMethod]
+        public void TestLexer1SmallerEqualThen2Ok()
+        {
+            string phrase = "1<=2";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(3, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("1", tokens[0].Value);
+            Assert.AreEqual(TokenType.SmallerEqual, tokens[1].Type);
+            Assert.AreEqual("<=", tokens[1].Value);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
+            Assert.AreEqual("2", tokens[2].Value);
+        }
     }
 }

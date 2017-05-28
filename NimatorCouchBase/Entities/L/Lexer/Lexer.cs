@@ -18,17 +18,17 @@ namespace NimatorCouchBase.Entities.L.Lexer
 {
     public class Lexer : IEnumerator<Token>
     {
-        private readonly Dictionary<char, TokenType> Puctuators;
-        private readonly string TextToLex;
+        private readonly Dictionary<string, TokenType> Functions;
+        private readonly string TextToTokenize;
         private int CurrentIndex;
         private Token CurrrentToken;
 
         public Lexer(string pText)
         {
             Reset();
-            TextToLex = CleanTextToTokenize(pText);
+            TextToTokenize = CleanTextToTokenize(pText);
 
-            Puctuators = new Dictionary<char, TokenType>();
+            Functions = new Dictionary<string, TokenType>();
             RegisterTokenTypesPunctuators();
         }
 
@@ -49,7 +49,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
         /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
         public bool MoveNext()
         {
-            if (++CurrentIndex > (TextToLex.Length - 1))
+            if (++CurrentIndex > (TextToTokenize.Length - 1))
             {
                 return false;
             }
@@ -93,20 +93,40 @@ namespace NimatorCouchBase.Entities.L.Lexer
             foreach (TokenType type in Enum.GetValues(typeof (TokenType)))
             {
                 var value = type.GetPunctuator();
-                if (value != ' ')
+                if (value != " ")
                 {
-                    Puctuators.Add(value, type);
+                    Functions.Add(value, type);
                 }
             }
         }
 
         private void SetNextToken()
         {
-            char currentChar = TextToLex[CurrentIndex];            
+            char currentChar = TextToTokenize[CurrentIndex];            
             if (CharIsPunctuator(currentChar))
             {
-                CurrrentToken = new Token(Puctuators[currentChar], Convert.ToString(TextToLex[CurrentIndex]));
+                if (CurrentIndex + 1 < TextToTokenize.Length)
+                {
+                    if (CharIsPunctuator("" + currentChar + TextToTokenize[CurrentIndex + 1]))
+                    {
+                        var functionId = currentChar.ToString() + TextToTokenize[CurrentIndex + 1].ToString();
+                        CurrrentToken = new Token(Functions[functionId], functionId);
+                        CurrentIndex++;
+                        return;
+                    }
+                }
+                CurrrentToken = new Token(Functions[Convert.ToString(currentChar)], Convert.ToString(currentChar));
                 return;
+            }
+            if (CurrentIndex + 1 < TextToTokenize.Length)
+            {
+                if (CharIsPunctuator("" + currentChar + TextToTokenize[CurrentIndex + 1]))
+                {
+                    var functionId = currentChar.ToString() + TextToTokenize[CurrentIndex + 1].ToString();
+                    CurrrentToken = new Token(Functions[functionId], functionId);
+                    CurrentIndex++;
+                    return;
+                }
             }
             if (CharIsLetter(currentChar))
             {
@@ -156,9 +176,9 @@ namespace NimatorCouchBase.Entities.L.Lexer
             int valueStartIndex = CurrentIndex;
             int searchIndex = valueStartIndex;
             var charsToTake = 1;
-            while (searchIndex < TextToLex.Length - 1)
+            while (searchIndex < TextToTokenize.Length - 1)
             {
-                var currentChar = TextToLex[searchIndex];
+                var currentChar = TextToTokenize[searchIndex];
                 if (pStopFunction(currentChar))
                 {
                     //currentIndex belongs to stop function. We want the previous index
@@ -169,7 +189,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
                 charsToTake++;
                 searchIndex++;
             }
-            string scalarValue = GetSubstring(valueStartIndex, charsToTake, TextToLex);
+            string scalarValue = GetSubstring(valueStartIndex, charsToTake, TextToTokenize);
             CurrentIndex = searchIndex;
             return scalarValue;
         }
@@ -196,7 +216,12 @@ namespace NimatorCouchBase.Entities.L.Lexer
 
         private bool CharIsPunctuator(char pCurrentChar)
         {
-            return Puctuators.ContainsKey(pCurrentChar);
+            return Functions.ContainsKey(Convert.ToString(pCurrentChar));
+        }
+
+        private bool CharIsPunctuator(string pCurrentChar)
+        {
+            return Functions.ContainsKey(pCurrentChar);
         }
     }
 }
