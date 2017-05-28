@@ -167,9 +167,9 @@ namespace NimatorCouchBase.Entities.L.Lexer
             return !char.IsDigit(pCurrentChar) && pCurrentChar != '.';
         }
 
-        private static bool CharIsNotLetter(char pCurrentChar)
+        private static bool CharIsNotLetterNorNumber(char pCurrentChar)
         {
-            return !char.IsLetter(pCurrentChar) && pCurrentChar != '.';
+            return !char.IsLetter(pCurrentChar) && pCurrentChar != '.' && !char.IsDigit(pCurrentChar);
         }
 
         private string GetCharactersUntil(Func<char, bool> pStopFunction)
@@ -207,7 +207,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
 
         private string GetVariableName()
         {
-            return GetCharactersUntil(CharIsNotLetter);
+            return GetCharactersUntil(CharIsNotLetterNorNumber);
         }
 
         private static bool CharIsLetter(char pCurrentChar)

@@ -19,7 +19,7 @@ namespace NimatorCouchBase.Entities.L.Memory
             {
                 return false;
             }
-            return string.Equals(pY.Key, pX.Key, StringComparison.InvariantCultureIgnoreCase);
+            return string.Equals(pY.Key, pX.Key, StringComparison.InvariantCulture);
         }
 
         /// <summary>

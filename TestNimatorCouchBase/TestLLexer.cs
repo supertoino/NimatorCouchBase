@@ -160,7 +160,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestLexerCpuBiggerSuperRamOk()
+        public void TestLexerCpuEqualSuperRamOk()
         {
             string phrase = "Cpu=SuperRam";
             Lexer lexer = new Lexer(phrase);
@@ -178,7 +178,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestLexerCpuDotRateBiggerSuperRamOk()
+        public void TestLexerCpuDotRateEqualSuperRamOk()
         {
             string phrase = "Cpu.Rate=SuperRam";
             Lexer lexer = new Lexer(phrase);
@@ -190,6 +190,24 @@ namespace TestNimatorCouchBase
             Assert.AreEqual(3, tokens.Count);
             Assert.AreEqual(TokenType.Variable, tokens[0].Type);
             Assert.AreEqual("Cpu.Rate", tokens[0].Value);
+            Assert.AreEqual(TokenType.Equal, tokens[1].Type);
+            Assert.AreEqual(TokenType.Variable, tokens[2].Type);
+            Assert.AreEqual("SuperRam", tokens[2].Value);
+        }
+
+        [TestMethod]
+        public void TestLexerCpu2RateEqualSuperRamOk()
+        {
+            string phrase = "Cpu2Rate=SuperRam";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(3, tokens.Count);
+            Assert.AreEqual(TokenType.Variable, tokens[0].Type);
+            Assert.AreEqual("Cpu2Rate", tokens[0].Value);
             Assert.AreEqual(TokenType.Equal, tokens[1].Type);
             Assert.AreEqual(TokenType.Variable, tokens[2].Type);
             Assert.AreEqual("SuperRam", tokens[2].Value);

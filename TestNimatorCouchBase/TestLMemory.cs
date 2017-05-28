@@ -80,6 +80,25 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
+        public void TestMemoryAccessCaseInsensitiveShouldReturnEmptyMemorySlots()
+        {
+            var memory = new Memory();
+            var aclass = new AClass(1, 2, "Antonio")
+            {
+                B =
+                {
+                    PublicBProperty = "Ola",
+                    Values = new List<int>() {1, 2, 3}
+                }
+            };
+
+            memory.AddToMemory(aclass);
+
+            Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("b.PublicBProperty")).IsEmpty());
+            Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("Publicproperty")).IsEmpty());
+        }
+
+        [TestMethod]
         public void TestMemoryAcessOkNullSlots()
         {
             var memory = new Memory();            
