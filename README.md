@@ -11,9 +11,18 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 ```markdown
 Syntax highlighted code block
 
-# Header 1
+# Nimator CouchBase
 ## Header 2
-### Header 3
+### L
+
+<L> ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
+<ArithmeticFunction> ::= <PrefixOperators> | <PrefixOperators> <InfixOperations> <ArithmeticFunction>
+<PrefixOperators> ::= <Var> | <Long> | <Double>						
+<Var> ::= 1*<letter>
+<Long> ::= 1*<digit>
+<Double> ::= <digit> (".") <digit>
+<LogicalFunction> ::= = | != | < | > | <= | >=
+<InfixOperations> ::= + | - | * | \
 
 - Bulleted
 - List
