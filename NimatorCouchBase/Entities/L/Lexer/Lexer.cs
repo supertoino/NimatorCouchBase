@@ -26,7 +26,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
         public Lexer(string pText)
         {
             Reset();
-            TextToLex = pText;
+            TextToLex = CleanTextToTokenize(pText);
 
             Puctuators = new Dictionary<char, TokenType>();
             RegisterTokenTypesPunctuators();
@@ -82,6 +82,12 @@ namespace NimatorCouchBase.Entities.L.Lexer
         /// </returns>
         object IEnumerator.Current => Current;
 
+        private static string CleanTextToTokenize(string pCode)
+        {            
+            var cleanCode = pCode.Replace(" ",string.Empty);
+            return cleanCode;
+        }
+
         private void RegisterTokenTypesPunctuators()
         {
             foreach (TokenType type in Enum.GetValues(typeof (TokenType)))
@@ -96,8 +102,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
 
         private void SetNextToken()
         {
-            char currentChar = TextToLex[CurrentIndex];
-
+            char currentChar = TextToLex[CurrentIndex];            
             if (CharIsPunctuator(currentChar))
             {
                 CurrrentToken = new Token(Puctuators[currentChar], Convert.ToString(TextToLex[CurrentIndex]));
@@ -111,15 +116,24 @@ namespace NimatorCouchBase.Entities.L.Lexer
             }
             if (CharIsNumber(currentChar))
             {
-                var scalarValue = GetScalarValue();
-                CurrrentToken = new Token(TokenType.Scalar, scalarValue);
+                var factorValue = GetScalarValue();
+                if (NumberFactorIsDecimal(factorValue))
+                {
+                    CurrrentToken = new Token(TokenType.Double, factorValue);
+                }
+                else
+                {
+                    CurrrentToken = new Token(TokenType.Long, factorValue);
+                }
+                
                 return;
-            }
-            if (CharIsWhitespace(currentChar))
-            {
-                //Ignore
-            }
+            }            
             CurrrentToken = new Token(TokenType.Eof, string.Empty);
+        }
+
+        private static bool NumberFactorIsDecimal(string pFactorValue)
+        {
+            return pFactorValue.Contains(".");
         }
 
         private static bool CharIsNumber(char pCurrentChar)
@@ -137,11 +151,6 @@ namespace NimatorCouchBase.Entities.L.Lexer
             return !char.IsLetter(pCurrentChar) && pCurrentChar != '.';
         }
 
-        private static bool CharIsWhitespace(char pCurrentChar)
-        {
-            return char.IsWhiteSpace(pCurrentChar);
-        }
-
         private string GetCharactersUntil(Func<char, bool> pStopFunction)
         {
             int valueStartIndex = CurrentIndex;
@@ -152,6 +161,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
                 var currentChar = TextToLex[searchIndex];
                 if (pStopFunction(currentChar))
                 {
+                    //currentIndex belongs to stop function. We want the previous index
                     charsToTake--;
                     searchIndex--;
                     break;

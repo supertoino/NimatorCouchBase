@@ -21,12 +21,31 @@ namespace TestNimatorCouchBase
                 tokens.Add(lexer.Current);
             }
             Assert.AreEqual(3, tokens.Count);            
-            Assert.AreEqual(TokenType.Scalar, tokens[0].Type);            
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);            
             Assert.AreEqual("1", tokens[0].Value);            
             Assert.AreEqual(TokenType.Bigger, tokens[1].Type);            
             Assert.AreEqual(">", tokens[1].Value);            
-            Assert.AreEqual(TokenType.Scalar, tokens[2].Type);            
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);            
             Assert.AreEqual("2", tokens[2].Value);            
+        }
+
+        [TestMethod]
+        public void TestLexerOneBiggerTwoWithWhiteSpacesOk()
+        {
+            string phrase = "1 > 2 ";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(3, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("1", tokens[0].Value);
+            Assert.AreEqual(TokenType.Bigger, tokens[1].Type);
+            Assert.AreEqual(">", tokens[1].Value);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
+            Assert.AreEqual("2", tokens[2].Value);
         }
 
         [TestMethod]
@@ -40,16 +59,16 @@ namespace TestNimatorCouchBase
                 tokens.Add(lexer.Current);
             }
             Assert.AreEqual(3, tokens.Count);
-            Assert.AreEqual(TokenType.Scalar, tokens[0].Type);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
             Assert.AreEqual("1", tokens[0].Value);
             Assert.AreEqual(TokenType.Equal, tokens[1].Type);
             Assert.AreEqual("=", tokens[1].Value);
-            Assert.AreEqual(TokenType.Scalar, tokens[2].Type);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
             Assert.AreEqual("2", tokens[2].Value);
         }
 
         [TestMethod]
-        public void TestLexerOneDot666EqualTwoOk()
+        public void TestLexerOneDot666SmallerTwoOk()
         {
             string phrase = "1.666<2";
             Lexer lexer = new Lexer(phrase);
@@ -59,12 +78,31 @@ namespace TestNimatorCouchBase
                 tokens.Add(lexer.Current);
             }
             Assert.AreEqual(3, tokens.Count);
-            Assert.AreEqual(TokenType.Scalar, tokens[0].Type);
+            Assert.AreEqual(TokenType.Double, tokens[0].Type);
             Assert.AreEqual("1.666", tokens[0].Value);
             Assert.AreEqual(TokenType.Smaller, tokens[1].Type);
             Assert.AreEqual("<", tokens[1].Value);
-            Assert.AreEqual(TokenType.Scalar, tokens[2].Type);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
             Assert.AreEqual("2", tokens[2].Value);
+        }
+
+        [TestMethod]
+        public void TestLexerTwoBiggerOneDot666Ok()
+        {
+            string phrase = "2>1.666";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(3, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("2", tokens[0].Value);
+            Assert.AreEqual(TokenType.Bigger, tokens[1].Type);
+            Assert.AreEqual(">", tokens[1].Value);
+            Assert.AreEqual(TokenType.Double, tokens[2].Type);
+            Assert.AreEqual("1.666", tokens[2].Value);
         }
 
         [TestMethod]
@@ -78,10 +116,10 @@ namespace TestNimatorCouchBase
                 tokens.Add(lexer.Current);
             }
             Assert.AreEqual(3, tokens.Count);
-            Assert.AreEqual(TokenType.Scalar, tokens[0].Type);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
             Assert.AreEqual("10", tokens[0].Value);
             Assert.AreEqual(TokenType.Bigger, tokens[1].Type);
-            Assert.AreEqual(TokenType.Scalar, tokens[2].Type);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
             Assert.AreEqual("1000", tokens[2].Value);
         }
 
@@ -99,7 +137,7 @@ namespace TestNimatorCouchBase
             Assert.AreEqual(TokenType.Variable, tokens[0].Type);
             Assert.AreEqual("Cpu", tokens[0].Value);
             Assert.AreEqual(TokenType.Equal, tokens[1].Type);
-            Assert.AreEqual(TokenType.Scalar, tokens[2].Type);
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
             Assert.AreEqual("2", tokens[2].Value);
         }
 
@@ -114,7 +152,7 @@ namespace TestNimatorCouchBase
                 tokens.Add(lexer.Current);
             }
             Assert.AreEqual(3, tokens.Count);
-            Assert.AreEqual(TokenType.Scalar, tokens[0].Type);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
             Assert.AreEqual("2", tokens[0].Value);
             Assert.AreEqual(TokenType.Equal, tokens[1].Type);
             Assert.AreEqual(TokenType.Variable, tokens[2].Type);

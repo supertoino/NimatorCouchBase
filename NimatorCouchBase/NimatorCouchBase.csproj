@@ -125,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Models\LParser.cd" />
     <None Include="Models\DefaultStatistics.cd" />
     <None Include="packages.config" />
   </ItemGroup>

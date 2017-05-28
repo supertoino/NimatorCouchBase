@@ -2,18 +2,12 @@
 {
     public enum TokenType
     {
-        LeftParam,
-        RigthParam,
-        Comma,
         Equal,
-        Not,
-        Plus,
-        Minus,
-        Asterisk,
         Bigger,
         Smaller,        
-        Variable,
-        Eof,
-        Scalar
+        Variable,        
+        Long,
+        Double,
+        Eof
     }
 }
