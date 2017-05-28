@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces
+namespace NimatorCouchBase.Entities.L.Parser.Entities.Interfaces
 {
     public interface IExpression
     {

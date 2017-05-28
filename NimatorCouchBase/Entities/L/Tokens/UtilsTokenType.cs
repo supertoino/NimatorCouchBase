@@ -2,7 +2,7 @@ namespace NimatorCouchBase.Entities.L.Tokens
 {
     public static class UtilsTokenType
     {
-        public static string GetPunctuator(this TokenType pTokenType)
+        public static string GetFunctionSyntax(this TokenType pTokenType)
         {
             switch (pTokenType)
             {                
@@ -18,6 +18,14 @@ namespace NimatorCouchBase.Entities.L.Tokens
                     return ">=";
                 case TokenType.SmallerEqual:
                     return "<=";
+                case TokenType.Plus:
+                    return "+";
+                case TokenType.Divide:
+                    return "/";
+                case TokenType.Minus:
+                    return "-";
+                case TokenType.Asterisk:
+                    return "*";
                 default:
                     return " ";
             }

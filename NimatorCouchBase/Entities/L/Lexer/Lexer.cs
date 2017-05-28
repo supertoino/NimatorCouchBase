@@ -29,7 +29,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
             TextToTokenize = CleanTextToTokenize(pText);
 
             Functions = new Dictionary<string, TokenType>();
-            RegisterTokenTypesPunctuators();
+            RegisterTokenTypesFunctions();
         }
 
         /// <summary>
@@ -94,11 +94,11 @@ namespace NimatorCouchBase.Entities.L.Lexer
             return cleanCode;
         }
 
-        private void RegisterTokenTypesPunctuators()
+        private void RegisterTokenTypesFunctions()
         {
             foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
             {
-                var value = type.GetPunctuator();
+                var value = type.GetFunctionSyntax();
                 if (value != " ")
                 {
                     Functions.Add(value, type);
@@ -111,12 +111,20 @@ namespace NimatorCouchBase.Entities.L.Lexer
             char currentChar = TextToTokenize[CurrentIndex];
             if (CharIsFunction(currentChar))
             {
-                if (NextPositionIsFunction(currentChar)) return;
-                CurrrentToken = new Token(Functions[Convert.ToString(currentChar)], Convert.ToString(currentChar));
+                if (NextPositionIsFunction(currentChar))
+                {
+                    CreateFunctionTokenWithTwoCharacters(currentChar);
+                    return;
+                }                
+                CreateFunctionTokenWithOneCaracther(currentChar);
                 return;
             }
 
-            if (NextPositionIsFunction(currentChar)) return;
+            if (NextPositionIsFunction(currentChar))
+            {
+                CreateFunctionTokenWithTwoCharacters(currentChar);
+                return;
+            };
 
             if (CharIsLetter(currentChar))
             {
@@ -133,17 +141,23 @@ namespace NimatorCouchBase.Entities.L.Lexer
             SetNextTokenAsEofAndEndIteration();
         }
 
+        private void CreateFunctionTokenWithOneCaracther(char pCurrentChar)
+        {
+            CurrrentToken = new Token(Functions[Convert.ToString(pCurrentChar)], Convert.ToString(pCurrentChar));
+        }
+
+        private void CreateFunctionTokenWithTwoCharacters(char pCurrentChar)
+        {
+            var function = pCurrentChar + TextToTokenize[CurrentIndex + 1].ToString();
+            CurrrentToken = new Token(Functions[function], function);
+            CurrentIndex++;
+        }
+
         private bool NextPositionIsFunction(char pCurrentChar)
         {
             var nextIndex = CurrentIndex + 1;
-            if (IndexIsWithinCodeBounds(nextIndex) && CharIsFunction("" + pCurrentChar + TextToTokenize[nextIndex]))
-            {
-                var function = pCurrentChar + TextToTokenize[nextIndex].ToString();
-                CurrrentToken = new Token(Functions[function], function);
-                CurrentIndex++;
-                return true;
-            }
-            return false;
+            var nextPositionFunction = IndexIsWithinCodeBounds(nextIndex) && CharIsFunction("" + pCurrentChar + TextToTokenize[nextIndex]);
+            return nextPositionFunction;
         }
 
         private void SetNextTokenAsEofAndEndIteration()
@@ -172,14 +186,14 @@ namespace NimatorCouchBase.Entities.L.Lexer
             return !char.IsLetter(pCurrentChar) && pCurrentChar != '.' && !char.IsDigit(pCurrentChar);
         }
 
-        private string GetCharactersUntil(Func<char, bool> pStopFunction)
+        private string GetCharactersUntil(Func<char, bool> pStopFunction, int pValueStartIndex, string pTextToSubstring)
         {
-            int valueStartIndex = CurrentIndex;
+            int valueStartIndex = pValueStartIndex;
             int searchIndex = valueStartIndex;
             var charsToTake = 1;
-            while (searchIndex < TextToTokenize.Length - 1)
+            while (searchIndex < pTextToSubstring.Length - 1)
             {
-                var currentChar = TextToTokenize[searchIndex];
+                var currentChar = pTextToSubstring[searchIndex];
                 if (pStopFunction(currentChar))
                 {
                     //currentIndex belongs to stop function. We want the previous index
@@ -190,7 +204,7 @@ namespace NimatorCouchBase.Entities.L.Lexer
                 charsToTake++;
                 searchIndex++;
             }
-            string scalarValue = GetSubstring(valueStartIndex, charsToTake, TextToTokenize);
+            string scalarValue = GetSubstring(valueStartIndex, charsToTake, pTextToSubstring);
             CurrentIndex = searchIndex;
             return scalarValue;
         }
@@ -202,12 +216,12 @@ namespace NimatorCouchBase.Entities.L.Lexer
 
         private string GetScalarValue()
         {
-            return GetCharactersUntil(CharIsNotNumber);
+            return GetCharactersUntil(CharIsNotNumber, CurrentIndex, TextToTokenize);
         }
 
         private string GetVariableName()
         {
-            return GetCharactersUntil(CharIsNotLetterNorNumber);
+            return GetCharactersUntil(CharIsNotLetterNorNumber, CurrentIndex, TextToTokenize);
         }
 
         private static bool CharIsLetter(char pCurrentChar)

@@ -1,7 +1,7 @@
-using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Parser.Interfaces
+namespace NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Interfaces
 {
     public interface IPrefixParser
     {

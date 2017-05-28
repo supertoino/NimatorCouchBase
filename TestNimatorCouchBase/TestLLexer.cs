@@ -308,5 +308,59 @@ namespace TestNimatorCouchBase
             }
             Assert.AreEqual(1, tokens.Count);
         }
+
+        [TestMethod]
+        public void TestLexerWithSum()
+        {
+            string phrase = "1+2>2";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(5, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("1", tokens[0].Value);
+
+            Assert.AreEqual(TokenType.Plus, tokens[1].Type);
+            Assert.AreEqual("+", tokens[1].Value);
+
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
+            Assert.AreEqual("2", tokens[2].Value);
+
+            Assert.AreEqual(TokenType.Bigger, tokens[3].Type);
+            Assert.AreEqual(">", tokens[3].Value);
+
+            Assert.AreEqual(TokenType.Long, tokens[4].Type);
+            Assert.AreEqual("2", tokens[4].Value);
+        }
+
+        [TestMethod]
+        public void TestLexerWithMul()
+        {
+            string phrase = "1*2>2";
+            Lexer lexer = new Lexer(phrase);
+            List<Token> tokens = new List<Token>();
+            while (lexer.MoveNext())
+            {
+                tokens.Add(lexer.Current);
+            }
+            Assert.AreEqual(5, tokens.Count);
+            Assert.AreEqual(TokenType.Long, tokens[0].Type);
+            Assert.AreEqual("1", tokens[0].Value);
+
+            Assert.AreEqual(TokenType.Asterisk, tokens[1].Type);
+            Assert.AreEqual("*", tokens[1].Value);
+
+            Assert.AreEqual(TokenType.Long, tokens[2].Type);
+            Assert.AreEqual("2", tokens[2].Value);
+
+            Assert.AreEqual(TokenType.Bigger, tokens[3].Type);
+            Assert.AreEqual(">", tokens[3].Value);
+
+            Assert.AreEqual(TokenType.Long, tokens[4].Type);
+            Assert.AreEqual("2", tokens[4].Value);
+        }
     }
 }

@@ -1,19 +1,21 @@
 using System;
 using System.Text;
 using NimatorCouchBase.Entities.L.Memory;
-using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Expressions;
+using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 using NimatorCouchBase.Utils;
 
-namespace NimatorCouchBase.Entities.L.Parser.Expressions
+namespace NimatorCouchBase.Entities.L.Parser.Entities.Infix.Expressions
 {
-    public class OperatorExpression : IExpression
+    public class LogicalOperatorExpression : IExpression
     {
         private readonly IExpression LeftExpression;
         private readonly IExpression RigthExpression;
         private readonly TokenType Operator;
 
-        public OperatorExpression(IExpression pLeftExpression, TokenType pOperator, IExpression pRigthExpression)
+        public LogicalOperatorExpression(IExpression pLeftExpression, TokenType pOperator, IExpression pRigthExpression)
         {
             Operator = pOperator;
             RigthExpression = pRigthExpression;
@@ -58,9 +60,13 @@ namespace NimatorCouchBase.Entities.L.Parser.Expressions
                 {
                     expressionValue = Convert.ToInt64(pExpression.Value);
                 }
-                else if (LeftExpression is DoubleExpression)
+                else if (pExpression is DoubleExpression)
                 {
-                    expressionValue = Convert.ToDouble(pExpression.Value);
+                    expressionValue = Convert.ToDouble(pExpression.Value, System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else if (pExpression is ArithmeticOperatorExpression)
+                {
+                    expressionValue = Convert.ToDouble(pExpression.Value, System.Globalization.CultureInfo.InvariantCulture);
                 }
                 else
                 {
@@ -83,7 +89,7 @@ namespace NimatorCouchBase.Entities.L.Parser.Expressions
         public void Print(StringBuilder pBuilder)
         {
             LeftExpression.Print(pBuilder);
-            pBuilder.Append(" ").Append(Operator.GetPunctuator()).Append(" ");
+            pBuilder.Append(" ").Append(Operator.GetFunctionSyntax()).Append(" ");
             RigthExpression.Print(pBuilder);
         }
     }

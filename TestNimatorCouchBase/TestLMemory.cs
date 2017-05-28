@@ -60,6 +60,15 @@ namespace TestNimatorCouchBase
             }
         }
 
+        public class CClass : IMemoryReady
+        {
+            public string C { get; set; }
+            public List<IMemorySlot> AvailableInMemoery()
+            {
+                return null;
+            }
+        }
+
         [TestMethod]
         public void TestMemoryAccessOk()
         {
@@ -107,6 +116,15 @@ namespace TestNimatorCouchBase
             Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("A.B.C")).IsEmpty());
 
             Assert.AreEqual("",memory.GetFromMemory(new MemorySlotKey("A.B.C")).Value);
-        }     
+        }
+
+        [TestMethod]
+        public void TestMemoryAddNullObject()
+        {
+            var memory = new Memory();
+            memory.AddToMemory(new CClass());
+
+            Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("C")).IsEmpty());
+        }
     }
 }

@@ -38,11 +38,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="NimatorCouchBase.Entities.L.Parser.Expressions.OperatorExpression" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="NimatorCouchBase.Entities.L.Parser.Expressions.LogicalOperatorExpression" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAgAAIEIAA=</HashCode>
-      <FileName>Entities\L\Parser\Expressions\OperatorExpression.cs</FileName>
+      <FileName>Entities\L\Parser\Expressions\LogicalOperatorExpression.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>

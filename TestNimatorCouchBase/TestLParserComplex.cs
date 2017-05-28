@@ -11,7 +11,7 @@ using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 namespace TestNimatorCouchBase
 {
     [TestClass]
-    public class TestLParserVariables
+    public class TestLParserComplex
     {
         public class Totals : IMemoryReady
         {
@@ -21,7 +21,7 @@ namespace TestNimatorCouchBase
             public double MatchersOver2Goals { get; set; }
             public double TotalGoalsPerMatch { get; set; }
 
-            public SubTotals SubTotal { get; set; }
+            public TestLParserVariables.Totals.SubTotals SubTotal { get; set; }
 
             public List<IMemorySlot> AvailableInMemoery()
             {
@@ -39,16 +39,16 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestTotalGoalsEqualsTotalPenaltiesShouldReturnTrue()
+        public void TestOk()
         {
-            var total = new Totals
+            var total = new TestLParserVariables.Totals
             {
                 TotalGoals = 10,
                 TotalPenalties = 10
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoals=TotalPenalties");
+            Lexer lexer = new Lexer("TotalGoals*10>TotalPenalties");
             Parser parser = new LParser(lexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
@@ -58,16 +58,16 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestTotalGoalsEqualsTotalPenaltiesShouldReturnFalse()
+        public void TestOk2()
         {
-            var total = new Totals
+            var total = new TestLParserVariables.Totals
             {
                 TotalGoals = 10,
-                TotalPenalties = 12
+                TotalPenalties = 10
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoals=TotalPenalties");
+            Lexer lexer = new Lexer("TotalGoals*10<TotalPenalties");
             Parser parser = new LParser(lexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
@@ -77,16 +77,16 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestTotalGoalsBiggerTotalPenaltiesShouldReturnTrue()
+        public void TestOk3()
         {
-            var total = new Totals
+            var total = new TestLParserVariables.Totals
             {
-                TotalGoals = 12,
+                TotalGoals = 10,
                 TotalPenalties = 10
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoals>TotalPenalties");
+            Lexer lexer = new Lexer("TotalGoals*0.5+1.2<TotalPenalties");
             Parser parser = new LParser(lexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
@@ -96,16 +96,16 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestTotalGoalsPerMatchEqualToMatchersOver2GoalsShouldReturnTrue()
+        public void TestOk4()
         {
-            var total = new Totals
+            var total = new TestLParserVariables.Totals
             {
-                TotalGoalsPerMatch = 12.11,
-                MatchersOver2Goals = 12.11
+                TotalGoals = 10,
+                TotalPenalties = 10
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoalsPerMatch=MatchersOver2Goals");
+            Lexer lexer = new Lexer("TotalGoals*0.5+1.2=TotalPenalties*0.5+1.2");
             Parser parser = new LParser(lexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
@@ -115,24 +115,22 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        public void TestSubTotalDocsSumOfGoalsEquals100ShouldReturnTrue()
+        public void TestOk5()
         {
-            var total = new Totals
+            var total = new TestLParserVariables.Totals
             {
-                SubTotal = new Totals.SubTotals()
-                {
-                    SumOfGoals = 100
-                }                
+                TotalGoals = 10,
+                TotalPenalties = 10
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("SubTotal.SumOfGoals=100");
+            Lexer lexer = new Lexer("TotalGoals*0.5+1.2!=TotalPenalties*0.5+1.21");
             Parser parser = new LParser(lexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
             Console.WriteLine(stringBuilder);
             Assert.IsTrue((bool)result.Value);
-        }        
+        }
     }
 }

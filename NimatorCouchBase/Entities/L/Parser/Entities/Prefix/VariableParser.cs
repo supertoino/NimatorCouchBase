@@ -1,10 +1,10 @@
 using NimatorCouchBase.Entities.L.Memory.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Expressions;
-using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Expressions;
+using NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 
-namespace NimatorCouchBase.Entities.L.Parser.Specific
+namespace NimatorCouchBase.Entities.L.Parser.Entities.Prefix
 {
     public class VariableParser : IPrefixParser
     {

@@ -1,9 +1,9 @@
 using System.Text;
 using NimatorCouchBase.Entities.L.Memory;
 using NimatorCouchBase.Entities.L.Memory.Interfaces;
-using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Entities.Interfaces;
 
-namespace NimatorCouchBase.Entities.L.Parser.Expressions
+namespace NimatorCouchBase.Entities.L.Parser.Entities.Prefix.Expressions
 {
     public class VariableExpression : IExpression
     {

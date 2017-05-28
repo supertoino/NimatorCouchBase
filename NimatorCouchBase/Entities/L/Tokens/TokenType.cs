@@ -11,6 +11,10 @@
         Double,
         Eof,
         SmallerEqual,
-        BiggerEqual
+        BiggerEqual,
+        Plus,
+        Divide,
+        Minus,
+        Asterisk
     }
 }
