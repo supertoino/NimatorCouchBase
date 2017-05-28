@@ -12,17 +12,17 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 Syntax highlighted code block
 
 # Nimator CouchBase
-## Header 2
+## Components
 ### L
 
-<L> ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
-<ArithmeticFunction> ::= <PrefixOperators> | <PrefixOperators> <InfixOperations> <ArithmeticFunction>
-<PrefixOperators> ::= <Var> | <Long> | <Double>						
-<Var> ::= 1*<letter>
-<Long> ::= 1*<digit>
-<Double> ::= <digit> (".") <digit>
-<LogicalFunction> ::= = | != | < | > | <= | >=
-<InfixOperations> ::= + | - | * | \
+**<L>** ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
+**<ArithmeticFunction>** ::= <PrefixOperators> | <PrefixOperators> <InfixOperations> <ArithmeticFunction>
+**<PrefixOperators>** ::= <Var> | <Long> | <Double>						
+**<Var>** ::= 1*<letter>
+**<Long>** ::= 1*<digit>
+**<Double>** ::= <digit> (".") <digit>
+**<LogicalFunction>** ::= = | != | < | > | <= | >=
+**<InfixOperations>** ::= + | - | * | \
 
 - Bulleted
 - List
