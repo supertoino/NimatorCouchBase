@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using NimatorCouchBase.Entities.L.Memory.Interfaces;
 using NimatorCouchBase.Entities.L.Parser.Expressions;
 using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 using NimatorCouchBase.Entities.L.Parser.Interfaces;
+using NimatorCouchBase.Entities.L.Parser.Specific;
 using NimatorCouchBase.Entities.L.Tokens;
 
 namespace NimatorCouchBase.Entities.L.Parser
@@ -11,11 +13,25 @@ namespace NimatorCouchBase.Entities.L.Parser
     {
         private readonly IEnumerator<Token> Tokens;
         private readonly List<Token> Read;
+        private readonly Dictionary<TokenType, IInfixParser> InfixParsers = new Dictionary<TokenType, IInfixParser>();
+        private readonly Dictionary<TokenType, IPrefixParser> PrefixParser = new Dictionary<TokenType, IPrefixParser>();
 
-        public Parser(IEnumerator<Token> pTokens)
+        private readonly IMemory Memory;
+
+        private Parser()
         {
-            Tokens = pTokens;
             Read = new List<Token>();
+            Memory = new Memory.Memory();
+        }
+        public Parser(IEnumerator<Token> pTokens) : this()
+        {
+            Tokens = pTokens;            
+        }
+
+        public Parser(IEnumerator<Token> pTokens, IMemory pMemory) : this()
+        {
+            Tokens = pTokens;            
+            Memory = pMemory;
         }
 
         public Token Consume()
@@ -40,16 +56,25 @@ namespace NimatorCouchBase.Entities.L.Parser
 
         public IExpression ParseExpression()
         {
-           Token token = Consume();
-            IPrefixParser prefix = MiPrefixParselet[token.Type];
+            Token token = Consume();
+            IPrefixParser prefix = PrefixParser[token.Type];
+            if (prefix is VariableParser)
+            {
+                //Add Memory Access to VariableParser
+                var variableParser = (VariableParser) prefix;
+                variableParser.SetMemory(Memory);
+            }
 
             //if (prefix == null) throw new ParseException("Could not parse \"" + token.getText() + "\".");
 
             IExpression left = prefix.Parse(this, token);
 
             token = LookAhead(0);
+
+            //If no token is found then return the left value alone.
             if (token == null) return left;
-            IInfixParser infix = MInfixParselets[token.Type];
+
+            IInfixParser infix = InfixParsers[token.Type];
 
             // No infix expression at this point, so we're done.
             if (infix == null) return left;
@@ -61,16 +86,12 @@ namespace NimatorCouchBase.Entities.L.Parser
 
         public void Register(TokenType pToken, IPrefixParser pArselet)
         {
-            MiPrefixParselet.Add(pToken, pArselet);
+            PrefixParser.Add(pToken, pArselet);
         }
 
         public void Register(TokenType pToken, IInfixParser pArselet)
         {
-            MInfixParselets.Add(pToken, pArselet);
+            InfixParsers.Add(pToken, pArselet);
         }
-
-        private readonly Dictionary<TokenType, IInfixParser> MInfixParselets = new Dictionary<TokenType, IInfixParser>();
-        private readonly Dictionary<TokenType, IPrefixParser> MiPrefixParselet = new Dictionary<TokenType, IPrefixParser>();
-
     }
 }

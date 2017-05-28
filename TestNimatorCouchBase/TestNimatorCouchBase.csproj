@@ -60,7 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestLMemory.cs" />
     <Compile Include="TestLLexer.cs" />
-    <Compile Include="TestLParser.cs" />
+    <Compile Include="TestLParserLongs.cs" />
+    <Compile Include="TestLParserVariables.cs" />
+    <Compile Include="TestLParserDoubles.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NimatorCouchBase\NimatorCouchBase.csproj">

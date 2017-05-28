@@ -1,4 +1,6 @@
 using System.Text;
+using NimatorCouchBase.Entities.L.Memory;
+using NimatorCouchBase.Entities.L.Memory.Interfaces;
 using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 
 namespace NimatorCouchBase.Entities.L.Parser.Expressions
@@ -6,13 +8,15 @@ namespace NimatorCouchBase.Entities.L.Parser.Expressions
     public class VariableExpression : IExpression
     {
         private readonly string VariableName;
+        private readonly IMemory Memory;
 
-        public VariableExpression(string pVariableName)
+        public VariableExpression(string pVariableName, IMemory pMemory)
         {
             VariableName = pVariableName;
+            Memory = pMemory;
         }
 
-        public object Value { get; }
+        public object Value => Memory.GetFromMemory(new MemorySlotKey(VariableName));
 
         public void Print(StringBuilder pBuilder)
         {

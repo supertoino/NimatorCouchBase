@@ -12,7 +12,7 @@ using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 namespace TestNimatorCouchBase
 {
     [TestClass]
-    public class TestLParser
+    public class TestLParserLongs
     {
         [TestMethod]
         public void TestParserTwoBiggerOneShouldReturnTrue()
@@ -110,28 +110,6 @@ namespace TestNimatorCouchBase
             Assert.IsFalse((bool)result.Value);
         }
 
-        [TestMethod]
-        public void TestParser10Dot10SmallerEqualThanOneShouldReturnFalse()
-        {
-            Lexer lexer = new Lexer("10.10<=1");
-            Parser parser = new LParser(lexer);
-            IExpression result = parser.ParseExpression();
-            StringBuilder stringBuilder = new StringBuilder();
-            result.Print(stringBuilder);
-            Console.WriteLine(stringBuilder);
-            Assert.IsFalse((bool)result.Value);
-        }
-
-        [TestMethod]
-        public void TestParser10Dot10SmallerEqualThanOneDotFiveShouldReturnFalse()
-        {
-            Lexer lexer = new Lexer("10.10<=1.5");
-            Parser parser = new LParser(lexer);
-            IExpression result = parser.ParseExpression();
-            StringBuilder stringBuilder = new StringBuilder();
-            result.Print(stringBuilder);
-            Console.WriteLine(stringBuilder);
-            Assert.IsFalse((bool)result.Value);
-        }
+        
     }
 }

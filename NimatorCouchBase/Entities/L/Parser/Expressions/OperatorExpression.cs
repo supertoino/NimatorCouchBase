@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using NimatorCouchBase.Entities.L.Memory;
 using NimatorCouchBase.Entities.L.Parser.Expressions.Interfaces;
 using NimatorCouchBase.Entities.L.Tokens;
 using NimatorCouchBase.Utils;
@@ -50,23 +51,33 @@ namespace NimatorCouchBase.Entities.L.Parser.Expressions
 
         private dynamic GetValueFromExpression(IExpression pExpression)
         {
-            dynamic leftValue = pExpression.Value;
+            dynamic expressionValue = pExpression.Value;
             try
             {
                 if (pExpression is LongExpression)
                 {
-                    leftValue = Convert.ToInt64(pExpression.Value);
+                    expressionValue = Convert.ToInt64(pExpression.Value);
                 }
-                else //(LeftExpression is DoubleExpression)
+                else if (LeftExpression is DoubleExpression)
                 {
-                    leftValue = Convert.ToDouble(pExpression.Value);
+                    expressionValue = Convert.ToDouble(pExpression.Value);
+                }
+                else
+                {
+                    //Assume it's variable
+                    var variable = (MemorySlot) expressionValue;
+                    if (variable.IsEmpty())
+                    {
+                        throw new Exception($"Memory Slot {variable.Key} is empty");
+                    }
+                    expressionValue = Convert.ChangeType(variable.Value, variable.ValueType);
                 }
             }
             catch (Exception e)
             {
-                throw new Exception($"Error parsing value {leftValue} - {e.GetAllExceptionMessages()}");
+                throw new Exception($"Error parsing value {expressionValue} - {e.GetAllExceptionMessages()}");
             }
-            return leftValue;
+            return expressionValue;
         }
 
         public void Print(StringBuilder pBuilder)
