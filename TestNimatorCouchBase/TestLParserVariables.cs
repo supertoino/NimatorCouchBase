@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.Entities.L.Lexer;
-using NimatorCouchBase.Entities.L.Memory;
-using NimatorCouchBase.Entities.L.Memory.Interfaces;
-using NimatorCouchBase.Entities.L.Parser;
+using NimatorCouchBase.NimatorBooster.L.Lexical;
+using NimatorCouchBase.NimatorBooster.L.Parser;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace TestNimatorCouchBase
 {
@@ -47,8 +47,8 @@ namespace TestNimatorCouchBase
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoals=TotalPenalties");
-            Parser parser = new LParser(lexer, memory);
+            LLexer lLexer = new LLexer("TotalGoals=TotalPenalties");
+            BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
@@ -66,8 +66,8 @@ namespace TestNimatorCouchBase
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoals=TotalPenalties");
-            Parser parser = new LParser(lexer, memory);
+            LLexer lLexer = new LLexer("TotalGoals=TotalPenalties");
+            BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
@@ -85,8 +85,8 @@ namespace TestNimatorCouchBase
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoals>TotalPenalties");
-            Parser parser = new LParser(lexer, memory);
+            LLexer lLexer = new LLexer("TotalGoals>TotalPenalties");
+            BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
@@ -104,8 +104,8 @@ namespace TestNimatorCouchBase
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("TotalGoalsPerMatch=MatchersOver2Goals");
-            Parser parser = new LParser(lexer, memory);
+            LLexer lLexer = new LLexer("TotalGoalsPerMatch=MatchersOver2Goals");
+            BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
@@ -125,8 +125,8 @@ namespace TestNimatorCouchBase
             };
             IMemory memory = new Memory();
             memory.AddToMemory(total);
-            Lexer lexer = new Lexer("SubTotal.SumOfGoals=100");
-            Parser parser = new LParser(lexer, memory);
+            LLexer lLexer = new LLexer("SubTotal.SumOfGoals=100");
+            BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);

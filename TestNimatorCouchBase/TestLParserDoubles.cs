@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.Entities.L.Lexer;
-using NimatorCouchBase.Entities.L.Parser;
+using NimatorCouchBase.NimatorBooster.L.Lexical;
+using NimatorCouchBase.NimatorBooster.L.Parser;
 
 namespace TestNimatorCouchBase
 {
@@ -12,8 +12,8 @@ namespace TestNimatorCouchBase
         [TestMethod]
         public void TestParser10Dot10SmallerEqualThanOneShouldReturnFalse()
         {
-            Lexer lexer = new Lexer("10.10<=1");
-            Parser parser = new LParser(lexer);
+            LLexer lLexer = new LLexer("10.10<=1");
+            BaseParser parser = new LParser(lLexer);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
@@ -24,8 +24,8 @@ namespace TestNimatorCouchBase
         [TestMethod]
         public void TestParser10Dot10SmallerEqualThanOneDotFiveShouldReturnFalse()
         {
-            Lexer lexer = new Lexer("10.10<=1.5");
-            Parser parser = new LParser(lexer);
+            LLexer lLexer = new LLexer("10.10<=1.5");
+            BaseParser parser = new LParser(lLexer);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);

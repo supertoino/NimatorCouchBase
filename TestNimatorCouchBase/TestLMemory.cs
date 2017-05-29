@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.Entities.L.Memory;
-using NimatorCouchBase.Entities.L.Memory.Interfaces;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace TestNimatorCouchBase
 {

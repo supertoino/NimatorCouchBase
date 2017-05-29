@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.Entities.Checkers;
-using NimatorCouchBase.Entities.Statistics.Bucker;
-using NimatorCouchBase.Entities.Statistics.Default;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NimatorCouchBase.CouchBase.Statistics.Bucker;
+using NimatorCouchBase.CouchBase.Statistics.Default;
+using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
+using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Generic;
 using RestSharp.Authenticators;
 
 namespace TestNimatorCouchBase
@@ -25,7 +25,7 @@ namespace TestNimatorCouchBase
         {            
             var httpCallerParameters = DefaultStatsHttpCallerParameters;
 
-            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(httpCallerParameters);
+            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(new HttpCaller(), httpCallerParameters);
 
             var stats = checkHttpCaller.Call();
             
@@ -38,7 +38,7 @@ namespace TestNimatorCouchBase
         {
             var httpCallerParameters = new CheckHttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpBasicAuthenticator("supertoino", "OcohoW*99"));
 
-            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(httpCallerParameters);
+            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(new HttpCaller(), httpCallerParameters);
 
             var stats = checkHttpCaller.Call();
 
@@ -51,7 +51,7 @@ namespace TestNimatorCouchBase
         {
             var httpCallerParameters = new CheckHttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpBasicAuthenticator("supertoinoo", "OcohoW*99"));
 
-            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(httpCallerParameters);
+            CheckHttpCaller<CouchBaseDefaultStats> checkHttpCaller = new CheckHttpCaller<CouchBaseDefaultStats>(new HttpCaller(), httpCallerParameters);
 
             var stats = checkHttpCaller.Call();
 
@@ -64,7 +64,7 @@ namespace TestNimatorCouchBase
         {
             var httpCallerParameters = BucketStatsHttpCallerParameters;
 
-            CheckHttpCaller<CoachBaseBucketStats> checkHttpCaller = new CheckHttpCaller<CoachBaseBucketStats>(httpCallerParameters);
+            CheckHttpCaller<CoachBaseBucketStats> checkHttpCaller = new CheckHttpCaller<CoachBaseBucketStats>(new HttpCaller(), httpCallerParameters);
 
             var stats = checkHttpCaller.Call();
 
