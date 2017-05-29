@@ -44,8 +44,10 @@ namespace NimatorCouchBase.CouchBase.Checkers
         public Task<ICheckResult> RunAsync()
         {
             var defaultStatus = CouchBaseDefaultStatisticsCaller.Call();
-
             CheckCouchBaseResult checkCouchBaseResult = new CheckCouchBaseResult(NotificationLevel.Okay, defaultStatus.ToString());
+
+
+
             return Task.FromResult<ICheckResult>(checkCouchBaseResult);
         }
 
