@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="CouchBase\Checkers\CheckCouchBaseDefaultStatistics.cs" />
     <Compile Include="CouchBase\Checkers\CheckCouchBaseResult.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\CheckDynamicHttpCaller.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\CheckHttpCaller.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\Generic\HttpCallerParameters.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\Generic\Interfaces\IHttpCaller.cs" />

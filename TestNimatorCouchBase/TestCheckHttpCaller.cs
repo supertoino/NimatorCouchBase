@@ -71,6 +71,18 @@ namespace TestNimatorCouchBase
             Assert.AreNotEqual(stats, null);
             Assert.AreEqual(60, stats.Op.SamplesCount);
         }
-        
+
+        [TestMethod]
+        public void TestCheckHttpCallerUsingDynamicObject()
+        {
+            var httpCallerParameters = BucketStatsHttpCallerParameters;
+
+            CheckDynamicHttpCaller checkHttpCaller = new CheckDynamicHttpCaller(new HttpCaller(), httpCallerParameters);
+
+            var stats = checkHttpCaller.Call();
+
+            Assert.AreNotEqual(stats, null);
+            Assert.AreEqual(60, stats.op.samplesCount.Value);
+        }
     }
 }
