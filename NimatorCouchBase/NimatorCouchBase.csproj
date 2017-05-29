@@ -56,13 +56,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CouchBase\Checkers\CheckCouchBaseDefaultSettings.cs" />
+    <Compile Include="CouchBase\Checkers\CheckCouchBaseDefaultStatisticsSettings.cs" />
     <Compile Include="CouchBase\Checkers\CheckCouchBaseDefaultStatistics.cs" />
-    <Compile Include="CouchBase\Checkers\CheckCouchBaseResult.cs" />
-    <Compile Include="NimatorBooster\HttpCheckers\Callers\CheckDynamicHttpCaller.cs" />
-    <Compile Include="NimatorBooster\HttpCheckers\Callers\CheckHttpCaller.cs" />
-    <Compile Include="NimatorBooster\HttpCheckers\Callers\Generic\HttpCallerParameters.cs" />
-    <Compile Include="NimatorBooster\HttpCheckers\Callers\Generic\Interfaces\IHttpCaller.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\RuntimeObjectCheckResult.cs" />
+    <Compile Include="NimatorBooster\IRuntimeObjectValidatorCheckSettings.cs" />
+    <Compile Include="NimatorBooster\ILRuntimeObjectValidation.cs" />
+    <Compile Include="NimatorBooster\ILRuntimeObjectValidations.cs" />
+    <Compile Include="NimatorBooster\L\ILValidator.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\IRuntimeObjectCheck.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\IWebCheck.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpCallerParameters.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\Interfaces\IHttpCallerParameters.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\Interfaces\IHttpCaller.cs" />
+    <Compile Include="NimatorBooster\L\LValidator.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticDivisionOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticSubtractionOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmeticAdditionExpression.cs" />
@@ -86,7 +92,7 @@
     <Compile Include="NimatorBooster\L\Parser\Storage\Interfaces\IMemoryReady.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\Interfaces\IMemorySlot.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\Interfaces\IMemorySlotKey.cs" />
-    <Compile Include="NimatorBooster\L\Parser\Storage\Memory.cs" />
+    <Compile Include="NimatorBooster\L\Parser\Storage\LMemory.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\MemorySlot.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\MemorySlotEmpty.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\MemorySlotKey.cs" />
@@ -134,9 +140,8 @@
     <Compile Include="CouchBase\Statistics\Default\SystemStats.cs" />
     <Compile Include="CouchBase\Statistics\Default\Tasks.cs" />
     <Compile Include="CouchBase\Statistics\Default\ViewFragmentationThreshold.cs" />
-    <Compile Include="NimatorBooster\HttpCheckers\Callers\Generic\ErrorHttpResponse.cs" />
     <Compile Include="NimatorBooster\Utils\Utils.cs" />
-    <Compile Include="NimatorBooster\HttpCheckers\Callers\Generic\HttpCaller.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpCaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

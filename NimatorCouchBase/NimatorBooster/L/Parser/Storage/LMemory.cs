@@ -3,11 +3,11 @@ using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
 {
-    public class Memory : IMemory
+    public class LMemory : IMemory
     {
         private readonly Dictionary<IMemorySlotKey, IMemorySlot> MemoryData;
 
-        public Memory()
+        public LMemory()
         {
             MemoryData = new Dictionary<IMemorySlotKey, IMemorySlot>(new MemorySlotKeyComparer());
         }      

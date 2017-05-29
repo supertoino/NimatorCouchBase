@@ -1,13 +1,14 @@
-using System.Collections.Generic;
 using Nimator;
 
-namespace NimatorCouchBase.CouchBase.Checkers
+namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
-    public class CheckCouchBaseResult : ICheckResult
+    public class RuntimeObjectCheckResult : ICheckResult
     {
-        public CheckCouchBaseResult(NotificationLevel pLevel, string pCheckName)
+        public RuntimeObjectCheckResult(NotificationLevel pLevel, string pCheckName, bool pLValidationResult, string pLValidation)
         {
             CheckName = pCheckName;
+            LValidationResult = pLValidationResult;
+            LValidation = pLValidation;
             Level = pLevel;
         }
 
@@ -17,8 +18,12 @@ namespace NimatorCouchBase.CouchBase.Checkers
         /// </summary>
         public string RenderPlainText()
         {
-            return "";
+            return $"{Level} in {CheckName}: L Validation({LValidation}) returned {LValidationResult}";
         }
+
+        public bool LValidationResult { get; }
+
+        public string LValidation { get; }
 
         /// <summary>
         ///     Repeats the name of the <see cref="T:Nimator.ICheck" />, possibly in a format altered to
@@ -30,16 +35,5 @@ namespace NimatorCouchBase.CouchBase.Checkers
         ///     The <see cref="T:Nimator.NotificationLevel" /> for this result (e.g. "Okay", or "Error").
         /// </summary>
         public NotificationLevel Level { get; }
-    }
-
-    public interface ICheckRule
-    {
-        List<INotifier> Notifiers { get; }
-        ICheckResult ResultToCheck { get; }
-    }
-
-    //TODO CheckRules(Result, INotifier[]) -> Given an Business Rule I'll then Notifier this. I'll do a parser for the rules. One level objects. <,>,!=,=,>=,<=
-    //TODO Do this notifier https://stackoverflow.com/questions/32260/sending-email-in-net-through-gmail
-    //TODO Do a test drive with their console app. 
-    //TODO Refactor code   
+    }        
 }

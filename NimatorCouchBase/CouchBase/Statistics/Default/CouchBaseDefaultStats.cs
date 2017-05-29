@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace NimatorCouchBase.CouchBase.Statistics.Default
 {
-    public class CouchBaseDefaultStats
+    public class CouchBaseDefaultStats : IMemoryReady
     {
         public StorageTotals StorageTotals { get; set; }
         public int FtsMemoryQuota { get; set; }
@@ -27,6 +29,11 @@ namespace NimatorCouchBase.CouchBase.Statistics.Default
         public string CheckPermissionsUri { get; set; }
         public string ServerGroupsUri { get; set; }
         public string ClusterName { get; set; }
+
+        public List<IMemorySlot> AvailableInMemoery()
+        {
+            return MemoryUtils.CreateMemorySlots(this);
+        }
     }
 
 }

@@ -68,7 +68,7 @@ namespace TestNimatorCouchBase
         [TestMethod]
         public void TestMemoryAccessOk()
         {
-            var memory = new Memory();
+            var memory = new LMemory();
             var aclass = new AClass(1, 2, "Antonio")
             {
                 B =
@@ -87,7 +87,7 @@ namespace TestNimatorCouchBase
         [TestMethod]
         public void TestMemoryAccessCaseInsensitiveShouldReturnEmptyMemorySlots()
         {
-            var memory = new Memory();
+            var memory = new LMemory();
             var aclass = new AClass(1, 2, "Antonio")
             {
                 B =
@@ -106,7 +106,7 @@ namespace TestNimatorCouchBase
         [TestMethod]
         public void TestMemoryAcessOkNullSlots()
         {
-            var memory = new Memory();            
+            var memory = new LMemory();            
             Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("PublicVar")).IsEmpty());
             Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("A")).IsEmpty());
             Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("A.B.C")).IsEmpty());
@@ -117,7 +117,7 @@ namespace TestNimatorCouchBase
         [TestMethod]
         public void TestMemoryAddNullObject()
         {
-            var memory = new Memory();
+            var memory = new LMemory();
             memory.AddToMemory(new CClass());
 
             Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("C")).IsEmpty());

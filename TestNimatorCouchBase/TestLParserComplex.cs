@@ -45,7 +45,7 @@ namespace TestNimatorCouchBase
                 TotalGoals = 10,
                 TotalPenalties = 10
             };
-            IMemory memory = new Memory();
+            IMemory memory = new LMemory();
             memory.AddToMemory(total);
             LLexer lLexer = new LLexer("TotalGoals*10>TotalPenalties");
             BaseParser parser = new LParser(lLexer, memory);
@@ -64,7 +64,7 @@ namespace TestNimatorCouchBase
                 TotalGoals = 10,
                 TotalPenalties = 10
             };
-            IMemory memory = new Memory();
+            IMemory memory = new LMemory();
             memory.AddToMemory(total);
             LLexer lLexer = new LLexer("TotalGoals*10<TotalPenalties");
             BaseParser parser = new LParser(lLexer, memory);
@@ -83,7 +83,7 @@ namespace TestNimatorCouchBase
                 TotalGoals = 10,
                 TotalPenalties = 10
             };
-            IMemory memory = new Memory();
+            IMemory memory = new LMemory();
             memory.AddToMemory(total);
             LLexer lLexer = new LLexer("TotalGoals*0.5+1.2<TotalPenalties");
             BaseParser parser = new LParser(lLexer, memory);
@@ -102,7 +102,7 @@ namespace TestNimatorCouchBase
                 TotalGoals = 10,
                 TotalPenalties = 10
             };
-            IMemory memory = new Memory();
+            IMemory memory = new LMemory();
             memory.AddToMemory(total);
             LLexer lLexer = new LLexer("TotalGoals*0.5+1.2=TotalPenalties*0.5+1.2");
             BaseParser parser = new LParser(lLexer, memory);
@@ -121,7 +121,7 @@ namespace TestNimatorCouchBase
                 TotalGoals = 10,
                 TotalPenalties = 10
             };
-            IMemory memory = new Memory();
+            IMemory memory = new LMemory();
             memory.AddToMemory(total);
             LLexer lLexer = new LLexer("TotalGoals*0.5+1.2!=TotalPenalties*0.5+1.21");
             LParser parser = new LParser(lLexer, memory);

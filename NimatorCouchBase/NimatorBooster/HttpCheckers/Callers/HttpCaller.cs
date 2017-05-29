@@ -1,18 +1,34 @@
 using System;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Generic.Interfaces;
+using System.Net;
+using Newtonsoft.Json;
+using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.Utils;
 using RestSharp;
 using RestSharp.Authenticators;
 
-namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Generic
+namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
 {
     public class HttpCaller : IHttpCaller
     {
-        public IRestResponse DoHttpGetCall(CheckHttpCallerParameters pCallerParameters)
+        public HttpCaller(IHttpCallerParameters pParameters)
         {
-            return DoHttpCall(pCallerParameters.HttpUrl, Method.GET, pCallerParameters.Authenticator);
+            Parameters = pParameters;
         }
-        
+
+        public IHttpCallerParameters Parameters { get; }
+
+        public IRestResponse DoHttpGetCall()
+        {
+            return DoHttpCall(Parameters.HttpUrl, Parameters.Method, Parameters.Authenticator);
+        }
+
+        public T DoHttpGetCall<T>()
+        {
+            var response = DoHttpCall(Parameters.HttpUrl, Parameters.Method, Parameters.Authenticator);
+            var json = JsonConvert.DeserializeObject<T>(response.Content);
+            return json;
+        }
+
         private static IRestResponse DoHttpCall(string pUrl, Method pRestMethod, IAuthenticator pHttpBasicAuthenticator)
         {
             try
@@ -32,7 +48,7 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Generic
             }
             catch (Exception e)
             {
-                return new ErrorHttpResponse(e.GetAllExceptionMessages());
+                throw new WebException(e.GetAllExceptionMessages());
             }
         }
     }
