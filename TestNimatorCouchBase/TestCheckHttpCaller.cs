@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using NimatorCouchBase.CouchBase.Statistics.Bucker;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
@@ -34,6 +35,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
+        [ExpectedException(typeof(JsonException))]
         public void TestCheckHttpCallerGetNokInvalidUrl()
         {
             var httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpBasicAuthenticator("supertoino", "OcohoW*99"), Method.GET);
@@ -47,6 +49,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
+        [ExpectedException(typeof(JsonException))]
         public void TestCheckHttpCallerGetNokInvalidCredentials()
         {
             var httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpBasicAuthenticator("supertoinoo", "OcohoW*99"), Method.GET);

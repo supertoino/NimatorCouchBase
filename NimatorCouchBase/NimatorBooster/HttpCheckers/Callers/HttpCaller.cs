@@ -25,8 +25,20 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
         public T DoHttpGetCall<T>()
         {
             var response = DoHttpCall(Parameters.HttpUrl, Parameters.Method, Parameters.Authenticator);
-            var json = JsonConvert.DeserializeObject<T>(response.Content);
+            var json = DeserializeObject<T>(response.Content);
             return json;
+        }
+
+        private static T DeserializeObject<T>(string pJsonString)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(pJsonString);
+            }
+            catch (Exception e)
+            {
+                throw new JsonException($"Could not Deserialize Json '{pJsonString}': {e.GetAllExceptionMessages()}");
+            }
         }
 
         private static IRestResponse DoHttpCall(string pUrl, Method pRestMethod, IAuthenticator pHttpBasicAuthenticator)
