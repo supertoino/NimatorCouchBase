@@ -55,7 +55,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
         private RuntimeObjectCheckResult GetResultBasedOnValidation(CouchBaseDefaultStats pObjectToVerify)
         {
             RuntimeObjectCheckResult resultBasedOnValidation;
-            foreach (var runtimeValidation in LValidations.GetObjectValidations())
+            foreach (var runtimeValidation in LValidations.Validations)
             {
                 if (LValidator.ValidateLExpression(runtimeValidation.LValidation, pObjectToVerify))
                 {

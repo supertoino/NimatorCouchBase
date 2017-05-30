@@ -5,8 +5,8 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces
     public interface IHttpCallerParameters
     {
         string HttpUrl { get; }
-        IAuthenticator Authenticator { get; }
+        HttpAuthenticationSettings Authenticator { get; }
 
-        RestSharp.Method Method { get; }
+        HttpMethods Method { get; }
     }
 }

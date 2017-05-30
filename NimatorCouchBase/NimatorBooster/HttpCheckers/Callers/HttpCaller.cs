@@ -19,12 +19,14 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
 
         public IRestResponse DoHttpGetCall()
         {
-            return DoHttpCall(Parameters.HttpUrl, Parameters.Method, Parameters.Authenticator);
+            var method = Parameters.Method == HttpMethods.GET ? Method.GET : Method.POST;
+            return DoHttpCall(Parameters.HttpUrl, method, Parameters.Authenticator.ToHttpAuthenticator());
         }
 
         public T DoHttpGetCall<T>()
         {
-            var response = DoHttpCall(Parameters.HttpUrl, Parameters.Method, Parameters.Authenticator);
+            var method = Parameters.Method == HttpMethods.GET ? Method.GET : Method.POST;
+            var response = DoHttpCall(Parameters.HttpUrl, method, Parameters.Authenticator.ToHttpAuthenticator());
             var json = DeserializeObject<T>(response.Content);
             return json;
         }
