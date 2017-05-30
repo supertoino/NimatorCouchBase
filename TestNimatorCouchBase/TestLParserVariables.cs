@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.NimatorBooster.L;
+using NimatorCouchBase.NimatorBooster.L.Lexical;
+using NimatorCouchBase.NimatorBooster.L.Parser;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace TestNimatorCouchBase
 {

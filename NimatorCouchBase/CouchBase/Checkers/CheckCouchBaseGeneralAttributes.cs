@@ -7,15 +7,11 @@
 
 #region Imports
 
-using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Nimator;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
 using NimatorCouchBase.NimatorBooster.RuntimeCheckers;

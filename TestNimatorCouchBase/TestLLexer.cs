@@ -1,8 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.NimatorBooster.L;
+using NimatorCouchBase.NimatorBooster.L.Lexical;
+using NimatorCouchBase.NimatorBooster.L.Tokens;
 
 namespace TestNimatorCouchBase
 {

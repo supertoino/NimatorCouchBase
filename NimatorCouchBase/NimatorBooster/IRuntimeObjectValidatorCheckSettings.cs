@@ -1,4 +1,3 @@
-using System.Security.Policy;
 using Nimator;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 

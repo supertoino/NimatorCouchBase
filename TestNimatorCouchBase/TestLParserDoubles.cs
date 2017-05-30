@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NimatorCouchBase.NimatorBooster.L;
+using NimatorCouchBase.NimatorBooster.L.Lexical;
+using NimatorCouchBase.NimatorBooster.L.Parser;
 
 namespace TestNimatorCouchBase
 {

@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nimator;
-using NimatorCouchBase.CouchBase.Statistics.Default;
+﻿using Nimator;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
-using RestSharp;
-using RestSharp.Authenticators;
 
 namespace NimatorCouchBase.CouchBase.Checkers
 {
