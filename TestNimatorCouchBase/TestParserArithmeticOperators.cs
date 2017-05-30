@@ -6,7 +6,7 @@ using NimatorCouchBase.NimatorBooster.L.Tokens;
 namespace TestNimatorCouchBase
 {
     [TestClass]
-    public class TestlParserArithmeticOperators
+    public class TestParserArithmeticOperators
     {
         [TestMethod]
         public void TestAllArithmeticOperations()
