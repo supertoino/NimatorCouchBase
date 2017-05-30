@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
+using NimatorCouchBase.NimatorBooster.L;
 
 namespace NimatorCouchBase.CouchBase.Statistics.Default
 {

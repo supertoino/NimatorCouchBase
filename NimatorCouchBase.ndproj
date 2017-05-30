@@ -6,9 +6,9 @@
   </Assemblies>
   <FrameworkAssemblies>
     <Name>mscorlib</Name>
-    <Name>System.Core</Name>
     <Name>Nimator</Name>
     <Name>RestSharp</Name>
+    <Name>System.Core</Name>
     <Name>Newtonsoft.Json</Name>
     <Name>System</Name>
     <Name>Microsoft.CSharp</Name>

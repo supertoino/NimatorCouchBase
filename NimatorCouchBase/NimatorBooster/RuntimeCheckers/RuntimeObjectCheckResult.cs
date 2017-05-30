@@ -2,9 +2,14 @@ using Nimator;
 
 namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
-    public class RuntimeObjectCheckResult : ICheckResult
+    public interface IRuntimeObjectCheckResult : ICheckResult
     {
-        public RuntimeObjectCheckResult(NotificationLevel pLevel, string pCheckName, bool pLValidationResult, string pLValidation)
+        bool LValidationResult { get; }        
+        string LValidation { get; }
+    }
+    public class RuntimeObjectCheckResult : IRuntimeObjectCheckResult
+    {
+        public RuntimeObjectCheckResult(NotificationLevel pLevel, string pCheckName, string pLValidation, bool pLValidationResult)
         {
             CheckName = pCheckName;
             LValidationResult = pLValidationResult;
@@ -16,7 +21,7 @@ namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
         ///     Joins <see cref="P:Nimator.ICheckResult.Level" />, <see cref="P:Nimator.ICheckResult.CheckName" />, and any other
         ///     details, in  a readable fashion.
         /// </summary>
-        public string RenderPlainText()
+        public virtual string RenderPlainText()
         {
             return $"{Level} in {CheckName}: L Validation({LValidation}) returned {LValidationResult}";
         }

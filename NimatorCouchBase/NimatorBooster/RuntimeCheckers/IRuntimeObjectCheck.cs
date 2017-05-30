@@ -1,6 +1,5 @@
 using Nimator;
 using NimatorCouchBase.NimatorBooster.L;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {

@@ -1,5 +1,5 @@
 ﻿// 
-// NimatorCouchBase - NimatorCouchBase - CheckCouchBaseDefaultStatistics.cs 
+// NimatorCouchBase - NimatorCouchBase - CheckCouchBaseGeneralAttributes.cs 
 // CREATOR: antonio.silva - António Silva
 // AT: 2017/05/26/18:00
 // LAST HEADER UPDATE: 2017 /05/26/20:05
@@ -18,17 +18,15 @@ using NimatorCouchBase.NimatorBooster.HttpCheckers;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
-using NimatorCouchBase.NimatorBooster.L.Lexical;
-using NimatorCouchBase.NimatorBooster.L.Parser;
 using NimatorCouchBase.NimatorBooster.RuntimeCheckers;
 
 #endregion
 
 namespace NimatorCouchBase.CouchBase.Checkers
 {
-    public class CheckCouchBaseDefaultStatistics : IRuntimeObjectCheck<CouchBaseDefaultStats>, IWebCheck
+    public class CheckCouchBaseGeneralAttributes : IRuntimeObjectCheck<CouchBaseDefaultStats>, IWebCheck
     {
-        public CheckCouchBaseDefaultStatistics(string pShortName, ILValidator pLValidator, ILRuntimeObjectValidations pLValidations, IHttpCaller pHttpCaller)
+        public CheckCouchBaseGeneralAttributes(string pShortName, ILValidator pLValidator, ILRuntimeObjectValidations pLValidations, IHttpCaller pHttpCaller)
         {
             ShortName = pShortName;
             LValidations = pLValidations;
@@ -65,11 +63,11 @@ namespace NimatorCouchBase.CouchBase.Checkers
             {
                 if (LValidator.ValidateLExpression(runtimeValidation.LValidation, pObjectToVerify))
                 {
-                    resultBasedOnValidation = new RuntimeObjectCheckResult(NotificationLevel.Critical, ShortName, true, runtimeValidation.LValidation);
+                    resultBasedOnValidation = new RuntimeObjectCheckResult(NotificationLevel.Critical, ShortName, runtimeValidation.LValidation, true);
                     return resultBasedOnValidation;
                 }
             }
-            resultBasedOnValidation = new RuntimeObjectCheckResult(NotificationLevel.Okay, ShortName, false, "");
+            resultBasedOnValidation = new RuntimeObjectCheckResult(NotificationLevel.Okay, ShortName, "", false);
             return resultBasedOnValidation;
         }
 

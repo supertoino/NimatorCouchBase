@@ -270,7 +270,8 @@ paket-files/
 # CodeRush
 .cr/
 
-#NDependOut
+#NDepend
+NDependOut/**
 NDependOut*/
 *.ndproj
 

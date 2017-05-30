@@ -7,14 +7,20 @@ using Nimator;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
+using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
 using RestSharp;
 using RestSharp.Authenticators;
 
 namespace NimatorCouchBase.CouchBase.Checkers
 {
-    public class CheckCouchBaseDefaultStatisticsSettings : IRuntimeObjectValidatorCheckSettings
+    public class CheckCouchBaseGeneralAttributesSettings : IRuntimeObjectValidatorCheckSettings, IWebCheckSettings
     {
+        public CheckCouchBaseGeneralAttributesSettings(IHttpCallerParameters pParameters, ILRuntimeObjectValidations pValidations)
+        {
+            Parameters = pParameters;
+            Validations = pValidations;
+        }
 
         /// <summary>
         /// When called, the settings converts itself to an <see cref="T:Nimator.ICheck"/> instance. This
@@ -24,11 +30,12 @@ namespace NimatorCouchBase.CouchBase.Checkers
         /// <returns/>
         public ICheck ToCheck()
         {            
-            HttpCallerParameters httpCallerParameters = new HttpCallerParameters("", new HttpBasicAuthenticator("",""), Method.GET);
+            var httpCallerParameters = Parameters;
             HttpCaller httpCaller = new HttpCaller(httpCallerParameters);
-            return new CheckCouchBaseDefaultStatistics("", new LValidator(), Validations, httpCaller);
+            return new CheckCouchBaseGeneralAttributes("", new LValidator(), Validations, httpCaller);
         }
 
-        public ILRuntimeObjectValidations Validations { get; set; }
+        public ILRuntimeObjectValidations Validations { get; }
+        public IHttpCallerParameters Parameters { get; }
     }
 }
