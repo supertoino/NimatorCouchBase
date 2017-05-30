@@ -1,24 +1,46 @@
+// 
+// NimatorCouchBase - NimatorCouchBase - ArithmeticOperatorExpression.cs 
+// CREATOR: antonio.silva - António Silva
+// AT: 2017/05/30/14:55
+// LAST HEADER UPDATE: 2017 /05/30/21:26
+// 
+
+#region Imports
+
 using System;
+using System.Globalization;
 using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.L.Tokens;
 using NimatorCouchBase.NimatorBooster.Utils;
+
+#endregion
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser
 {
     public abstract class ArithmeticOperatorExpression : IExpression
     {
         protected readonly IExpression LeftExpression;
-        protected readonly IExpression RigthExpression;
         protected readonly LTokenType Operator;
+        protected readonly IExpression RigthExpression;
 
-        protected ArithmeticOperatorExpression(IExpression pLeftExpression, LTokenType pOperator, IExpression pRigthExpression)
+        protected ArithmeticOperatorExpression(IExpression pLeftExpression, LTokenType pOperator,
+            IExpression pRigthExpression)
         {
             Operator = pOperator;
             RigthExpression = pRigthExpression;
             LeftExpression = pLeftExpression;
         }
-             
+
+        public abstract object Value { get; }
+
+        public void Print(StringBuilder pBuilder)
+        {
+            LeftExpression.Print(pBuilder);
+            pBuilder.Append(" ").Append(Operator.GetFunctionSyntax()).Append(" ");
+            RigthExpression.Print(pBuilder);
+        }
+
         protected dynamic GetValueFromExpression(IExpression pExpression)
         {
             dynamic expressionValue = pExpression.Value;
@@ -30,16 +52,19 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                 }
                 else if (pExpression is DoubleExpression)
                 {
-                    expressionValue = Convert.ToDouble(pExpression.Value, System.Globalization.CultureInfo.InvariantCulture);
+                    expressionValue = Convert.ToDouble(pExpression.Value, CultureInfo.InvariantCulture);
                 }
                 else if (pExpression is ArithmeticOperatorExpression)
-                {                    
-                    expressionValue = Convert.ToDouble(pExpression.Value, System.Globalization.CultureInfo.InvariantCulture);
+                {
+                    object value = pExpression.Value;
+                    expressionValue = ExpressionValueIsDouble(value)
+                        ? Convert.ToDouble(value, CultureInfo.InvariantCulture)
+                        : Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 }
                 else
                 {
                     //Assume it's variable
-                    var variable = (MemorySlot)expressionValue;
+                    var variable = (MemorySlot) expressionValue;
                     if (variable.IsEmpty())
                     {
                         throw new Exception($"Memory Slot {variable.Key} is empty");
@@ -54,13 +79,10 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             return expressionValue;
         }
 
-        public abstract object Value { get; }
-
-        public void Print(StringBuilder pBuilder)
+        private static bool ExpressionValueIsDouble(object pValue)
         {
-            LeftExpression.Print(pBuilder);
-            pBuilder.Append(" ").Append(Operator.GetFunctionSyntax()).Append(" ");
-            RigthExpression.Print(pBuilder);
+            double isDouble;
+            return double.TryParse(Convert.ToString(pValue), out isDouble);
         }
     }
 }

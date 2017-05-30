@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.L.Tokens;
@@ -63,7 +64,10 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                 }
                 else if (pExpression is ArithmeticOperatorExpression)
                 {
-                    expressionValue = Convert.ToDouble(pExpression.Value, System.Globalization.CultureInfo.InvariantCulture);
+                    object value = pExpression.Value;
+                    expressionValue = ExpressionValueIsDouble(value)
+                        ? Convert.ToDouble(value, CultureInfo.InvariantCulture)
+                        : Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 }
                 else
                 {
@@ -81,6 +85,12 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                 throw new Exception($"Error parsing value {expressionValue} - {e.GetAllExceptionMessages()}");
             }
             return expressionValue;
+        }
+
+        private static bool ExpressionValueIsDouble(object pValue)
+        {
+            double isDouble;
+            return double.TryParse(Convert.ToString(pValue), out isDouble);
         }
 
         public void Print(StringBuilder pBuilder)

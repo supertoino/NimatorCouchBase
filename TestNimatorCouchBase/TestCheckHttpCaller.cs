@@ -17,8 +17,8 @@ namespace TestNimatorCouchBase
         [TestInitialize]
         public void TestInit()
         {
-            DefaultStatsHttpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default", new HttpBasicAuthenticator("supertoino", "OcohoW*99"), Method.GET);
-            BucketStatsHttpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default/buckets/supertoinoBucket/stats", new HttpBasicAuthenticator("supertoino", "OcohoW*99"), Method.GET);
+            DefaultStatsHttpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default", new HttpAuthenticationSettings("supertoino", "OcohoW*99"), HttpMethods.GET);
+            BucketStatsHttpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default/buckets/supertoinoBucket/stats", new HttpAuthenticationSettings("supertoino", "OcohoW*99"), HttpMethods.GET);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace TestNimatorCouchBase
         [ExpectedException(typeof(JsonException))]
         public void TestCheckHttpCallerGetNokInvalidUrl()
         {
-            var httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpBasicAuthenticator("supertoino", "OcohoW*99"), Method.GET);
+            var httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpAuthenticationSettings("supertoino", "OcohoW*99"), HttpMethods.GET);
 
             var checkHttpCaller = new HttpCaller(httpCallerParameters);
 
@@ -52,7 +52,7 @@ namespace TestNimatorCouchBase
         [ExpectedException(typeof(JsonException))]
         public void TestCheckHttpCallerGetNokInvalidCredentials()
         {
-            var httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpBasicAuthenticator("supertoinoo", "OcohoW*99"), Method.GET);
+            var httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/defaultt_", new HttpAuthenticationSettings("supertoinoo", "OcohoW*99"), HttpMethods.GET);
 
             var checkHttpCaller = new HttpCaller(httpCallerParameters);
 
