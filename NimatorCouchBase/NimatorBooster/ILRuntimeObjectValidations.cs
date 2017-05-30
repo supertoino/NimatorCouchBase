@@ -15,8 +15,6 @@ namespace NimatorCouchBase.NimatorBooster
         [JsonProperty]
         public IList<ILRuntimeObjectValidation> Validations { get; private set; }
 
-        public string Test => "A";
-
         public LRuntimeObjectValidations()
         {
             Validations = new List<ILRuntimeObjectValidation>();    

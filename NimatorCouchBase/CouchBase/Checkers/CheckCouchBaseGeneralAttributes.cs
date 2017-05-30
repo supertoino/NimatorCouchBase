@@ -7,6 +7,7 @@
 
 #region Imports
 
+using System.Linq;
 using System.Threading.Tasks;
 using Nimator;
 using NimatorCouchBase.CouchBase.Statistics.Default;
@@ -55,7 +56,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
         private RuntimeObjectCheckResult GetResultBasedOnValidation(CouchBaseDefaultStats pObjectToVerify)
         {
             RuntimeObjectCheckResult resultBasedOnValidation;
-            foreach (var runtimeValidation in LValidations.Validations)
+            foreach (var runtimeValidation in LValidations.Validations.OrderByDescending(V => V.NotificationLevel))
             {
                 if (LValidator.ValidateLExpression(runtimeValidation.LValidation, pObjectToVerify))
                 {

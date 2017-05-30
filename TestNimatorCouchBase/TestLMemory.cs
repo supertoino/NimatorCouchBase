@@ -81,7 +81,26 @@ namespace TestNimatorCouchBase
             memory.AddToMemory(aclass);
             
             Assert.AreEqual("Ola", memory.GetFromMemory(new MemorySlotKey("B.PublicBProperty")).Value);
+            Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("B.Values")).IsEmpty());
             Assert.AreEqual("Antonio", memory.GetFromMemory(new MemorySlotKey("PublicProperty")).Value);            
+        }
+
+        [TestMethod]
+        public void TestMemoryCannotHaveListValues()
+        {
+            var memory = new LMemory();
+            var aclass = new AClass(1, 2, "Antonio")
+            {
+                B =
+                {
+                    PublicBProperty = "Ola",
+                    Values = new List<int>() {1, 2, 3}
+                }
+            };
+
+            memory.AddToMemory(aclass);
+
+            Assert.IsTrue(memory.GetFromMemory(new MemorySlotKey("B.Values")).IsEmpty());
         }
 
         [TestMethod]

@@ -13,10 +13,12 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
             Method = pMethod;
             HttpUrl = pHttpUrl;
         }
-        
-        public string HttpUrl { get; }
-        public HttpAuthenticationSettings Authenticator { get; }
-        public HttpMethods Method { get; }
+        [JsonProperty]
+        public string HttpUrl { get; private set; }
+        [JsonProperty]
+        public HttpAuthenticationSettings Authenticator { get; private set; }
+        [JsonProperty]
+        public HttpMethods Method { get; private set; }
     }
 
     public enum HttpMethods
@@ -27,8 +29,10 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
 
     public class HttpAuthenticationSettings
     {
-        public string Username { get; }
-        public string Password { get; }
+        [JsonProperty]
+        public string Username { get; private set; }
+        [JsonProperty]
+        public string Password { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.

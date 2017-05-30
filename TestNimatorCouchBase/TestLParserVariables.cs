@@ -29,6 +29,8 @@ namespace TestNimatorCouchBase
 
             public class SubTotals : IMemoryReady
             {
+
+                public List<int> ManyInts { get; set; } 
                 public int SumOfGoals { get; set; }
                 public List<IMemorySlot> AvailableInMemoery()
                 {
@@ -132,6 +134,29 @@ namespace TestNimatorCouchBase
             result.Print(stringBuilder);
             Console.WriteLine(stringBuilder);
             Assert.IsTrue((bool)result.Value);
-        }        
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AccessingEmptyMemoryException))]
+        public void TestAccessToListVariable()
+        {
+            var total = new Totals
+            {
+                SubTotal = new Totals.SubTotals()
+                {
+                    ManyInts = new List<int>() { 1,2,3,4 },
+                    SumOfGoals = 100
+                }
+            };
+            IMemory memory = new LMemory();
+            memory.AddToMemory(total);
+            LLexer lLexer = new LLexer("SubTotal.ManyInts=100");
+            BaseParser parser = new LParser(lLexer, memory);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            result.Print(stringBuilder);
+            Console.WriteLine(stringBuilder);
+            Assert.IsTrue((bool)result.Value);
+        }
     }
 }

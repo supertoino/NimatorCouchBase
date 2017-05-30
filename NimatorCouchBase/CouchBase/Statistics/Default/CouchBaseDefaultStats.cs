@@ -32,7 +32,8 @@ namespace NimatorCouchBase.CouchBase.Statistics.Default
 
         public List<IMemorySlot> AvailableInMemoery()
         {
-            return MemoryUtils.CreateMemorySlots(this);
+            List<IMemorySlot> availableInMemoery = MemoryUtils.CreateMemorySlots(this);
+            return availableInMemoery;
         }
     }
 

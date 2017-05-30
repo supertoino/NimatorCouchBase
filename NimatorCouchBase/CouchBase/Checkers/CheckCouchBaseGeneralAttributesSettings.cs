@@ -36,7 +36,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
         /// <returns />
         public ICheck ToCheck()
         {
-            var httpCallerParameters = new HttpCallerParameters("", null, HttpMethods.GET);
+            var httpCallerParameters = Parameters; //new HttpCallerParameters("", null, HttpMethods.GET);
             HttpCaller httpCaller = new HttpCaller(httpCallerParameters);
             return new CheckCouchBaseGeneralAttributes("CouchBase Check General Attributes", new LValidator(),
                 Validations, httpCaller);
@@ -47,5 +47,15 @@ namespace NimatorCouchBase.CouchBase.Checkers
 
         [JsonProperty]
         public IHttpCallerParameters Parameters { get; private set; }
+
+        public static CheckCouchBaseGeneralAttributesSettings GetExampleCheckCouchBaseGeneralAttributesSettings()
+        {
+            HttpCallerParameters httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default", new HttpAuthenticationSettings("supertoino","OcohoW*99"), HttpMethods.GET);
+            LRuntimeObjectValidations lRuntimeObjectValidations = new LRuntimeObjectValidations();
+            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Warning, "StorageTotals.Ram>10"));
+            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Critical, "StorageTotals.Ram>20"));
+            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Error, "StorageTotals.Ram>30"));
+            return new CheckCouchBaseGeneralAttributesSettings(lRuntimeObjectValidations, httpCallerParameters);
+        }
     }
 }

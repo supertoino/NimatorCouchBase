@@ -23,6 +23,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
                 var elems = propValue as IList;
                 if (elems != null)
                 {
+                    continue;
                     foreach (var item in elems)
                     {
                         result.AddRange(CreateMemorySlots(item));
@@ -33,7 +34,8 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
                     // This will not cut-off System.Collections because of the first check
                     if (property.PropertyType.Assembly == objType.Assembly)
                     {
-                        result.AddRange(CreateMemorySlots(propValue, property.Name));
+                        var previousName = pPreviousName == string.Empty ? string.Empty : pPreviousName + ".";
+                        result.AddRange(CreateMemorySlots(propValue, previousName + property.Name));
                     }
                     else
                     {

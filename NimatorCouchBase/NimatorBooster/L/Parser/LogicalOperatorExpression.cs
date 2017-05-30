@@ -60,7 +60,8 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                 }
                 else if (pExpression is DoubleExpression)
                 {
-                    expressionValue = Convert.ToDouble(pExpression.Value, System.Globalization.CultureInfo.InvariantCulture);
+                    expressionValue = Convert.ToDouble(pExpression.Value,
+                        System.Globalization.CultureInfo.InvariantCulture);
                 }
                 else if (pExpression is ArithmeticOperatorExpression)
                 {
@@ -75,11 +76,15 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                     var variable = (MemorySlot) expressionValue;
                     if (variable.IsEmpty())
                     {
-                        throw new Exception($"Memory Slot {variable.Key} is empty");
+                        throw new AccessingEmptyMemoryException($"Memory Slot {variable.Key} is empty");
                     }
                     expressionValue = Convert.ChangeType(variable.Value, variable.ValueType);
                 }
             }
+            catch (AccessingEmptyMemoryException e)
+            {
+                throw;
+            } 
             catch (Exception e)
             {
                 throw new Exception($"Error parsing value {expressionValue} - {e.GetAllExceptionMessages()}");

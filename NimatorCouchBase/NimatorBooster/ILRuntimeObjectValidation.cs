@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Nimator;
 
 namespace NimatorCouchBase.NimatorBooster
@@ -16,7 +17,9 @@ namespace NimatorCouchBase.NimatorBooster
             LValidation = pLValidation;
         }
 
-        public NotificationLevel NotificationLevel { get; }
-        public string LValidation { get; }
+        [JsonProperty]
+        public NotificationLevel NotificationLevel { get; private set; }
+        [JsonProperty]
+        public string LValidation { get; private set; }
     }
 }

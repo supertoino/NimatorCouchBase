@@ -67,7 +67,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                     var variable = (MemorySlot) expressionValue;
                     if (variable.IsEmpty())
                     {
-                        throw new Exception($"Memory Slot {variable.Key} is empty");
+                        throw new AccessingEmptyMemoryException($"Memory Slot {variable.Key} is empty");
                     }
                     expressionValue = Convert.ChangeType(variable.Value, variable.ValueType);
                 }
@@ -83,6 +83,14 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         {
             double isDouble;
             return double.TryParse(Convert.ToString(pValue), out isDouble);
+        }
+    }
+
+    public class AccessingEmptyMemoryException : Exception
+    {
+        public AccessingEmptyMemoryException(string pExceptionMessage) : base(pExceptionMessage)
+        {
+            
         }
     }
 }
