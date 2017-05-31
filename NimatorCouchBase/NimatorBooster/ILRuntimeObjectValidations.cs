@@ -6,23 +6,28 @@ namespace NimatorCouchBase.NimatorBooster
 {
     public interface ILRuntimeObjectValidations
     {
-        IList<ILRuntimeObjectValidation> Validations { get; }
+        IList<ILRuntimeObjectValidation> Validations();
+        //IList<ILRuntimeObjectValidation> Validations { get; }
         void AddObjectValidation(ILRuntimeObjectValidation pObjectValidation);
     }
 
     public class LRuntimeObjectValidations : ILRuntimeObjectValidations
     {
         [JsonProperty]
-        public IList<ILRuntimeObjectValidation> Validations { get; private set; }
+        private IList<ILRuntimeObjectValidation> _Validations { get; set; }
 
         public LRuntimeObjectValidations()
         {
-            Validations = new List<ILRuntimeObjectValidation>();    
-        }        
+            _Validations = new List<ILRuntimeObjectValidation>();    
+        }
 
+        public IList<ILRuntimeObjectValidation> Validations()
+        {
+            return _Validations;
+        }
         public void AddObjectValidation(ILRuntimeObjectValidation pObjectValidation)
         {
-            Validations.Add(pObjectValidation);
+            _Validations.Add(pObjectValidation);
         }
     }
 }

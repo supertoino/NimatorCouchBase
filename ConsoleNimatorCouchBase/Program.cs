@@ -35,7 +35,7 @@ namespace ConsoleNimatorCouchBase
 
         static void Main()
         {
-            //Nhe();
+            Nhe();
             //log4net.Config.XmlConfigurator.Configure(); // Alternatively: http://stackoverflow.com/a/10204514/419956
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionLogger;
@@ -93,7 +93,7 @@ namespace ConsoleNimatorCouchBase
             Console.WriteLine(jsonSettings);
             var jsonObject = JsonConvert.DeserializeObject<CheckCouchBaseGeneralAttributesSettings>(jsonSettings, settings);
 
-            Console.WriteLine($"Has {jsonObject.Validations.Validations.Count} element(s)");
+            Console.WriteLine($"Has {jsonObject.Validations.Validations().Count} element(s)");
             Console.WriteLine();
             Console.Write("Press any key to exist...");
             Console.ReadLine();
