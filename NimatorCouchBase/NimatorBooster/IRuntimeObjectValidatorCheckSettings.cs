@@ -1,6 +1,5 @@
 using Nimator;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 
 namespace NimatorCouchBase.NimatorBooster
 {
@@ -8,11 +7,4 @@ namespace NimatorCouchBase.NimatorBooster
     {
         ILRuntimeObjectValidations Validations { get; }
     }
-
-    public interface IWebCheckSettings
-    {
-        IHttpCallerParameters Parameters { get; }
-    }
-
-
 }

@@ -89,6 +89,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                 leftExpression = infixParser.Parse(this, leftExpression, lToken);
                 //Continue doing this until the precedence is lower for the LookAhead
             }
+            
             return leftExpression;
         }
 
@@ -96,7 +97,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         {
             if (!InfixParsers.ContainsKey(pLTokenType))
             {
-                return null;
+                throw new UnableToParseLTokenTypeException($"Unable to Parse L Token '{pLTokenType}'");
             }
             return InfixParsers[pLTokenType];
         }
@@ -105,14 +106,14 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         {
             if (!PrefixParser.ContainsKey(pLTokenType))
             {
-                return null;
+                throw new UnableToParseLTokenTypeException($"Unable to Parse L Token '{pLTokenType}'");
             }
             return PrefixParser[pLTokenType];
         }
 
         private void AddMemoryToExpressionParser(IPrefixParser pPrefixParser)
         {
-            var variableParser = (VariableParser) pPrefixParser;
+            var variableParser = (VariableParser)pPrefixParser;
             variableParser?.SetMemory(Memory);
         }
 
@@ -133,7 +134,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             {
                 return 0;
             }
-            var parser = InfixParsers[lookAhead.Type];
+            var parser = GetInfixParserByTokenType(lookAhead.Type);
             if (parser != null)
             {
                 return parser.Precedence;
@@ -149,6 +150,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         public void AddInfixExpressionParser(LTokenType pLToken, IInfixParser pArselet)
         {
             InfixParsers.Add(pLToken, pArselet);
-        }
+        }        
     }
 }
+

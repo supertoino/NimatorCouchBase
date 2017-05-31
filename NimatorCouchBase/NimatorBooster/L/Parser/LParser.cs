@@ -65,6 +65,6 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             AddPrefixExpressionParser(LTokenType.Long, new LongParser());
             AddPrefixExpressionParser(LTokenType.Double, new DoubleParser());
             AddPrefixExpressionParser(LTokenType.Variable, new VariableParser());
-        }
+        }        
     }
 }

@@ -137,7 +137,7 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]
-        [ExpectedException(typeof(AccessingEmptyMemoryException))]
+        [ExpectedException(typeof(UnableToValidateExpressionException))]
         public void TestAccessToListVariable()
         {
             var total = new Totals

@@ -361,6 +361,6 @@ namespace TestNimatorCouchBase
 
             Assert.AreEqual(LTokenType.Long, tokens[4].Type);
             Assert.AreEqual("2", tokens[4].Value);
-        }
+        }   
     }
 }

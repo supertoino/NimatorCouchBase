@@ -61,20 +61,23 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                         ? Convert.ToDouble(value, CultureInfo.InvariantCulture)
                         : Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 }
-                else
+                else if (pExpression is VariableExpression)
                 {
-                    //Assume it's variable
-                    var variable = (MemorySlot) expressionValue;
+                    var variable = (MemorySlot)expressionValue;
                     if (variable.IsEmpty())
                     {
                         throw new AccessingEmptyMemoryException($"Memory Slot {variable.Key} is empty");
                     }
                     expressionValue = Convert.ChangeType(variable.Value, variable.ValueType);
                 }
+                else
+                {
+                    throw new UnableToValidateExpressionException("");
+                }
             }
             catch (Exception e)
             {
-                throw new Exception($"Error parsing value {expressionValue} - {e.GetAllExceptionMessages()}");
+                throw new UnableToValidateExpressionException($"Incorrent L Validation Sintax. Unable To Validate Value {pExpression.Value}: {e.GetAllExceptionMessages()}");
             }
             return expressionValue;
         }
@@ -83,14 +86,6 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         {
             double isDouble;
             return double.TryParse(Convert.ToString(pValue), out isDouble);
-        }
-    }
-
-    public class AccessingEmptyMemoryException : Exception
-    {
-        public AccessingEmptyMemoryException(string pExceptionMessage) : base(pExceptionMessage)
-        {
-            
         }
     }
 }

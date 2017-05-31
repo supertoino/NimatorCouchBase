@@ -44,8 +44,10 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                     return pLeftValue != pRightValue;
                 case LTokenType.BiggerEqual:
                     return pLeftValue >= pRightValue;
-                default:
+                case LTokenType.SmallerEqual:
                     return pLeftValue <= pRightValue;
+                default:
+                    throw new UnableToParseLTokenTypeException($"Incorrent L Validation Sintax. Unable To Validate Logical Operator {pLTokenType}");
             }
         }
 
@@ -60,8 +62,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                 }
                 else if (pExpression is DoubleExpression)
                 {
-                    expressionValue = Convert.ToDouble(pExpression.Value,
-                        System.Globalization.CultureInfo.InvariantCulture);
+                    expressionValue = Convert.ToDouble(pExpression.Value, CultureInfo.InvariantCulture);
                 }
                 else if (pExpression is ArithmeticOperatorExpression)
                 {
@@ -70,9 +71,8 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                         ? Convert.ToDouble(value, CultureInfo.InvariantCulture)
                         : Convert.ToInt64(value, CultureInfo.InvariantCulture);
                 }
-                else
+                else if (pExpression is VariableExpression)
                 {
-                    //Assume it's variable
                     var variable = (MemorySlot) expressionValue;
                     if (variable.IsEmpty())
                     {
@@ -80,14 +80,14 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                     }
                     expressionValue = Convert.ChangeType(variable.Value, variable.ValueType);
                 }
-            }
-            catch (AccessingEmptyMemoryException e)
-            {
-                throw;
-            } 
+                else
+                {
+                    throw new UnableToValidateExpressionException("");
+                }
+            }            
             catch (Exception e)
             {
-                throw new Exception($"Error parsing value {expressionValue} - {e.GetAllExceptionMessages()}");
+                throw new UnableToValidateExpressionException($"Incorrent L Validation Sintax. Unable To Validate Value {pExpression.Value}: {e.GetAllExceptionMessages()}");
             }
             return expressionValue;
         }

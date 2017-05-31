@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NimatorCouchBase.NimatorBooster.L;
 using NimatorCouchBase.NimatorBooster.L.Lexical;
 using NimatorCouchBase.NimatorBooster.L.Parser;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
@@ -126,9 +127,61 @@ namespace TestNimatorCouchBase
             LLexer lLexer = new LLexer("TotalGoals*0.5+1.2!=TotalPenalties*0.5+1.21");
             LParser parser = new LParser(lLexer, memory);
             var result = parser.Parse();
-            //StringBuilder stringBuilder = new StringBuilder();
-            //result.Print(stringBuilder);
-            //Console.WriteLine(stringBuilder);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnableToParseLTokenTypeException))]
+        public void TestWrongLValidationCodeWithMemory()
+        {
+            var total = new TestLParserVariables.Totals
+            {
+                TotalGoals = 10,
+                TotalPenalties = 10
+            };
+            LValidator lValidator = new LValidator();
+            var result = lValidator.ValidateLExpression("0.5+1.2!=0.5+1.21AAAA", total);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnableToParseLTokenTypeException))]
+        public void TestWrongLValidationCode()
+        {
+            var total = new TestLParserVariables.Totals
+            {
+                TotalGoals = 10,
+                TotalPenalties = 10
+            };
+            LValidator lValidator = new LValidator();
+            var result = lValidator.ValidateLExpression("0.5+1.2!=0.5+1.21AAAA");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnableToParseLTokenTypeException))]
+        public void TestWrongLvalidationCodeNoFunction()
+        {
+            LValidator lValidator = new LValidator();
+            var result = lValidator.ValidateLExpression("0.6+1.2A0.5+1.21");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnableToValidateExpressionException))]
+        public void TestWrongLvalidationTwoFunctionsUnableToValidate()
+        {
+            LValidator lValidator = new LValidator();
+            var result = lValidator.ValidateLExpression("0.6+1.2>0.5>1.21");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnableToParseLTokenTypeException))]
+        public void TestWrongLvalidationTwoFunctionsUnableToParse()
+        {
+            LValidator lValidator = new LValidator();
+            var result = lValidator.ValidateLExpression("0.6+1.2><0.51.21");
             Assert.IsTrue(result);
         }
     }

@@ -59,7 +59,13 @@
   <ItemGroup>
     <Compile Include="CouchBase\Checkers\CheckCouchBaseGeneralAttributesSettings.cs" />
     <Compile Include="CouchBase\Checkers\CheckCouchBaseGeneralAttributes.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpAuthenticationSettings.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpMethods.cs" />
+    <Compile Include="NimatorBooster\IWebCheckSettings.cs" />
+    <Compile Include="NimatorBooster\LRuntimeObjectValidation.cs" />
+    <Compile Include="NimatorBooster\LRuntimeObjectValidations.cs" />
     <Compile Include="NimatorBooster\L\Lexical\LLexer.cs" />
+    <Compile Include="NimatorBooster\L\Parser\AccessingEmptyMemoryException.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticAdditionOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticDivisionOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticMultiplicationOperatorParser.cs" />
@@ -92,11 +98,14 @@
     <Compile Include="NimatorBooster\L\Parser\Storage\MemorySlotKey.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\MemorySlotKeyComparer.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\MemoryUtils.cs" />
+    <Compile Include="NimatorBooster\L\Parser\UnableToParseLTokenTypeException.cs" />
+    <Compile Include="NimatorBooster\L\Parser\UnableToValidateExpressionException.cs" />
     <Compile Include="NimatorBooster\L\Parser\VariableExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\VariableParser.cs" />
     <Compile Include="NimatorBooster\L\Tokens\LToken.cs" />
     <Compile Include="NimatorBooster\L\Tokens\LTokenType.cs" />
     <Compile Include="NimatorBooster\L\Tokens\UtilsLTokenType.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\IRuntimeObjectCheckResult.cs" />
     <Compile Include="NimatorBooster\RuntimeCheckers\RuntimeObjectCheckResult.cs" />
     <Compile Include="NimatorBooster\IRuntimeObjectValidatorCheckSettings.cs" />
     <Compile Include="NimatorBooster\ILRuntimeObjectValidation.cs" />

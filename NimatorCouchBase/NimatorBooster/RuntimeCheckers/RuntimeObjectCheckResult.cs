@@ -2,11 +2,6 @@ using Nimator;
 
 namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
-    public interface IRuntimeObjectCheckResult : ICheckResult
-    {
-        bool LValidationResult { get; }        
-        string LValidation { get; }
-    }
     public class RuntimeObjectCheckResult : IRuntimeObjectCheckResult
     {
         public RuntimeObjectCheckResult(NotificationLevel pLevel, string pCheckName, string pLValidation, bool pLValidationResult)

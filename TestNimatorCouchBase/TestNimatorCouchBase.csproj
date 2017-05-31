@@ -69,7 +69,7 @@
     <Compile Include="TestLParserVariables.cs" />
     <Compile Include="TestLParserDoubles.cs" />
     <Compile Include="TestLParserComplex.cs" />
-    <Compile Include="TestParserArithmeticOperators.cs" />
+    <Compile Include="TestLParserArithmeticOperators.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NimatorCouchBase\NimatorCouchBase.csproj">
