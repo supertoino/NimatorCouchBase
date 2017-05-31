@@ -5,6 +5,7 @@ namespace NimatorCouchBase.NimatorBooster
 {
     public interface IRuntimeObjectValidatorCheckSettings : ICheckSettings
     {
+        string CheckerName { get; }
         ILRuntimeObjectValidations Validations { get; }
     }
 }

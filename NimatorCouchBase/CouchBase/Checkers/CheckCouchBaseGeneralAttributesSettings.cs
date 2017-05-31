@@ -21,6 +21,9 @@ namespace NimatorCouchBase.CouchBase.Checkers
 {
     public class CheckCouchBaseGeneralAttributesSettings : IRuntimeObjectValidatorCheckSettings, IWebCheckSettings
     {
+        [JsonProperty]
+        public string CheckerName { get; private set; }
+
         public CheckCouchBaseGeneralAttributesSettings(ILRuntimeObjectValidations pValidations,
             IHttpCallerParameters pParameters)
         {
@@ -37,8 +40,8 @@ namespace NimatorCouchBase.CouchBase.Checkers
         public ICheck ToCheck()
         {
             var httpCallerParameters = Parameters; //new HttpCallerParameters("", null, HttpMethods.GET);
-            HttpCaller httpCaller = new HttpCaller(httpCallerParameters);
-            return new CheckCouchBaseGeneralAttributes("CouchBase Check General Attributes", new LValidator(),
+            HttpCaller httpCaller = new HttpCaller(httpCallerParameters);            
+            return new CheckCouchBaseGeneralAttributes(CheckerName, new LValidator(),
                 Validations, httpCaller);
         }
 

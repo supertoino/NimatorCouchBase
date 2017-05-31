@@ -5,7 +5,7 @@ namespace NimatorCouchBase.NimatorBooster
 {
     public interface ILRuntimeObjectValidations
     {
-        IList<ILRuntimeObjectValidation> Validations();
+        IList<ILRuntimeObjectValidation> ValidationsOrderByNotifcationLevel();
         void AddObjectValidation(ILRuntimeObjectValidation pObjectValidation);
     }
 }

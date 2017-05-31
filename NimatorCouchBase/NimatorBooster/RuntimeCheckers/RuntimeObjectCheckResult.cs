@@ -13,7 +13,7 @@ namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
         }
 
         /// <summary>
-        ///     Joins <see cref="P:Nimator.ICheckResult.Level" />, <see cref="P:Nimator.ICheckResult.CheckName" />, and any other
+        ///     Joins <see cref="P:Nimator.ICheckResult.Level" />, <see cref="P:Nimator.ICheckResult.CheckerName" />, and any other
         ///     details, in  a readable fashion.
         /// </summary>
         public virtual string RenderPlainText()
