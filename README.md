@@ -53,7 +53,7 @@ This Check settings consist in:
 ```
 Those settings can have several rules. They are interperted by order of Notification (from Higher to Lower) when one is true the process stops and a ICheckResult is returned.
 #### L
-L is a langauge to validate boolean expressions. It has access to variables of objects. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It doesn't support (). It has operator precedence: first multiplactions and dvisions then additions and subtrations.
+L is a langauge to validate boolean expressions. It has access to variables of objects. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It doesn't support (). It has operator precedence: first multiplactions and divisions then additions and subtrations.
 ##### BNF for Language L
 ```
 <L> ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
