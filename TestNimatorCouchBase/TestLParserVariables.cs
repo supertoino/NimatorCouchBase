@@ -136,8 +136,7 @@ namespace TestNimatorCouchBase
             Assert.IsTrue((bool)result.Value);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(UnableToValidateExpressionException))]
+        [TestMethod]        
         public void TestAccessToListVariable()
         {
             var total = new Totals
@@ -150,7 +149,7 @@ namespace TestNimatorCouchBase
             };
             IMemory memory = new LMemory();
             memory.AddToMemory(total);
-            LLexer lLexer = new LLexer("SubTotal.ManyInts=100");
+            LLexer lLexer = new LLexer("SubTotal.ManyInts=10");
             BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();

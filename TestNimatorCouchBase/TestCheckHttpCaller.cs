@@ -1,8 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using NimatorCouchBase.CouchBase.Statistics.Bucker;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -29,7 +32,7 @@ namespace TestNimatorCouchBase
             var checkHttpCaller = new HttpCaller(httpCallerParameters);
 
             var stats = checkHttpCaller.DoHttpGetCall<CouchBaseDefaultStats>();
-            
+
             Assert.AreNotEqual(stats, null); 
             Assert.AreEqual("supertoino", stats.ClusterName);                 
         }

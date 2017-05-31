@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
@@ -31,6 +32,14 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
             IMemorySlot value;
             MemoryData.TryGetValue(pMemoryKey, out value);            
             return value ?? new MemorySlotEmpty();
+        }
+
+        public void DumpMemory(StringBuilder pBuilder)
+        {
+            foreach (var key in MemoryData.Keys)
+            {
+                pBuilder.AppendLine($"{key.Key} - {MemoryData[key].ValueType} - {MemoryData[key].Value}");
+            }
         }
     }
 }
