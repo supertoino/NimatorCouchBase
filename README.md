@@ -6,9 +6,8 @@ This project is a plugin for [Nimator](https://github.com/omniaretail/nimator). 
 
 This plugin is composed by:
 
-- Checkers to make REST calls
-- L (A Language to check properties from C# Classes with Logical Functions)
-- CouchBase Classes for General
+1. CouchBase Classes for General  Statistics (with the ability to make HTTP GET calls)
+2. L (A Language to check properties from C# Classes with Logical Functions)
 
 ### Components
 #### Checkers
@@ -52,7 +51,7 @@ This Check settings consist in:
             "Method": 0
           }
 ```
-Those settings can have several rules. They are interperted by order of Notification (from Higher to Lower) when one is true the process stops and a ICheckResult is returned. 
+Those settings can have several rules. They are interperted by order of Notification (from Higher to Lower) when one is true the process stops and a ICheckResult is returned.
 #### L
 L is a langauge to validate boolean expressions. It has access to variables of objects. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It doesn't support (). It has operator precedence: first multiplactions and dvisions then additions and subtrations.
 ##### BNF for Language L
