@@ -44,7 +44,7 @@ namespace TestNimatorCouchBase
 
         public class SubSubTotals
         {
-            public int SubSubTotalss { get; set; }
+            public int SubSubSubTotals { get; set; }
         }
 
         [TestMethod]
@@ -155,8 +155,8 @@ namespace TestNimatorCouchBase
                     SumOfGoals = 100,
                     SubSubTotals = new List<SubSubTotals>()
                     {
-                        new SubSubTotals() { SubSubTotalss = 2 },
-                        new SubSubTotals() { SubSubTotalss = 3 }
+                        new SubSubTotals() { SubSubSubTotals = 2 },
+                        new SubSubTotals() { SubSubSubTotals = 3 }
                     }
                 }
             };
@@ -174,36 +174,36 @@ namespace TestNimatorCouchBase
             Assert.IsTrue((bool)result.Value);
         }
 
-        //[TestMethod]
-        //public void TestSumListOfIntsEqualsTo5()
-        //{
-        //    var total = new Totals
-        //    {
-        //        SubTotal = new TestLParserVariables.SubTotals()
-        //        {
-        //            ManyInts = new List<int>() { 1, 2, 3, 4 },
-        //            SumOfGoals = 100,
-        //            SubSubTotals = new List<SubSubTotals>()
-        //            {
-        //                new SubSubTotals() { SubSubTotalss = 2 },
-        //                new SubSubTotals() { SubSubTotalss = 3 }
-        //            }
-        //        }
-        //    };
-        //    IMemory memory = new LMemory();
-        //    memory.AddToMemory(total);
+        [TestMethod]
+        public void TestSumListOfIntsEqualsTo5()
+        {
+            var total = new Totals
+            {
+                SubTotal = new SubTotals()
+                {
+                    ManyInts = new List<int>() { 1, 2, 3, 4 },
+                    SumOfGoals = 100,
+                    SubSubTotals = new List<SubSubTotals>()
+                    {
+                        new SubSubTotals() { SubSubSubTotals = 2 },
+                        new SubSubTotals() { SubSubSubTotals = 3 }
+                    }
+                }
+            };
+            IMemory memory = new LMemory();
+            memory.AddToMemory(total);
 
 
-        //    LLexer lLexer = new LLexer("SubTotal.SubSubTotals.SubSubTotalss=5");
-        //    BaseParser parser = new LParser(lLexer, memory);
-        //    IExpression result = parser.ParseExpression();
-        //    StringBuilder stringBuilder = new StringBuilder();
-        //    memory.DumpMemory(stringBuilder);
-            
-        //    result.Print(stringBuilder);
+            LLexer lLexer = new LLexer("SubTotal.SubSubTotals.SubSubSubTotals=5");
+            BaseParser parser = new LParser(lLexer, memory);
+            IExpression result = parser.ParseExpression();
+            StringBuilder stringBuilder = new StringBuilder();
+            memory.DumpMemory(stringBuilder);
 
-        //    Console.WriteLine(stringBuilder);
-        //    Assert.IsTrue((bool)result.Value);
-        //}
+            result.Print(stringBuilder);
+
+            Console.WriteLine(stringBuilder);
+            Assert.IsTrue((bool)result.Value);
+        }
     }
 }

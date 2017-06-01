@@ -23,12 +23,17 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             get
             {
                 MemorySlotKey memorySlotKey = new MemorySlotKey(VariableName);
-                var variable = Memory.GetFromMemory(memorySlotKey);
-                if (variable.ValueType.IsGenericType && variable.ValueType.GetGenericTypeDefinition() == typeof(List<>))
+                IMemorySlot variable;
+                var variableList = Memory.GetListFromMemory(memorySlotKey);
+                if (variableList.Any())
                 {
-                    var arrayValues = Memory.GetListFromMemory(memorySlotKey);
+                    var arrayValues = variableList;
                     var sum = arrayValues.Sum(pArrayValue => Convert.ToDouble(pArrayValue.Value));
-                    variable = new MemorySlot(memorySlotKey, typeof(double), sum);
+                    variable = new MemorySlot(memorySlotKey, typeof (double), sum);
+                }
+                else
+                {
+                    variable = Memory.GetFromMemory(memorySlotKey);
                 }
                 return variable;
             }

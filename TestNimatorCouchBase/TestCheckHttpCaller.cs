@@ -39,6 +39,12 @@ namespace TestNimatorCouchBase
 
             var stats = checkHttpCaller.DoHttpGetCall<CouchBaseDefaultStats>();
 
+            LMemory memory = new LMemory();
+            memory.AddToMemory(stats);
+            StringBuilder sb = new StringBuilder();
+            memory.DumpMemory(sb);
+            Console.WriteLine(sb);
+
             Assert.AreNotEqual(stats, null); 
             Assert.AreEqual("supertoino", stats.ClusterName);                 
         }
@@ -79,7 +85,7 @@ namespace TestNimatorCouchBase
             var checkHttpCaller = new HttpCaller(httpCallerParameters);
 
             var stats = checkHttpCaller.DoHttpGetCall<CoachBaseBucketStats>();
-
+           
             Assert.AreNotEqual(stats, null);
             Assert.AreEqual(60, stats.Op.SamplesCount);
         }
@@ -97,85 +103,10 @@ namespace TestNimatorCouchBase
             //Assert.AreEqual(60, stats.op.samplesCount.Value);
         }
 
-        [TestMethod]
-        public void TestCheckCouchBaseGeneralAttributesPercetangeRamAvailable()
-        {
-            var runExample = CreateSettingsForPercentageRamAvailable();
-            IHttpCallerParameters httpCallerParameters = runExample.Parameters;
-            LValidator lValidator = new LValidator();
-            var checkCouchBaseRamAvailable = new CheckCouchBaseGeneralAttributes(runExample.CheckerName, lValidator, runExample.Validations, new HttpCaller(httpCallerParameters));
-            var result = checkCouchBaseRamAvailable.RunAsync();
-            IRuntimeObjectCheckResult runtimeObjectCheckResult = (IRuntimeObjectCheckResult) result.Result;
-            Assert.IsTrue(runtimeObjectCheckResult != null);
-            Assert.IsTrue(runtimeObjectCheckResult.LValidationResult);
-            Assert.AreEqual(NotificationLevel.Critical, runtimeObjectCheckResult.Level);
-        }
+        
 
-        [TestMethod]
-        public void TestCheckCouchBaseGeneralAttributesRamAvailable()
-        {
-            var runExample = CreateSettingsForRamAvailable();
-            IHttpCallerParameters httpCallerParameters = runExample.Parameters;
-            LValidator lValidator = new LValidator();
-            var checkCouchBaseRamAvailable = new CheckCouchBaseGeneralAttributes(runExample.CheckerName, lValidator, runExample.Validations, new HttpCaller(httpCallerParameters));
-            var result = checkCouchBaseRamAvailable.RunAsync();
-            IRuntimeObjectCheckResult runtimeObjectCheckResult = (IRuntimeObjectCheckResult)result.Result;
-            Assert.IsTrue(runtimeObjectCheckResult != null);
-            Assert.IsTrue(runtimeObjectCheckResult.LValidationResult);
-            Assert.AreEqual(NotificationLevel.Critical,runtimeObjectCheckResult.Level);
-        }
 
-        [TestMethod]
-        public void TestCheckCouchBaseGeneralAttributesPercetangeHddAvailable()
-        {
-            var runExample = CreateSettingsForPercentageHddAvailable();
-            IHttpCallerParameters httpCallerParameters = runExample.Parameters;
-            LValidator lValidator = new LValidator();
-            var checkCouchBaseRamAvailable = new CheckCouchBaseGeneralAttributes(runExample.CheckerName, lValidator, runExample.Validations, new HttpCaller(httpCallerParameters));
-            var result = checkCouchBaseRamAvailable.RunAsync();
-            IRuntimeObjectCheckResult runtimeObjectCheckResult = (IRuntimeObjectCheckResult)result.Result;
-            Assert.IsTrue(runtimeObjectCheckResult != null);
-            Assert.IsTrue(runtimeObjectCheckResult.LValidationResult);
-            Assert.AreEqual(NotificationLevel.Warning, runtimeObjectCheckResult.Level);
-        }
 
-        private static CheckCouchBaseGeneralAttributesSettings CreateSettingsForRamAvailable()
-        {
-            HttpCallerParameters httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default",
-                new HttpAuthenticationSettings("supertoino", "OcohoW*99"), HttpMethods.GET);
-            LRuntimeObjectValidations lRuntimeObjectValidations = new LRuntimeObjectValidations();
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Warning,
-                "StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.01"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Error,
-                "StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.1"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Critical,
-                "StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5"));
-            var runExample = new CheckCouchBaseGeneralAttributesSettings(lRuntimeObjectValidations, httpCallerParameters);
-            return runExample;
-        }
-
-        private static CheckCouchBaseGeneralAttributesSettings CreateSettingsForPercentageRamAvailable()
-        {
-            HttpCallerParameters httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default",
-                new HttpAuthenticationSettings("supertoino", "OcohoW*99"), HttpMethods.GET);
-            LRuntimeObjectValidations lRuntimeObjectValidations = new LRuntimeObjectValidations();
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Warning, "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.01"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Error, "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.1"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Critical, "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.5"));
-            var runExample = new CheckCouchBaseGeneralAttributesSettings(lRuntimeObjectValidations, httpCallerParameters);
-            return runExample;
-        }
-
-        private static CheckCouchBaseGeneralAttributesSettings CreateSettingsForPercentageHddAvailable()
-        {
-            HttpCallerParameters httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default",
-                new HttpAuthenticationSettings("supertoino", "OcohoW*99"), HttpMethods.GET);
-            LRuntimeObjectValidations lRuntimeObjectValidations = new LRuntimeObjectValidations();
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Warning,"StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.00000001"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Error,"StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.3"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Critical,"StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.5"));
-            var runExample = new CheckCouchBaseGeneralAttributesSettings(lRuntimeObjectValidations, httpCallerParameters);
-            return runExample;
-        }
+        
     }
 }

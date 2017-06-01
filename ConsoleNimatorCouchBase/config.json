@@ -97,6 +97,16 @@
                 {
                   "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
                   "NotificationLevel": 20,
+                  "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.00000001"
+                },
+                {
+                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "NotificationLevel": 30,
+                  "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.3"
+                },
+                {
+                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "NotificationLevel": 40,
                   "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.5"
                 }
               ]
@@ -112,7 +122,44 @@
             },
             "Method": 0
           }
-        }        
+        },
+        {
+          "$type": "NimatorCouchBase.CouchBase.Checkers.CheckCouchBaseGeneralAttributesSettings, NimatorCouchBase",
+          "CheckerName": "Total Documents",
+          "Validations": {
+            "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidations, NimatorCouchBase",
+            "_Validations": {
+              "$type": "System.Collections.Generic.List`1[[NimatorCouchBase.NimatorBooster.ILRuntimeObjectValidation, NimatorCouchBase]], mscorlib",
+              "$values": [
+                {
+                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "NotificationLevel": 20,
+                  "LValidation": "Nodes.InterestingStats.CurrItems>=1"
+                },
+                {
+                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "NotificationLevel": 30,
+                  "LValidation": "Nodes.InterestingStats.CurrItems>=5"
+                },
+                {
+                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "NotificationLevel": 40,
+                  "LValidation": "Nodes.InterestingStats.CurrItems>=10"
+                }
+              ]
+            }
+          },
+          "Parameters": {
+            "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpCallerParameters, NimatorCouchBase",
+            "HttpUrl": "http://localhost:8091/pools/default",
+            "Authenticator": {
+              "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpAuthenticationSettings, NimatorCouchBase",
+              "Username": "supertoino",
+              "Password": "OcohoW*99"
+            },
+            "Method": 0
+          }
+        }
       ]
     },
     {

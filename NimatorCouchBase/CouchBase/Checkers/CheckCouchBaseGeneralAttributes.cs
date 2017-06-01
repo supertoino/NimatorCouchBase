@@ -60,7 +60,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
             var validationsOrderByNotifcationLevel = LValidations.ValidationsOrderByNotifcationLevel();
             foreach (var runtimeValidation in validationsOrderByNotifcationLevel)
             {
-                if (LValidator.ValidateLExpression(runtimeValidation.LValidation, pObjectToVerify))
+               if (LValidator.ValidateLExpression(runtimeValidation.LValidation, pObjectToVerify))
                 {
                     resultBasedOnValidation = new RuntimeObjectCheckResult(runtimeValidation.NotificationLevel, ShortName, runtimeValidation.LValidation, true);
                     return resultBasedOnValidation;

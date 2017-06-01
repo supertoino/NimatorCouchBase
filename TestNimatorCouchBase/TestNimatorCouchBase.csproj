@@ -78,6 +78,7 @@
     <Compile Include="TestLParserDoubles.cs" />
     <Compile Include="TestLParserComplex.cs" />
     <Compile Include="TestLParserArithmeticOperators.cs" />
+    <Compile Include="TestCheckCouchBaseGeneralAttributes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NimatorCouchBase\NimatorCouchBase.csproj">
