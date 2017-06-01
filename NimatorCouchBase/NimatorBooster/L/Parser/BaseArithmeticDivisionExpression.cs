@@ -3,9 +3,9 @@ using NimatorCouchBase.NimatorBooster.L.Tokens;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser
 {
-    public class ArithmeticDivisionExpression : ArithmeticOperatorExpression
+    public class BaseArithmeticDivisionExpression : BaseArithmeticOperatorExpression
     {
-        public ArithmeticDivisionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, LTokenType.Divide, pRigthExpression)
+        public BaseArithmeticDivisionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, LTokenType.Divide, pRigthExpression)
         {
         }
 

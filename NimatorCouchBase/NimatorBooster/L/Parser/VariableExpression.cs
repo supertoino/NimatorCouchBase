@@ -22,21 +22,32 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             get
             {
                 MemorySlotKey memorySlotKey = new MemorySlotKey(VariableName);
-                IMemorySlot variable;
-                var variableList = Memory.GetListFromMemory(memorySlotKey);
-                if (variableList.Any())
-                {
-                    var arrayValues = variableList;
-                    var sum = arrayValues.Sum(pArrayValue => Convert.ToDouble(pArrayValue.Value));
-                    variable = new MemorySlot(memorySlotKey, typeof (double), sum);
-                }
-                else
-                {
-                    variable = Memory.GetFromMemory(memorySlotKey);
-                }
+
+                var variableList = CheckIfVariableIsList(memorySlotKey);
+                IMemorySlot variable = variableList.Any() ?
+                    SumAllValuesFromListInMemory(variableList, memorySlotKey) :
+                    GetSingleValueFromMemory(memorySlotKey);
                 return variable;
             }
-        } 
+        }
+
+        private IMemorySlot GetSingleValueFromMemory(IMemorySlotKey pMemorySlotKey)
+        {
+            return Memory.GetFromMemory(pMemorySlotKey);
+        }
+
+        private IList<IMemorySlot> CheckIfVariableIsList(IMemorySlotKey pMemorySlotKey)
+        {
+            return Memory.GetListFromMemory(pMemorySlotKey);
+        }
+
+        private static IMemorySlot SumAllValuesFromListInMemory(IList<IMemorySlot> pVariableList, IMemorySlotKey pMemorySlotKey)
+        {
+            var arrayValues = pVariableList;
+            var sum = arrayValues.Sum(pArrayValue => Convert.ToDouble(pArrayValue.Value));
+            IMemorySlot variable = new MemorySlot(pMemorySlotKey, typeof (double), sum);
+            return variable;
+        }
 
         public void Print(StringBuilder pBuilder)
         {

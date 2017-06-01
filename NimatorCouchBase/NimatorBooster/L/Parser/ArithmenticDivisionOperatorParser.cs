@@ -12,7 +12,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         public IExpression Parse(BaseParser pArser, IExpression pLeft, LToken pLToken)
         {
             IExpression right = pArser.ParseExpression(Precedence);
-            return new ArithmeticDivisionExpression(pLeft, right);
+            return new BaseArithmeticDivisionExpression(pLeft, right);
         }
 
         public int Precedence { get; }

@@ -2,9 +2,9 @@ using NimatorCouchBase.NimatorBooster.L.Tokens;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser
 {
-    public class ArithmeticSubtractionExpression : ArithmeticOperatorExpression
+    public class BaseArithmeticSubtractionExpression : BaseArithmeticOperatorExpression
     {
-        public ArithmeticSubtractionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, LTokenType.Minus, pRigthExpression)
+        public BaseArithmeticSubtractionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, LTokenType.Minus, pRigthExpression)
         {
         }
 

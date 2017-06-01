@@ -62,6 +62,7 @@
     <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpAuthenticationSettings.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpMethods.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\IWebCheckSettings.cs" />
+    <Compile Include="NimatorBooster\L\Parser\ExpressionUtils.cs" />
     <Compile Include="NimatorBooster\RuntimeCheckers\LRuntimeObjectValidation.cs" />
     <Compile Include="NimatorBooster\RuntimeCheckers\LRuntimeObjectValidations.cs" />
     <Compile Include="NimatorBooster\L\Lexical\LLexer.cs" />
@@ -70,11 +71,11 @@
     <Compile Include="NimatorBooster\L\Parser\ArithmenticDivisionOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticMultiplicationOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticSubtractionOperatorParser.cs" />
-    <Compile Include="NimatorBooster\L\Parser\ArithmeticAdditionExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\ArithmeticDivisionExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\ArithmeticMultiplicationExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\ArithmeticOperatorExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\ArithmeticSubtractionExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticAdditionExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticDivisionExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticMultiplicationExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticOperatorExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticSubtractionExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\BaseParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\DoubleExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\DoubleParser.cs" />

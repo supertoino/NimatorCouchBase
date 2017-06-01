@@ -34,8 +34,7 @@ namespace ConsoleNimatorCouchBase
         private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger("Nimator");
 
         static void Main()
-        {
-            //Nhe();
+        {            
             //log4net.Config.XmlConfigurator.Configure(); // Alternatively: http://stackoverflow.com/a/10204514/419956
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionLogger;
@@ -78,25 +77,6 @@ namespace ConsoleNimatorCouchBase
                 Logger.Fatal("Fatal problem without Excption occurred.");
                 Logger.Fatal(pEventArgs.ExceptionObject);
             }
-        }
-
-        private static void Nhe()
-        {            
-            var settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented
-            };
-
-            var jsonSettings = JsonConvert.SerializeObject(CheckCouchBaseGeneralAttributesSettings.GetExampleCheckCouchBaseGeneralAttributesSettings(), settings);
-            Console.WriteLine(jsonSettings);
-            var jsonObject = JsonConvert.DeserializeObject<CheckCouchBaseGeneralAttributesSettings>(jsonSettings, settings);
-
-            Console.WriteLine($"Has {jsonObject.Validations.ValidationsOrderByNotifcationLevel().Count} element(s)");
-            Console.WriteLine();
-            Console.Write("Press any key to exist...");
-            Console.ReadLine();
-        }
+        }        
     }
 }
