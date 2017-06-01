@@ -1,6 +1,6 @@
 # Nimator CouchBase plugin
 
-This project is a plugin for [Nimator](https://github.com/omniaretail/nimator). Nimator is a lightweight Monitor framework and this plugin gives Nimator the ability to make REST calls to get information a CouchBase Cluster.
+This project is a plugin for [Nimator](https://github.com/omniaretail/nimator). Nimator is a lightweight Monitor framework and this plugin gives Nimator the ability to make REST calls to get information a CouchBase Cluster and use a Language to write custom boolean expressions about the data obtained.
 
 ## The Plugin
 
