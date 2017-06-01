@@ -17,26 +17,26 @@ This checker settings consist are the following:
 ```
 {
           "$type": "NimatorCouchBase.CouchBase.Checkers.CheckCouchBaseGeneralAttributesSettings, NimatorCouchBase",
-          "CheckerName": "Ram Used",
+          "CheckerName": "Hdd Used",
           "Validations": {
-            "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidations, NimatorCouchBase",
+            "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidations, NimatorCouchBase",
             "_Validations": {
-              "$type": "System.Collections.Generic.List`1[[NimatorCouchBase.NimatorBooster.ILRuntimeObjectValidation, NimatorCouchBase]], mscorlib",
+              "$type": "System.Collections.Generic.List`1[[NimatorCouchBase.NimatorBooster.RuntimeCheckers.ILRuntimeObjectValidation, NimatorCouchBase]], mscorlib",
               "$values": [
                 {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidation, NimatorCouchBase",
                   "NotificationLevel": 20,
-                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.1"
+                  "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.00000001"
                 },
                 {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidation, NimatorCouchBase",
                   "NotificationLevel": 30,
-                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.3"
+                  "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.3"
                 },
                 {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidation, NimatorCouchBase",
                   "NotificationLevel": 40,
-                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.5"
+                  "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.5"
                 }
               ]
             }
