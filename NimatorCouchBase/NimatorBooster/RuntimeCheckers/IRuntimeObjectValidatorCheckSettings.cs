@@ -1,7 +1,6 @@
 using Nimator;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 
-namespace NimatorCouchBase.NimatorBooster
+namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
     public interface IRuntimeObjectValidatorCheckSettings : ICheckSettings
     {

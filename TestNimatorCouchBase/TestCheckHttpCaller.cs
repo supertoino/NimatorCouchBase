@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Nimator;
 using NimatorCouchBase.CouchBase.Checkers;
-using NimatorCouchBase.CouchBase.Statistics.Bucker;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
@@ -75,19 +74,7 @@ namespace TestNimatorCouchBase
             Assert.AreNotEqual(stats, null);
             Assert.AreEqual(null, stats.ClusterName);
         }
-
-        [TestMethod]
-        public void TestCheckHttpCallerGetBucketStatsOk()
-        {
-            var httpCallerParameters = BucketStatsHttpCallerParameters;
-
-            var checkHttpCaller = new HttpCaller(httpCallerParameters);
-
-            var stats = checkHttpCaller.DoHttpGetCall<CoachBaseBucketStats>();
-           
-            Assert.AreNotEqual(stats, null);
-            Assert.AreEqual(60, stats.Op.SamplesCount);
-        }
+       
 
         [TestMethod, Ignore]
         public void TestCheckHttpCallerUsingDynamicObject()

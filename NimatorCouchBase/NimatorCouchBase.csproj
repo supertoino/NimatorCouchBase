@@ -61,9 +61,9 @@
     <Compile Include="CouchBase\Checkers\CheckCouchBaseGeneralAttributes.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpAuthenticationSettings.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\HttpMethods.cs" />
-    <Compile Include="NimatorBooster\IWebCheckSettings.cs" />
-    <Compile Include="NimatorBooster\LRuntimeObjectValidation.cs" />
-    <Compile Include="NimatorBooster\LRuntimeObjectValidations.cs" />
+    <Compile Include="NimatorBooster\HttpCheckers\IWebCheckSettings.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\LRuntimeObjectValidation.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\LRuntimeObjectValidations.cs" />
     <Compile Include="NimatorBooster\L\Lexical\LLexer.cs" />
     <Compile Include="NimatorBooster\L\Parser\AccessingEmptyMemoryException.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticAdditionOperatorParser.cs" />
@@ -107,9 +107,9 @@
     <Compile Include="NimatorBooster\L\Tokens\UtilsLTokenType.cs" />
     <Compile Include="NimatorBooster\RuntimeCheckers\IRuntimeObjectCheckResult.cs" />
     <Compile Include="NimatorBooster\RuntimeCheckers\RuntimeObjectCheckResult.cs" />
-    <Compile Include="NimatorBooster\IRuntimeObjectValidatorCheckSettings.cs" />
-    <Compile Include="NimatorBooster\ILRuntimeObjectValidation.cs" />
-    <Compile Include="NimatorBooster\ILRuntimeObjectValidations.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\IRuntimeObjectValidatorCheckSettings.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\ILRuntimeObjectValidation.cs" />
+    <Compile Include="NimatorBooster\RuntimeCheckers\ILRuntimeObjectValidations.cs" />
     <Compile Include="NimatorBooster\L\ILValidator.cs" />
     <Compile Include="NimatorBooster\RuntimeCheckers\IRuntimeObjectCheck.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\IWebCheck.cs" />
@@ -117,9 +117,6 @@
     <Compile Include="NimatorBooster\HttpCheckers\Callers\IHttpCallerParameters.cs" />
     <Compile Include="NimatorBooster\HttpCheckers\Callers\IHttpCaller.cs" />
     <Compile Include="NimatorBooster\L\LValidator.cs" />
-    <Compile Include="CouchBase\Statistics\Bucker\CoachBaseBucketStats.cs" />
-    <Compile Include="CouchBase\Statistics\Bucker\Op.cs" />
-    <Compile Include="CouchBase\Statistics\Bucker\Samples.cs" />
     <Compile Include="CouchBase\Statistics\Default\AddNode.cs" />
     <Compile Include="CouchBase\Statistics\Default\AutoCompactionSettings.cs" />
     <Compile Include="CouchBase\Statistics\Default\Buckets.cs" />

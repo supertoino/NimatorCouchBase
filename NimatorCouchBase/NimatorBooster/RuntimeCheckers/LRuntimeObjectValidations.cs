@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace NimatorCouchBase.NimatorBooster
+namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
     public class LRuntimeObjectValidations : ILRuntimeObjectValidations
     {

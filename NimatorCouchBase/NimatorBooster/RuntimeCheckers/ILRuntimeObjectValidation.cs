@@ -1,6 +1,6 @@
 using Nimator;
 
-namespace NimatorCouchBase.NimatorBooster
+namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
     public interface ILRuntimeObjectValidation
     {

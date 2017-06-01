@@ -84,7 +84,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
         private static bool ExpressionValueIsDouble(object pValue)
         {
             double isDouble;
-            return double.TryParse(Convert.ToString(pValue), out isDouble);
+            return double.TryParse(Convert.ToString(pValue, CultureInfo.InvariantCulture), out isDouble);
         }
     }
 }

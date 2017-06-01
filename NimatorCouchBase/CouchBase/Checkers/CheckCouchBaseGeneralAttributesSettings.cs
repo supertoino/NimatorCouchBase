@@ -10,8 +10,10 @@
 using Newtonsoft.Json;
 using Nimator;
 using NimatorCouchBase.NimatorBooster;
+using NimatorCouchBase.NimatorBooster.HttpCheckers;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 using NimatorCouchBase.NimatorBooster.L;
+using NimatorCouchBase.NimatorBooster.RuntimeCheckers;
 using RestSharp;
 
 #endregion

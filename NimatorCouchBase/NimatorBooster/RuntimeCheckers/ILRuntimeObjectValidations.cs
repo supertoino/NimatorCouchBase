@@ -1,7 +1,6 @@
-using System.CodeDom;
 using System.Collections.Generic;
 
-namespace NimatorCouchBase.NimatorBooster
+namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
     public interface ILRuntimeObjectValidations
     {

@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Nimator;
 
-namespace NimatorCouchBase.NimatorBooster
+namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
     public class LRuntimeObjectValidation : ILRuntimeObjectValidation
     {
