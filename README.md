@@ -17,6 +17,7 @@ This checker settings consist are the following:
 ```
 {
           "$type": "NimatorCouchBase.CouchBase.Checkers.CheckCouchBaseGeneralAttributesSettings, NimatorCouchBase",
+          "CheckerName": "Ram Used",
           "Validations": {
             "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidations, NimatorCouchBase",
             "_Validations": {
@@ -25,20 +26,20 @@ This checker settings consist are the following:
                 {
                   "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
                   "NotificationLevel": 20,
-                  "LValidation": "StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.01"
-                },
-                {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
-                  "NotificationLevel": 40,
-                  "LValidation": "StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5"
+                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.1"
                 },
                 {
                   "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
                   "NotificationLevel": 30,
-                  "LValidation": "StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.1"
+                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.3"
+                },
+                {
+                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
+                  "NotificationLevel": 40,
+                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.5"
                 }
               ]
-            }            
+            }
           },
           "Parameters": {
             "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpCallerParameters, NimatorCouchBase",
@@ -50,6 +51,7 @@ This checker settings consist are the following:
             },
             "Method": 0
           }
+        }
 ```
 Those settings can have several rules. They are interpreted by order of Notification (from Higher to Lower) when one is true the process stops and a ICheckResult is returned.
 #### L
