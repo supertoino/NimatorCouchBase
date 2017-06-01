@@ -87,8 +87,6 @@
     <Compile Include="NimatorBooster\L\Parser\LongExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\LongParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\LParser.cs" />
-    <Compile Include="NimatorBooster\L\Parser\PrefixExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\PrefixOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\IMemory.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\IMemoryReady.cs" />
     <Compile Include="NimatorBooster\L\Parser\Storage\IMemorySlot.cs" />
