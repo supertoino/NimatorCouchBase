@@ -10,4 +10,3 @@ C:\Users\antonio.silva\Documents\NimatorCouchBase\NimatorCouchBase\bin\Debug\Nim
 C:\Users\antonio.silva\Documents\NimatorCouchBase\NimatorCouchBase\bin\Debug\RestSharp.xml
 C:\Users\antonio.silva\Documents\NimatorCouchBase\NimatorCouchBase\obj\Debug\NimatorCouchBase.dll
 C:\Users\antonio.silva\Documents\NimatorCouchBase\NimatorCouchBase\obj\Debug\NimatorCouchBase.pdb
-C:\Users\antonio.silva\Documents\NimatorCouchBase\NimatorCouchBase\obj\Debug\NimatorCouchBase.csprojResolveAssemblyReference.cache
