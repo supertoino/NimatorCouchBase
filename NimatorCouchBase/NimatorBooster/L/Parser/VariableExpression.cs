@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
@@ -15,7 +18,21 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             Memory = pMemory;
         }
 
-        public object Value => Memory.GetFromMemory(new MemorySlotKey(VariableName));
+        public object Value
+        {
+            get
+            {
+                MemorySlotKey memorySlotKey = new MemorySlotKey(VariableName);
+                var variable = Memory.GetFromMemory(memorySlotKey);
+                if (variable.ValueType.IsGenericType && variable.ValueType.GetGenericTypeDefinition() == typeof(List<>))
+                {
+                    var arrayValues = Memory.GetListFromMemory(memorySlotKey);
+                    var sum = arrayValues.Sum(pArrayValue => Convert.ToDouble(pArrayValue.Value));
+                    variable = new MemorySlot(memorySlotKey, typeof(double), sum);
+                }
+                return variable;
+            }
+        } 
 
         public void Print(StringBuilder pBuilder)
         {

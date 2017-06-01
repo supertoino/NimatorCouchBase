@@ -26,17 +26,25 @@ namespace TestNimatorCouchBase
             {
                 return MemoryUtils.CreateMemorySlots(this);
             }
+        }
 
-            public class SubTotals : IMemoryReady
+        public class SubTotals : IMemoryReady
+        {
+
+            public List<int> ManyInts { get; set; }
+            public int SumOfGoals { get; set; }
+
+            public List<SubSubTotals> SubSubTotals { get; set; }
+
+            public List<IMemorySlot> AvailableInMemoery()
             {
-
-                public List<int> ManyInts { get; set; } 
-                public int SumOfGoals { get; set; }
-                public List<IMemorySlot> AvailableInMemoery()
-                {
-                    return MemoryUtils.CreateMemorySlots(this);
-                }
+                return MemoryUtils.CreateMemorySlots(this);
             }
+        }
+
+        public class SubSubTotals
+        {
+            public int SubSubTotalss { get; set; }
         }
 
         [TestMethod]
@@ -120,7 +128,7 @@ namespace TestNimatorCouchBase
         {
             var total = new Totals
             {
-                SubTotal = new Totals.SubTotals()
+                SubTotal = new TestLParserVariables.SubTotals()
                 {
                     SumOfGoals = 100
                 }                
@@ -137,25 +145,65 @@ namespace TestNimatorCouchBase
         }
 
         [TestMethod]        
-        public void TestAccessToListVariable()
+        public void TestSumListOfIntsEqualsTo10()
         {
             var total = new Totals
             {
-                SubTotal = new Totals.SubTotals()
+                SubTotal = new TestLParserVariables.SubTotals()
                 {
                     ManyInts = new List<int>() { 1,2,3,4 },
-                    SumOfGoals = 100
+                    SumOfGoals = 100,
+                    SubSubTotals = new List<SubSubTotals>()
+                    {
+                        new SubSubTotals() { SubSubTotalss = 2 },
+                        new SubSubTotals() { SubSubTotalss = 3 }
+                    }
                 }
             };
             IMemory memory = new LMemory();
             memory.AddToMemory(total);
+
+            
             LLexer lLexer = new LLexer("SubTotal.ManyInts=10");
             BaseParser parser = new LParser(lLexer, memory);
             IExpression result = parser.ParseExpression();
             StringBuilder stringBuilder = new StringBuilder();
             result.Print(stringBuilder);
+
             Console.WriteLine(stringBuilder);
             Assert.IsTrue((bool)result.Value);
         }
+
+        //[TestMethod]
+        //public void TestSumListOfIntsEqualsTo5()
+        //{
+        //    var total = new Totals
+        //    {
+        //        SubTotal = new TestLParserVariables.SubTotals()
+        //        {
+        //            ManyInts = new List<int>() { 1, 2, 3, 4 },
+        //            SumOfGoals = 100,
+        //            SubSubTotals = new List<SubSubTotals>()
+        //            {
+        //                new SubSubTotals() { SubSubTotalss = 2 },
+        //                new SubSubTotals() { SubSubTotalss = 3 }
+        //            }
+        //        }
+        //    };
+        //    IMemory memory = new LMemory();
+        //    memory.AddToMemory(total);
+
+
+        //    LLexer lLexer = new LLexer("SubTotal.SubSubTotals.SubSubTotalss=5");
+        //    BaseParser parser = new LParser(lLexer, memory);
+        //    IExpression result = parser.ParseExpression();
+        //    StringBuilder stringBuilder = new StringBuilder();
+        //    memory.DumpMemory(stringBuilder);
+            
+        //    result.Print(stringBuilder);
+
+        //    Console.WriteLine(stringBuilder);
+        //    Assert.IsTrue((bool)result.Value);
+        //}
     }
 }

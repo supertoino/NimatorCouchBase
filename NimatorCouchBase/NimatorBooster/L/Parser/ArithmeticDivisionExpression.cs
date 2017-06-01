@@ -1,3 +1,4 @@
+using System;
 using NimatorCouchBase.NimatorBooster.L.Tokens;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser
@@ -14,7 +15,11 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             {
                 dynamic leftValue = GetValueFromExpression(LeftExpression);
                 dynamic rightValue = GetValueFromExpression(RigthExpression);
-                return leftValue / rightValue;
+                if (rightValue == 0)
+                {
+                    throw new DivideByZeroException();
+                }
+                return (double) leftValue / (double) rightValue;
             }
         }
     }

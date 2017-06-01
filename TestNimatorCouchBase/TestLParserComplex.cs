@@ -21,7 +21,7 @@ namespace TestNimatorCouchBase
             public double MatchersOver2Goals { get; set; }
             public double TotalGoalsPerMatch { get; set; }
 
-            public TestLParserVariables.Totals.SubTotals SubTotal { get; set; }
+            public TestLParserVariables.SubTotals SubTotal { get; set; }
 
             public List<IMemorySlot> AvailableInMemoery()
             {

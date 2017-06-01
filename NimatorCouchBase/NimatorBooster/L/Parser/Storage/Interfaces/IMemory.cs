@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces
 {
@@ -7,6 +8,8 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces
         void AddToMemory<T>(T pObject) where T : IMemoryReady;
         IMemorySlot GetFromMemory(IMemorySlotKey pMemoryKey);
 
+        IList<IMemorySlot> GetListFromMemory(IMemorySlotKey pMemorySlotKey);
+         
         void DumpMemory(StringBuilder pBuilder);
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
@@ -77,7 +79,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
                     if (variable.IsEmpty())
                     {
                         throw new AccessingEmptyMemoryException($"Memory Slot {variable.Key} is empty");
-                    }
+                    }                    
                     expressionValue = Convert.ChangeType(variable.Value, variable.ValueType);
                 }
                 else

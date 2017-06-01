@@ -30,10 +30,23 @@ namespace TestNimatorCouchBase
             public int D3 { get; set; }
 
             public List<DClass> Inside { get; set; } 
-
+            public List<EClass> EClasses { get; set; } 
             public List<IMemorySlot> AvailableInMemoery()
             {
                 return MemoryUtils.CreateMemorySlots(this);
+            }
+        }
+
+        public class EClass
+        {
+            public int EA { get; }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+            /// </summary>
+            public EClass(int pEa)
+            {
+                EA = pEa;
             }
         }
         public class BClass : IMemoryReady
@@ -135,6 +148,15 @@ namespace TestNimatorCouchBase
                             Inside = new List<DClass>()
                             {
                                 new DClass("1","2",0)
+                                {
+                                    EClasses = new List<EClass>()
+                                    {
+                                        new EClass(0),
+                                        new EClass(1),
+                                        new EClass(2),
+                                    }
+                                    //Inside = new List<DClass>() { new DClass("0","0", 0) }
+                                }
                             }
                         },
                         new DClass("1","2",4),
@@ -153,7 +175,40 @@ namespace TestNimatorCouchBase
             Assert.IsFalse(memory.GetFromMemory(new MemorySlotKey("B.Values")).IsEmpty());
             Assert.IsFalse(memory.GetFromMemory(new MemorySlotKey("B.StringValues")).IsEmpty());
             Assert.IsFalse(memory.GetFromMemory(new MemorySlotKey("B.DValues")).IsEmpty());
-            
+
+            Assert.AreEqual(2,memory.GetFromMemory(new MemorySlotKey("B.Values")).Value);
+            Assert.AreEqual(3,memory.GetFromMemory(new MemorySlotKey("B.StringValues")).Value);
+            Assert.AreEqual(3,memory.GetFromMemory(new MemorySlotKey("B.DValues")).Value);
+
+            var listFromMemory = memory.GetListFromMemory(new MemorySlotKey("B.Values"));
+            Assert.AreEqual(3, listFromMemory.Count);
+            Assert.AreEqual(1, listFromMemory[0].Value);
+            Assert.AreEqual(2, listFromMemory[1].Value);
+            Assert.AreEqual(3, listFromMemory[2].Value);
+
+            listFromMemory = memory.GetListFromMemory(new MemorySlotKey("B.StringValues"));
+            Assert.AreEqual(4, listFromMemory.Count);
+            Assert.AreEqual("1", listFromMemory[0].Value);
+            Assert.AreEqual("2", listFromMemory[1].Value);
+            Assert.AreEqual("3", listFromMemory[2].Value);
+            Assert.AreEqual("4", listFromMemory[3].Value);
+
+            listFromMemory = memory.GetListFromMemory(new MemorySlotKey("B.DValues.D3"));
+            Assert.AreEqual(4,listFromMemory.Count);
+            Assert.AreEqual(3,listFromMemory[0].Value);
+            Assert.AreEqual(4,listFromMemory[1].Value);
+            Assert.AreEqual(5,listFromMemory[2].Value);
+            Assert.AreEqual(6,listFromMemory[3].Value);
+
+            listFromMemory = memory.GetListFromMemory(new MemorySlotKey("B.DValues.Inside.D1"));
+            Assert.AreEqual(1, listFromMemory.Count);
+            Assert.AreEqual("1", listFromMemory[0].Value);
+
+            listFromMemory = memory.GetListFromMemory(new MemorySlotKey("B.DValues.Inside.EClasses.EA"));
+            Assert.AreEqual(3, listFromMemory.Count);
+            Assert.AreEqual(0, listFromMemory[0].Value);
+            Assert.AreEqual(1, listFromMemory[1].Value);
+            Assert.AreEqual(2, listFromMemory[2].Value);
         }
 
         [TestMethod]

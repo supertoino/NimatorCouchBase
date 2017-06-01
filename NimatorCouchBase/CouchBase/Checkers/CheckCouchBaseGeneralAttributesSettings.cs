@@ -41,8 +41,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
         {
             var httpCallerParameters = Parameters; //new HttpCallerParameters("", null, HttpMethods.GET);
             HttpCaller httpCaller = new HttpCaller(httpCallerParameters);            
-            return new CheckCouchBaseGeneralAttributes(CheckerName, new LValidator(),
-                Validations, httpCaller);
+            return new CheckCouchBaseGeneralAttributes(CheckerName, new LValidator(), Validations, httpCaller);
         }
 
         [JsonProperty]
@@ -55,9 +54,9 @@ namespace NimatorCouchBase.CouchBase.Checkers
         {
             HttpCallerParameters httpCallerParameters = new HttpCallerParameters("http://localhost:8091/pools/default", new HttpAuthenticationSettings("supertoino","OcohoW*99"), HttpMethods.GET);
             LRuntimeObjectValidations lRuntimeObjectValidations = new LRuntimeObjectValidations();
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Warning, "StorageTotals.Ram>10"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Critical, "StorageTotals.Ram>20"));
-            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Error, "StorageTotals.Ram>30"));
+            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Warning, "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.01"));
+            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Error, "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.1"));
+            lRuntimeObjectValidations.AddObjectValidation(new LRuntimeObjectValidation(NotificationLevel.Critical, "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.5"));            
             return new CheckCouchBaseGeneralAttributesSettings(lRuntimeObjectValidations, httpCallerParameters);
         }
     }

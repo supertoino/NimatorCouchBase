@@ -62,7 +62,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
             {
                 if (LValidator.ValidateLExpression(runtimeValidation.LValidation, pObjectToVerify))
                 {
-                    resultBasedOnValidation = new RuntimeObjectCheckResult(NotificationLevel.Critical, ShortName, runtimeValidation.LValidation, true);
+                    resultBasedOnValidation = new RuntimeObjectCheckResult(runtimeValidation.NotificationLevel, ShortName, runtimeValidation.LValidation, true);
                     return resultBasedOnValidation;
                 }
             }

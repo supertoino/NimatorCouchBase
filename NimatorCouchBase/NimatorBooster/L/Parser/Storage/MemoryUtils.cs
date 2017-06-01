@@ -56,7 +56,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
             return result;
         }
 
-        private static string CreateSlotKeyNameForList(string pCurrentName, int pListCurrentIndex)
+        public static string CreateSlotKeyNameForList(string pCurrentName, long pListCurrentIndex)
         {
             return pCurrentName + $"[{pListCurrentIndex}]";
         }

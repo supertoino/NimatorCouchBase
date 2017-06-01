@@ -14,7 +14,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             {
                 dynamic leftValue = GetValueFromExpression(LeftExpression);
                 dynamic rightValue = GetValueFromExpression(RigthExpression);
-                return leftValue * rightValue;
+                return (double) leftValue * (double) rightValue;
             }
         }
     }
