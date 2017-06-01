@@ -9,7 +9,7 @@
 
 using System;
 using System.Collections.Generic;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.L.Tokens;
 
 #endregion

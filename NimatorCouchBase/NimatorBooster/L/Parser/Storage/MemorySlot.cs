@@ -1,5 +1,4 @@
 using System;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
 {

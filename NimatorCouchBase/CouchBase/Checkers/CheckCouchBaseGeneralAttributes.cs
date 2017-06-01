@@ -14,7 +14,7 @@ using Nimator;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
+using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 using NimatorCouchBase.NimatorBooster.L;
 using NimatorCouchBase.NimatorBooster.RuntimeCheckers;
 

@@ -1,7 +1,6 @@
 ﻿using NimatorCouchBase.NimatorBooster.L.Lexical;
 using NimatorCouchBase.NimatorBooster.L.Parser;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace NimatorCouchBase.NimatorBooster.L
 {

@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 using Nimator;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
 using RestSharp;
 

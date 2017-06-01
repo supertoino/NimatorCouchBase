@@ -1,7 +1,10 @@
 using System;
 
-public class UnableToValidateExpressionException : Exception
+namespace NimatorCouchBase.NimatorBooster.L.Parser
 {
-    public UnableToValidateExpressionException(string pExceptionMessage) : base(pExceptionMessage)
-    { }
+    public class UnableToValidateExpressionException : Exception
+    {
+        public UnableToValidateExpressionException(string pExceptionMessage) : base(pExceptionMessage)
+        { }
+    }
 }

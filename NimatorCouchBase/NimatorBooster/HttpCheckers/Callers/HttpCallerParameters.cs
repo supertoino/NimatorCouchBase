@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using RestSharp;
 
 namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers

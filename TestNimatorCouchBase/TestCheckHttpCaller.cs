@@ -8,7 +8,6 @@ using NimatorCouchBase.CouchBase.Statistics.Bucker;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.RuntimeCheckers;

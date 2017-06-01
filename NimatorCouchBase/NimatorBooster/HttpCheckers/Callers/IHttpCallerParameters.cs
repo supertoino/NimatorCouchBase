@@ -1,6 +1,4 @@
-using RestSharp.Authenticators;
-
-namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces
+namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
 {
     public interface IHttpCallerParameters
     {

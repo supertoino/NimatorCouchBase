@@ -1,4 +1,4 @@
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
+using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 
 namespace NimatorCouchBase.NimatorBooster
 {

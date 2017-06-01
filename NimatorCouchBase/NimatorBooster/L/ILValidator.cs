@@ -1,4 +1,4 @@
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
+using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 
 namespace NimatorCouchBase.NimatorBooster.L
 {

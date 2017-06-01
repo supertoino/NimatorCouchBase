@@ -1,6 +1,6 @@
 using System;
 
-namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces
+namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
 {
     public interface IMemorySlot
     {

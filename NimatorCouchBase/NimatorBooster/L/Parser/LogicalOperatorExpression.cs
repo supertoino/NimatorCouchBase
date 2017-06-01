@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.L.Tokens;
-using NimatorCouchBase.NimatorBooster.Utils;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser
 {
@@ -89,7 +88,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             }            
             catch (Exception e)
             {
-                throw new UnableToValidateExpressionException($"Incorrent L Validation Sintax. Unable To Validate Value {pExpression.Value}: {e.GetAllExceptionMessages()}");
+                throw new UnableToValidateExpressionException($"Incorrent L Validation Sintax. Unable To Validate Value {pExpression.Value}: {e.Message}");
             }
             return expressionValue;
         }

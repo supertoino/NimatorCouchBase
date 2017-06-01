@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces
+namespace NimatorCouchBase.NimatorBooster.L.Parser.Storage
 {
     public interface IMemory
     {

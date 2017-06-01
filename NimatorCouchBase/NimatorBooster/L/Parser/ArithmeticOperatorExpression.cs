@@ -12,7 +12,6 @@ using System.Globalization;
 using System.Text;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
 using NimatorCouchBase.NimatorBooster.L.Tokens;
-using NimatorCouchBase.NimatorBooster.Utils;
 
 #endregion
 
@@ -77,7 +76,7 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             }
             catch (Exception e)
             {
-                throw new UnableToValidateExpressionException($"Incorrent L Validation Sintax. Unable To Validate Value {pExpression.Value}: {e.GetAllExceptionMessages()}");
+                throw new UnableToValidateExpressionException($"Incorrent L Validation Sintax. Unable To Validate Value {pExpression.Value}: {e.Message}");
             }
             return expressionValue;
         }

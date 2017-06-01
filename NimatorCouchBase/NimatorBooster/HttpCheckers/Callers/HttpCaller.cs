@@ -1,8 +1,6 @@
 using System;
 using System.Net;
 using Newtonsoft.Json;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
-using NimatorCouchBase.NimatorBooster.Utils;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -39,7 +37,7 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
             }
             catch (Exception e)
             {
-                throw new JsonException($"Could not Deserialize Json '{pJsonString}': {e.GetAllExceptionMessages()}");
+                throw new JsonException($"Could not Deserialize Json '{pJsonString}': {e.Message}");
             }
         }
 
@@ -62,7 +60,7 @@ namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
             }
             catch (Exception e)
             {
-                throw new WebException(e.GetAllExceptionMessages());
+                throw new WebException(e.Message);
             }
         }
     }

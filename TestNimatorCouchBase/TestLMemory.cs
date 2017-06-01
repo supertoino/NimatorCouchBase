@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NimatorCouchBase.CouchBase.Statistics.Default;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
 using NimatorCouchBase.NimatorBooster.L.Parser.Storage;
-using NimatorCouchBase.NimatorBooster.L.Parser.Storage.Interfaces;
 
 namespace TestNimatorCouchBase
 {

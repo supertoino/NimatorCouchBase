@@ -4,7 +4,6 @@ using Nimator;
 using NimatorCouchBase.CouchBase.Checkers;
 using NimatorCouchBase.NimatorBooster;
 using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers;
-using NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces;
 using NimatorCouchBase.NimatorBooster.L;
 using NimatorCouchBase.NimatorBooster.RuntimeCheckers;
 
@@ -66,7 +65,7 @@ namespace TestNimatorCouchBase
             IRuntimeObjectCheckResult runtimeObjectCheckResult = (IRuntimeObjectCheckResult)result.Result;
             Assert.IsTrue(runtimeObjectCheckResult != null);
             Assert.IsTrue(runtimeObjectCheckResult.LValidationResult);
-            Assert.AreEqual(NotificationLevel.Warning, runtimeObjectCheckResult.Level);
+            Assert.AreEqual(NotificationLevel.Error, runtimeObjectCheckResult.Level);
         }
 
         private static CheckCouchBaseGeneralAttributesSettings CreateSettingsForRamAvailable()

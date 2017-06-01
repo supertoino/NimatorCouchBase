@@ -1,6 +1,6 @@
 using RestSharp;
 
-namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.Interfaces
+namespace NimatorCouchBase.NimatorBooster.HttpCheckers.Callers
 {
     public interface IHttpCaller
     {
