@@ -11,7 +11,7 @@ This plugin is composed by:
 
 ### Components
 #### Checkers
-I created one checker for [Couch Base General Statistics](https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html) (/pools). With this checker you can ask any query for any boolean expression using L - A Language for boolean expression validation.
+I created one checker for [Couch Base General Statistics](https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html) (/pools). With this checker you can ask any query for any boolean expression using L - A Language for boolean expression validation. Full class specification to know variable access name [here](https://github.com/supertoino/NimatorCouchBase/blob/master/NimatorCouchBase/CouchBase/Statistics/Default/CouchBaseDefaultStats.cs).
 
 This Check settings consist in:
 ```
@@ -53,7 +53,7 @@ This Check settings consist in:
 ```
 Those settings can have several rules. They are interperted by order of Notification (from Higher to Lower) when one is true the process stops and a ICheckResult is returned.
 #### L
-L is a langauge to validate boolean expressions. It has access to variables of objects. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It has operator precedence: first multiplactions and divisions then additions and subtrations.
+L is a langauge to validate boolean expressions (Got inspiration from [1](http://jack-vanlightly.com/blog/2016/2/3/how-to-create-a-query-language-dsl) [2](http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/) [3](http://www.cristiandima.com/top-down-operator-precedence-parsing-in-go/)). It has access to objects' variables. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It has operator precedence: first multiplactions and divisions then additions and subtrations.
 ##### Limitations
 1. It doesn't support (). 
 2.Collection operations variable are very limited:
@@ -78,7 +78,7 @@ Using L you'll be able to perform the following expression ```AnotherClass.Numbe
 <InfixOperations> ::= + | - | * | \
 ```
 #### Improvements and Limitations
-1. I create specific C# Classes for the Couchbase statistics, however a more general aproach can be created using the ```dynamic``` object. In this way no code needs to be made in order to add more checkers when json objects are returned.
+1. I created specific C# Classes for the Couchbase statistics, however a more general aproach can be created using the ```dynamic``` object. In this way no code needs to be made in order to add more checkers when json objects are returned.
 2. Improve L to accept () and better collection variables handle. Also the ability to add conjuntions and dijunctions would be nice.
 
 ### Usage
