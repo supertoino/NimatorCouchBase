@@ -33,6 +33,13 @@ bld/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+#packages
+
+packages
+packages/
+packages/*
+packages/**
+
 # NUNIT
 *.VisualState.xml
 TestResult.xml
@@ -170,8 +177,6 @@ PublishScripts/
 #*.nuget.props
 #*.nuget.targets
 
-packages
-packages/
 
 # Microsoft Azure Build Output
 csx/
