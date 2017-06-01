@@ -55,8 +55,8 @@ Those settings can have several rules. They are interperted by order of Notifica
 #### L
 L is a langauge to validate boolean expressions. It has access to variables of objects. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It has operator precedence: first multiplactions and divisions then additions and subtrations.
 ##### Limitations
-1 - It doesn't support (). 
-2 - Collection operations variable are very limited:
+1. It doesn't support (). 
+2.Collection operations variable are very limited:
 ``` 
 class ExampleClass {
           public AnotherClass obj {get;set;}
@@ -66,7 +66,7 @@ class AnotherClass {
 }
 ```
 Using L you'll be able to perform the following expression ```AnotherClass.Numbers>10```. It will __Sum__ all _int_ from _Numbers_ and then evaluate the expression. Only list with numbers are supported.  
-##### BNF for Language L
+##### Language L - BNF 
 ```
 <L> ::= <ArithmeticFunction> <LogicalFunction> <ArithmeticFunction>
 <ArithmeticFunction> ::= <PrefixOperators> | <PrefixOperators> <InfixOperations> <ArithmeticFunction>
