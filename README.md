@@ -11,9 +11,9 @@ This plugin is composed by:
 
 ### Components
 #### Checkers
-I created one checker for [Couch Base General Statistics](https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html) (/pools). With this checker you can ask any query for any boolean expression using L - A Language for boolean expression validation. Full class specification to know variable access name [here](https://github.com/supertoino/NimatorCouchBase/blob/master/NimatorCouchBase/CouchBase/Statistics/Default/CouchBaseDefaultStats.cs).
+I created one checker for [Couch Base General Statistics](https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html) (/pools). With this checker you can ask any query for any boolean expression using L - A Language for boolean expression validation. Full class specification to know what variables are accessable can be found [here](https://github.com/supertoino/NimatorCouchBase/blob/master/NimatorCouchBase/CouchBase/Statistics/Default/CouchBaseDefaultStats.cs).
 
-This checker settings consist in:
+This checker settings consist are the following:
 ```
 {
           "$type": "NimatorCouchBase.CouchBase.Checkers.CheckCouchBaseGeneralAttributesSettings, NimatorCouchBase",
@@ -56,6 +56,7 @@ Those settings can have several rules. They are interperted by order of Notifica
 L is a langauge to validate boolean expressions (Got inspiration from [1](http://jack-vanlightly.com/blog/2016/2/3/how-to-create-a-query-language-dsl) [2](http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/) [3](http://www.cristiandima.com/top-down-operator-precedence-parsing-in-go/)). It has access to objects' variables. The access is made using the variable name as is defined in the class (it's name sensitive). You can have expressions like ```StorageTotals.Ram.Total>20``` or ```StorageTotals.Ram.Used>StorageTotals.Ram.Total*0.5``` or even weird ones ```1+5*10!=StorageTotals.Ram.Total*0.5```. It has operator precedence: first multiplactions and divisions then additions and subtrations.
 ##### Limitations
 1. It doesn't support (). 
+3. It doesn't support recursive calls.
 2. Collection operations variable are very limited:
 ``` 
 class ExampleClass {
