@@ -85,6 +85,38 @@ namespace NimatorCouchBase.NimatorBooster.L.Lexical
             return true;
         }
 
+        private void SetNextToken()
+        {
+            char currentChar = TextToTokenize[GetCurrentIndex()];
+            if (CharIsFunction(currentChar))
+            {
+                if (NextPositionIsFunction(currentChar)) //Because of expressions using >= and <=
+                {
+                    CreateFunctionTokenWithTwoCharacters(currentChar);
+                    return;
+                }
+                CreateFunctionTokenWithOneCaracther(currentChar);
+                return;
+            }
+            if (FunctionWithTwoCaracters(currentChar))
+            //Because of expressions using != (like 1!=2). Operations using two chars.
+            {
+                CreateFunctionTokenWithTwoCharacters(currentChar);
+                return;
+            }
+            if (CharIsLetter(currentChar))
+            {
+                CreateVariableToken();
+                return;
+            }
+            if (CharIsNumber(currentChar))
+            {
+                CreateScalarToken();
+                return;
+            }
+            throw new UnableToParseLTokenTypeException($"Unexpected Character {currentChar} to parse.");
+        }
+
         private bool IndexIsWithinCodeBounds(int pCurrentIndex)
         {
             return pCurrentIndex < (TextToTokenize.Length);
@@ -107,43 +139,8 @@ namespace NimatorCouchBase.NimatorBooster.L.Lexical
                 }
             }
         }
-
-        private void SetNextToken()
-        {
-            char currentChar = TextToTokenize[GetCurrentIndex()];
-            if (CharIsFunction(currentChar))
-            {
-                if (NextPositionIsFunction(currentChar)) //Because of expressions using >= and <=
-                {
-                    CreateFunctionTokenWithTwoCharacters(currentChar);
-                    return;
-                }
-                CreateFunctionTokenWithOneCaracther(currentChar);
-                return;
-            }
-            if (FunctionWithTwoCaracters(currentChar))
-                //Because of expressions using != (like 1!=2). Operations using two chars.
-            {
-                CreateFunctionTokenWithTwoCharacters(currentChar);
-                return;
-            }
-            if (CharIsLetter(currentChar))
-            {
-                CreateVariableToken();
-                return;
-            }
-            if (CharIsNumber(currentChar))
-            {
-                CreateScalarToken();
-                return;
-            }
-            throw new UnableToParseLTokenTypeException($"Unexpected Character {currentChar} to parse.");
-        }
-
-        private bool FunctionWithTwoCaracters(char pCurrentChar)
-        {
-            return NextPositionIsFunction(pCurrentChar);
-        }
+                                     
+        #region L Token Creators
 
         private void CreateScalarToken()
         {
@@ -172,53 +169,9 @@ namespace NimatorCouchBase.NimatorBooster.L.Lexical
             AdvanceCurrentIndex();
         }
 
-        private bool NextPositionIsFunction(char pCurrentChar)
-        {
-            var nextIndex = GetCurrentIndex() + 1;
-            var nextPositionFunction = IndexIsWithinCodeBounds(nextIndex) &&
-                                       CharIsFunction("" + pCurrentChar + TextToTokenize[nextIndex]);
-            return nextPositionFunction;
-        }
+        #endregion
 
-        private int GetCurrentIndex()
-        {
-            return CurrentIndex;
-        }
-
-        public void AdvanceCurrentIndex()
-        {
-            CurrentIndex++;
-        }
-
-        public void SetCurrentIndex(int pValue)
-        {
-            CurrentIndex = pValue;
-        }
-
-        public void SetCurrentLToken(LToken pNewLToken)
-        {
-            CurrrentLToken = pNewLToken;
-        }
-
-        private static bool ScalarIsDecimal(string pFactorValue)
-        {
-            return pFactorValue.Contains(".");
-        }
-
-        private static bool CharIsNumber(char pCurrentChar)
-        {
-            return char.IsDigit(pCurrentChar);
-        }
-
-        private static bool CharIsNotNumber(char pCurrentChar)
-        {
-            return !char.IsDigit(pCurrentChar) && pCurrentChar != '.';
-        }
-
-        private static bool CharIsNotLetterNorNumber(char pCurrentChar)
-        {
-            return !char.IsLetter(pCurrentChar) && pCurrentChar != '.' && !char.IsDigit(pCurrentChar);
-        }
+        #region Lexer Char Helpers 
 
         private string GetCharactersUntil(Func<char, bool> pStopFunction, int pValueStartIndex, string pTextToSubstring)
         {
@@ -258,6 +211,19 @@ namespace NimatorCouchBase.NimatorBooster.L.Lexical
             return GetCharactersUntil(CharIsNotLetterNorNumber, GetCurrentIndex(), TextToTokenize);
         }
 
+        private bool FunctionWithTwoCaracters(char pCurrentChar)
+        {
+            return NextPositionIsFunction(pCurrentChar);
+        }
+
+        private bool NextPositionIsFunction(char pCurrentChar)
+        {
+            var nextIndex = GetCurrentIndex() + 1;
+            var nextPositionFunction = IndexIsWithinCodeBounds(nextIndex) &&
+                                       CharIsFunction("" + pCurrentChar + TextToTokenize[nextIndex]);
+            return nextPositionFunction;
+        }
+
         private static bool CharIsLetter(char pCurrentChar)
         {
             return char.IsLetter(pCurrentChar);
@@ -272,5 +238,51 @@ namespace NimatorCouchBase.NimatorBooster.L.Lexical
         {
             return Functions.ContainsKey(pCurrentChar);
         }
+
+        private static bool ScalarIsDecimal(string pFactorValue)
+        {
+            return pFactorValue.Contains(".");
+        }
+
+        private static bool CharIsNumber(char pCurrentChar)
+        {
+            return char.IsDigit(pCurrentChar);
+        }
+
+        private static bool CharIsNotNumber(char pCurrentChar)
+        {
+            return !char.IsDigit(pCurrentChar) && pCurrentChar != '.';
+        }
+
+        private static bool CharIsNotLetterNorNumber(char pCurrentChar)
+        {
+            return !char.IsLetter(pCurrentChar) && pCurrentChar != '.' && !char.IsDigit(pCurrentChar);
+        }
+
+        #endregion
+
+        #region Iterator Variables Action Functions
+
+        private int GetCurrentIndex()
+        {
+            return CurrentIndex;
+        }
+
+        public void AdvanceCurrentIndex()
+        {
+            CurrentIndex++;
+        }
+
+        public void SetCurrentIndex(int pValue)
+        {
+            CurrentIndex = pValue;
+        }
+
+        public void SetCurrentLToken(LToken pNewLToken)
+        {
+            CurrrentLToken = pNewLToken;
+        }
+
+        #endregion
     }
 }

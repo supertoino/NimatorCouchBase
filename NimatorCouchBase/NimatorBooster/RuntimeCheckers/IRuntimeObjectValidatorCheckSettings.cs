@@ -1,4 +1,5 @@
 using Nimator;
+using NimatorCouchBase.NimatorBooster.L;
 
 namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
 {
@@ -6,5 +7,6 @@ namespace NimatorCouchBase.NimatorBooster.RuntimeCheckers
     {
         string CheckerName { get; }
         ILRuntimeObjectValidations Validations { get; }
+        ILValidator LValidator { get; }
     }
 }

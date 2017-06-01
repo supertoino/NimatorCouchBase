@@ -23,7 +23,7 @@ using NimatorCouchBase.NimatorBooster.RuntimeCheckers;
 namespace NimatorCouchBase.CouchBase.Checkers
 {
     public class CheckCouchBaseGeneralAttributes : IRuntimeObjectCheck<CouchBaseDefaultStats>, IWebCheck
-    {
+    {        
         public CheckCouchBaseGeneralAttributes(string pShortName, ILValidator pLValidator, ILRuntimeObjectValidations pLValidations, IHttpCaller pHttpCaller)
         {
             ShortName = pShortName;

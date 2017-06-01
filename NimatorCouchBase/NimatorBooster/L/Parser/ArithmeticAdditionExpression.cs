@@ -2,9 +2,9 @@ using NimatorCouchBase.NimatorBooster.L.Tokens;
 
 namespace NimatorCouchBase.NimatorBooster.L.Parser
 {
-    public class BaseArithmeticSubtractionExpression : BaseArithmeticOperatorExpression
-    {
-        public BaseArithmeticSubtractionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, LTokenType.Minus, pRigthExpression)
+    public class ArithmeticAdditionExpression : BaseArithmeticOperatorExpression
+    {        
+        public ArithmeticAdditionExpression(IExpression pLeftExpression, IExpression pRigthExpression) : base(pLeftExpression, LTokenType.Plus, pRigthExpression)
         {
         }
 
@@ -14,8 +14,8 @@ namespace NimatorCouchBase.NimatorBooster.L.Parser
             {
                 dynamic leftValue = GetValueFromExpression(LeftExpression);
                 dynamic rightValue = GetValueFromExpression(RigthExpression);
-                return leftValue - rightValue;
+                return leftValue + rightValue;
             }
-        }
+        }      
     }
 }

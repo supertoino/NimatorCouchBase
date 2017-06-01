@@ -71,11 +71,11 @@
     <Compile Include="NimatorBooster\L\Parser\ArithmenticDivisionOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticMultiplicationOperatorParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\ArithmenticSubtractionOperatorParser.cs" />
-    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticAdditionExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticDivisionExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticMultiplicationExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\ArithmeticAdditionExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\ArithmeticDivisionExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\ArithmeticMultiplicationExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\BaseArithmeticOperatorExpression.cs" />
-    <Compile Include="NimatorBooster\L\Parser\BaseArithmeticSubtractionExpression.cs" />
+    <Compile Include="NimatorBooster\L\Parser\ArithmeticSubtractionExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\BaseParser.cs" />
     <Compile Include="NimatorBooster\L\Parser\DoubleExpression.cs" />
     <Compile Include="NimatorBooster\L\Parser\DoubleParser.cs" />
@@ -152,9 +152,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="Models\LParser.cd" />
-    <None Include="Models\DefaultStatistics.cd" />
+    <None Include="Models\CouchBase Checkers.cd" />
+    <None Include="Models\RuntimeObjectCheck Interfaces.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

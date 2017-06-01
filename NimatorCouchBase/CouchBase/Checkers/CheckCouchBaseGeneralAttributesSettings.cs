@@ -30,6 +30,7 @@ namespace NimatorCouchBase.CouchBase.Checkers
         {
             Parameters = pParameters;
             Validations = pValidations;
+            LValidator = new LValidator();
         }
 
         /// <summary>
@@ -40,13 +41,15 @@ namespace NimatorCouchBase.CouchBase.Checkers
         /// <returns />
         public ICheck ToCheck()
         {
-            var httpCallerParameters = Parameters; //new HttpCallerParameters("", null, HttpMethods.GET);
+            var httpCallerParameters = Parameters;
             HttpCaller httpCaller = new HttpCaller(httpCallerParameters);            
-            return new CheckCouchBaseGeneralAttributes(CheckerName, new LValidator(), Validations, httpCaller);
+            return new CheckCouchBaseGeneralAttributes(CheckerName, LValidator, Validations, httpCaller);
         }
 
         [JsonProperty]
         public ILRuntimeObjectValidations Validations { get; private set; }
+        [JsonIgnore]
+        public ILValidator LValidator { get; }
 
         [JsonProperty]
         public IHttpCallerParameters Parameters { get; private set; }
