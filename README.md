@@ -16,42 +16,42 @@ It was created one checker for [Couch Base General Statistics](https://developer
 This checker settings consist are the following:
 ```
 {
-          "$type": "NimatorCouchBase.CouchBase.Checkers.CheckCouchBaseGeneralAttributesSettings, NimatorCouchBase",
-          "CheckerName": "Ram Used",
-          "Validations": {
-            "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidations, NimatorCouchBase",
-            "_Validations": {
-              "$type": "System.Collections.Generic.List`1[[NimatorCouchBase.NimatorBooster.ILRuntimeObjectValidation, NimatorCouchBase]], mscorlib",
-              "$values": [
-                {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
-                  "NotificationLevel": 20,
-                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.1"
-                },
-                {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
-                  "NotificationLevel": 30,
-                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.3"
-                },
-                {
-                  "$type": "NimatorCouchBase.NimatorBooster.LRuntimeObjectValidation, NimatorCouchBase",
-                  "NotificationLevel": 40,
-                  "LValidation": "StorageTotals.Ram.Used/StorageTotals.Ram.Total>0.5"
-                }
-              ]
-            }
-          },
-          "Parameters": {
-            "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpCallerParameters, NimatorCouchBase",
-            "HttpUrl": "http://localhost:8091/pools/default",
-            "Authenticator": {
-              "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpAuthenticationSettings, NimatorCouchBase",
-              "Username": "supertoino",
-              "Password": "OcohoW*99"
-            },
-            "Method": 0
-          }
-        }
+"$type": "NimatorCouchBase.CouchBase.Checkers.CheckCouchBaseGeneralAttributesSettings, NimatorCouchBase",
+"CheckerName": "Hdd Used",
+"Validations": {
+  "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidations, NimatorCouchBase",
+  "_Validations": {
+    "$type": "System.Collections.Generic.List`1[[NimatorCouchBase.NimatorBooster.RuntimeCheckers.ILRuntimeObjectValidation, NimatorCouchBase]], mscorlib",
+    "$values": [
+      {
+        "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidation, NimatorCouchBase",
+        "NotificationLevel": 20,
+        "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.00000001"
+      },
+      {
+        "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidation, NimatorCouchBase",
+        "NotificationLevel": 30,
+        "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.3"
+      },
+      {
+        "$type": "NimatorCouchBase.NimatorBooster.RuntimeCheckers.LRuntimeObjectValidation, NimatorCouchBase",
+        "NotificationLevel": 40,
+        "LValidation": "StorageTotals.Hdd.UsedByData/StorageTotals.Hdd.Total>=0.5"
+      }
+    ]
+  }
+},
+"Parameters": {
+  "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpCallerParameters, NimatorCouchBase",
+  "HttpUrl": "http://localhost:8091/pools/default",
+  "Authenticator": {
+    "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpAuthenticationSettings, NimatorCouchBase",
+    "Username": "supertoino",
+    "Password": "OcohoW*99"
+  },
+  "Method": 0
+}
+}
 ```
 Those settings can have several rules. They are interpreted by order of Notification (from Higher to Lower) when one is true the process stops and a ICheckResult is returned.
 #### L
