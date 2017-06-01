@@ -271,6 +271,7 @@ paket-files/
 .cr/
 
 #NDepend
+NDependOut/
 NDependOut/**
 NDependOut*/
 *.ndproj
