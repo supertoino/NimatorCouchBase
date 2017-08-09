@@ -47,7 +47,7 @@ This checker settings consist are the following:
   "Authenticator": {
     "$type": "NimatorCouchBase.NimatorBooster.HttpCheckers.Callers.HttpAuthenticationSettings, NimatorCouchBase",
     "Username": "supertoino",
-    "Password": "OcohoW*99"
+    "Password": "*****"
   },
   "Method": 0
 }
